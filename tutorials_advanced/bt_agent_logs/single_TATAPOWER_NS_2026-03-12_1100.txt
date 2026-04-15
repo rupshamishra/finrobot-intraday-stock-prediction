@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-12. Time: 11:00 IST.
+Target stock: TATAPOWER.NS. THIS IS A BACKTEST as of 2026-03-12 11:00 IST.
+Historical entry price at this time: 398.0
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 11:00 IST on 2026-03-12.
+ENTRY PRICE = latest_close from get_intraday_data() = 398.0
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="TATAPOWER.NS")
+STEP 2: get_stock_data(symbol="TATAPOWER.NS", start_date="2026-02-10", end_date="2026-03-12")
+        get_technical_indicators(symbol="TATAPOWER.NS")
+        get_support_resistance(symbol="TATAPOWER.NS")
+        get_intraday_data(symbol="TATAPOWER.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="TATAPOWER.NS")
+        get_company_news(symbol="TATAPOWER.NS")
+        get_sector_peers(symbol="TATAPOWER.NS")
+        get_data_sanity_check(symbol="TATAPOWER.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — TATAPOWER.NS
+Date: 2026-03-12 | As of: 11:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=398.0, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="TATAPOWER.NS", date="2026-03-12", direction=<Direction>,
+  entry_price=398.0, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 22512.65, 'prev_close': 23114.5, 'change_pct': -2.6, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 22851.7, 'session_low': 22471.25}, 'banknifty': {'latest_close': 51437.75, 'change_pct': -3.72, 'trend': 'down'}, 'india_vix': {'latest': 26.73, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.185, 'change_pct': 0.1103, 'rupee_signal': 'rupee_weakening_fii_outflow_risk'}, 'brent_crude_proxy': {'latest_usd': 88.83, 'change_pct': -9.65, 'data_anomaly': True, 'data_note': 'WARNING: change_pct exceeds 5% — likely a yfinance data anomaly (futures roll-over). Do NOT use this value in analysis.', 'signal': 'data_anomaly_ignore'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+                  Open        High         Low       Close   Volume  Dividends  Stock Splits
+Date                                                                                        
+2026-02-10  369.000000  370.399994  367.649994  369.950012  1910161        0.0           0.0
+2026-02-11  370.149994  377.399994  366.649994  375.649994  3457996        0.0           0.0
+2026-02-12  376.200012  381.500000  371.500000  380.549988  6063960        0.0           0.0
+2026-02-13  377.000000  377.799988  370.649994  374.100006  4441440        0.0           0.0
+2026-02-16  372.000000  384.250000  370.899994  382.100006  3884952        0.0           0.0
+2026-02-17  381.399994  384.100006  377.000000  378.399994  3799013        0.0           0.0
+2026-02-18  378.399994  382.149994  377.950012  379.600006  2150233        0.0           0.0
+2026-02-19  379.500000  381.750000  368.299988  369.299988  3203557        0.0           0.0
+2026-02-20  369.299988  379.200012  369.250000  378.000000  2844023        0.0           0.0
+2026-02-23  379.000000  381.549988  376.799988  379.250000  3229333        0.0           0.0
+2026-02-24  377.000000  380.450012  372.500000  379.750000  3005896        0.0           0.0
+2026-02-25  380.000000  383.649994  376.500000  381.250000  3122278        0.0           0.0
+2026-02-26  380.799988  385.399994  378.250000  380.399994  3190045        0.0           0.0
+2026-02-27  380.399994  381.500000  376.250000  377.549988  3197689        0.0           0.0
+2026-03-02  356.000000  373.950012  356.000000  368.350006  5645823        0.0           0.0
+2026-03-04  362.299988  369.899994  362.100006  365.850006  5707031        0.0           0.0
+2026-03-05  366.250000  378.500000  366.250000  376.850006  5981063        0.0           0.0
+2026-03-06  375.000000  385.250000  373.100006  375.500000  3748549        0.0           0.0
+2026-03-09  366.500000  374.200012  365.149994  372.899994  5063475        0.0           0.0
+2026-03-10  375.899994  384.149994  375.899994  381.299988  7675259        0.0           0.0
+2026-03-11  383.000000  392.500000  382.350006  385.750000  9679700        0.0           0.0
+
+{'latest_close': 386.95001220703125, '52w_high': 418.45, '52w_low': 342.5, 'pct_from_52w_high': -7.53, 'rsi_14': 60.3, 'rsi_signal': 'neutral', 'stoch_k': 44.1, 'stoch_d': 67.05, 'stoch_signal': 'neutral', 'macd': 6.42, 'macd_signal_line': 5.57, 'macd_histogram': 0.8451, 'macd_prev_histogram': 2.0234, 'macd_crossover': 'none', 'macd_trend': 'bullish', 'macd_signal': 'bullish', 'ema_trend': 'bullish', 'ema_9': 393.16, 'ema_21': 386.84, 'ema_50': 380.92, 'ema_200': 387.01, 'adx_14': 19.3, 'adx_signal': 'weak_trend', 'atr_14': 14.03, 'expected_intraday_range_pct': 3.63, 'bb_upper': 408.07, 'bb_lower': 362.07, 'bb_width_pct': 11.94, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'falling', 'avg_vol_20d': 8461321, 'latest_vol': 15159582, 'volume_vs_avg': 'high'}
+
+{'prev_session': {'high': 418.45001220703125, 'low': 401.0, 'close': 402.3999938964844, 'open': 402.0}, 'today_open': 402.70001220703125, 'latest_close': 386.95001220703125, 'classic_pivots': {'PP': 407.28, 'R1': 413.57, 'R2': 424.73, 'R3': 431.02, 'S1': 396.12, 'S2': 389.83, 'S3': 378.67}, 'camarilla_pivots': {'H4': 412.0, 'H3': 407.2, 'L3': 397.6, 'L4': 392.8}, 'nearest_support': 378.67, 'nearest_resistance': 413.57, 'bearish_setup': {'entry': 386.95001220703125, 'target': 389.83, 'stop': 407.2, 'reward_pts': -2.88, 'risk_pts': 20.25, 'rr_ratio': -0.14, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 386.95001220703125, 'target': 424.73, 'stop': 392.8, 'reward_pts': 37.78, 'risk_pts': -5.85, 'rr_ratio': -6.46, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': 0.07}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 386.95, 'latest_vwap': 401.36, 'price_vs_vwap': 'below', 'session_high': 418.4, 'session_low': 380.4, 'avg_volume_per_candle': 511937, 'last_20_candles': '                       Open    High     Low   Close   Volume    VWAP\nDatetime                                                            \n2026-03-23 10:30:00  387.50  389.50  387.15  387.50   336987  403.93\n2026-03-23 10:45:00  387.50  388.40  387.15  387.30   230010  403.86\n2026-03-23 11:00:00  387.35  389.70  386.50  389.70   294516  403.78\n2026-03-23 11:15:00  389.50  389.70  387.55  388.35   223636  403.72\n2026-03-23 11:30:00  388.25  389.05  386.70  386.75   181085  403.67\n2026-03-23 11:45:00  386.95  387.80  386.40  386.45   204686  403.61\n2026-03-23 12:00:00  386.95  386.95  385.10  386.20   270018  403.52\n2026-03-23 12:15:00  386.05  386.25  383.40  384.30   409353  403.38\n2026-03-23 12:30:00  384.40  386.65  384.40  386.65   264618  403.30\n2026-03-23 12:45:00  386.80  387.05  385.05  385.55   288306  403.21\n2026-03-23 13:00:00  385.50  385.95  384.65  385.30   303766  403.12\n2026-03-23 13:15:00  385.20  386.35  383.90  383.90   362590  403.00\n2026-03-23 13:30:00  384.10  386.80  383.25  386.80   367149  402.89\n2026-03-23 13:45:00  386.80  388.85  386.60  387.50   756398  402.69\n2026-03-23 14:00:00  387.45  388.50  386.60  386.85   337618  402.60\n2026-03-23 14:15:00  386.50  388.75  386.40  387.20   337611  402.52\n2026-03-23 14:30:00  387.25  387.50  385.20  387.50   409822  402.41\n2026-03-23 14:45:00  387.50  389.85  386.70  389.65  1249481  402.13\n2026-03-23 15:00:00  389.60  389.60  386.80  387.75  2011136  401.68\n2026-03-23 15:15:00  387.75  388.15  380.40  386.95  1209008  401.36'}
+
+{'company': 'TATA POWER CO LTD', 'sector': 'Utilities', 'industry': 'Utilities - Independent Power Producers', 'market_cap_cr': 123644.0, 'pe_ratio': 32.59899, 'pb_ratio': 3.2659245, 'ev_ebitda': 14.25, 'beta': 0.284, 'beta_signal': 'low_volatility_defensive', '52w_high': 418.45, '52w_low': 335.0, '200d_avg': 386.10825, '50d_avg': 372.672, 'float_shares': 1684197694, 'shares_outstanding': 3195339547, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 56.0, 'earnings_date': '1770199200', 'recommendation': 'hold', 'analyst_count': 22, 'target_price': 409.4091}
+
+Error: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+
+{'sector': 'Utilities', 'peers': {'NTPC.NS': {'1d_change_pct': -2.24, '5d_change_pct': -2.62, 'latest_close': 372.4}, 'POWERGRID.NS': {'1d_change_pct': 1.51, '5d_change_pct': 1.46, 'latest_close': 302.1}, 'TATAPOWER.NS': {'1d_change_pct': -3.84, '5d_change_pct': -0.92, 'latest_close': 386.95}, 'ADANIGREEN.NS': {'1d_change_pct': -5.4, '5d_change_pct': -5.83, 'latest_close': 816.45}}, 'sector_avg_1d_pct': -2.49, 'stock_vs_sector': -1.35, 'relative_strength': 'underperforming'}
+
+{'symbol': 'TATAPOWER.NS', 'checks_run': 3, 'flags_found': 1, 'flags': ['Price (386.95001220703125) is already BELOW S2 (389.83). Standard bearish setup may have played out. Consider S3 (378.67) as target.'], 'status': 'REVIEW_REQUIRED', 'warnings': {'price_below_s2': 'Price (386.95001220703125) is already BELOW S2 (389.83). Standard bearish setup may have played out. Consider S3 (378.67) as target.'}}
+
+
+
+{'symbol': 'TATAPOWER.NS', 'direction': 'Bearish', 'factors': {'technical_aligned': False, 'nifty_aligned': True, 'obv_confirming': True, 'news_clear': True, 'non_expiry_day': True}, 'score': 1, 'confidence': 'Low', 'macro_override': False, 'macro_override_reason': None, 'contradiction': True, 'contradiction_reason': 'CONTRADICTION: Negative R:R (-0.14) — target and stop are on the same side of entry.', 'tradeable': False, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — TATAPOWER.NS  
+Date: 2026-03-12 | As of: 11:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bearish  
+  Expected Move   : +-1.03% (30min scaled)  
+  Price Targets   : Entry=398.0, Target=389.83, Stop=392.8, R:R=-0.14  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 60.3 -> neutral  
+  MACD            : macd_trend=bullish | macd_crossover=none  
+  EMA Trend       : bullish  
+  ATR(14)         : 14.03 pts -> +-1.03% scaled to 30min  
+  ADX(14)         : 19.3 -> weak_trend  
+  OBV Trend       : falling  
+  VWAP            : Price 386.95 is below VWAP 401.36  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22512.65 [-2.6% change] | 5d trend: down  
+  BANKNIFTY       : 51437.75 [-3.72% change]  
+  India VIX       : 26.73 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: Yes  
+  - OBV confirming: Yes  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 1/5 -> Low  
+
+FINAL REASONING: The bearish setup indicates a potential downward movement in the next 30 minutes, but the negative risk-reward ratio and weak technical alignment suggest caution. The market context shows a bearish trend in NIFTY and BANKNIFTY, which supports the bearish outlook. However, the overall confidence is low due to conflicting technical signals.
+
+Now call: log_forecast(symbol="TATAPOWER.NS", date="2026-03-12", direction="Bearish", entry_price=398.0, target_price=389.83, stop_price=392.8, rr_ratio=-0.14, confidence="Low", score=1, tradeable=False)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'TATAPOWER.NS', 'date': '2026-03-12', 'direction': 'Bearish', 'entry_price': 398.0, 'target_price': 389.83, 'stop_price': 392.8, 'rr_ratio': -0.14, 'confidence': 'Low', 'score': 1, 'tradeable': False, 'factors': {}, 'logged_at': '2026-03-23T20:07:53.569687', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

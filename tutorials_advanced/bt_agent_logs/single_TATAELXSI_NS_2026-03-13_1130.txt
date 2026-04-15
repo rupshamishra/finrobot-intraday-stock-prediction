@@ -1,0 +1,155 @@
+You are an NSE intraday analyst. Date: 2026-03-13. Time: 11:30 IST.
+Target stock: TATAELXSI.NS. THIS IS A BACKTEST as of 2026-03-13 11:30 IST.
+Historical entry price at this time: 4293.2
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 11:30 IST on 2026-03-13.
+ENTRY PRICE = latest_close from get_intraday_data() = 4293.2
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="TATAELXSI.NS")
+STEP 2: get_stock_data(symbol="TATAELXSI.NS", start_date="2026-02-11", end_date="2026-03-13")
+        get_technical_indicators(symbol="TATAELXSI.NS")
+        get_support_resistance(symbol="TATAELXSI.NS")
+        get_intraday_data(symbol="TATAELXSI.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="TATAELXSI.NS")
+        get_company_news(symbol="TATAELXSI.NS")
+        get_sector_peers(symbol="TATAELXSI.NS")
+        get_data_sanity_check(symbol="TATAELXSI.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — TATAELXSI.NS
+Date: 2026-03-13 | As of: 11:30 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=4293.2, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="TATAELXSI.NS", date="2026-03-13", direction=<Direction>,
+  entry_price=4293.2, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 23114.5, 'prev_close': 23002.15, 'change_pct': 0.49, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 23345.15, 'session_low': 23067.6}, 'banknifty': {'latest_close': 53427.05, 'change_pct': -0.04, 'trend': 'down'}, 'india_vix': {'latest': 22.81, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.652, 'change_pct': 0.612, 'rupee_signal': 'rupee_weakening_fii_outflow_risk'}, 'brent_crude_proxy': {'latest_usd': 98.23, 'change_pct': 2.17, 'data_anomaly': False, 'data_note': 'data_ok', 'signal': 'bearish_for_india_importers'}}
+
+{'today': '2026-03-22', 'is_expiry_day': False, 'days_to_next_expiry': 4, 'is_monthly_expiry_week': True, 'expiry_implication': 'normal'}
+
+
+
+                   Open         High          Low        Close  Volume  Dividends  Stock Splits
+Date                                                                                           
+2026-02-11  5385.000000  5398.500000  5221.000000  5250.500000  158972        0.0           0.0
+2026-02-12  5206.000000  5224.500000  4955.500000  4976.000000  564653        0.0           0.0
+2026-02-13  4850.000000  4891.500000  4755.000000  4824.000000  441804        0.0           0.0
+2026-02-16  4824.000000  4845.000000  4750.000000  4821.000000  215518        0.0           0.0
+2026-02-17  4820.500000  5044.000000  4806.500000  4919.000000  423010        0.0           0.0
+2026-02-18  4940.000000  4940.000000  4821.000000  4885.000000  181973        0.0           0.0
+2026-02-19  4889.500000  4981.000000  4812.000000  4839.500000  282759        0.0           0.0
+2026-02-20  4830.000000  4910.000000  4788.000000  4859.000000  227011        0.0           0.0
+2026-02-23  4845.500000  4873.000000  4679.000000  4714.000000  327068        0.0           0.0
+2026-02-24  4675.500000  4700.000000  4455.000000  4498.000000  465584        0.0           0.0
+2026-02-25  4524.500000  4670.000000  4524.000000  4577.000000  433884        0.0           0.0
+2026-02-26  4600.000000  4696.000000  4470.500000  4507.500000  469675        0.0           0.0
+2026-02-27  4522.000000  4596.000000  4490.500000  4513.000000  345149        0.0           0.0
+2026-03-02  4317.700195  4529.000000  4317.700195  4449.299805  303080        0.0           0.0
+2026-03-04  4415.000000  4448.000000  4318.000000  4357.700195  279451        0.0           0.0
+2026-03-05  4400.000000  4424.000000  4334.399902  4400.000000  199593        0.0           0.0
+2026-03-06  4420.000000  4490.000000  4321.000000  4330.200195  267961        0.0           0.0
+2026-03-09  4295.000000  4321.299805  4221.500000  4303.700195  197809        0.0           0.0
+2026-03-10  4352.000000  4380.000000  4265.000000  4356.600098  241362        0.0           0.0
+2026-03-11  4377.700195  4425.000000  4325.000000  4343.399902  218308        0.0           0.0
+2026-03-12  4340.000000  4380.000000  4253.000000  4330.000000  227665        0.0           0.0
+
+{'latest_close': 4237.7001953125, '52w_high': 5950.0, '52w_low': 4021.6, 'pct_from_52w_high': -28.78, 'rsi_14': 37.14, 'rsi_signal': 'neutral', 'stoch_k': 42.59, 'stoch_d': 23.31, 'stoch_signal': 'neutral', 'macd': -223.62, 'macd_signal_line': -231.34, 'macd_histogram': 7.7206, 'macd_prev_histogram': -4.5031, 'macd_crossover': 'bullish_crossover', 'macd_trend': 'bullish', 'macd_signal': 'bullish_crossover', 'ema_trend': 'bearish', 'ema_9': 4229.99, 'ema_21': 4421.6, 'ema_50': 4756.75, 'ema_200': 5174.37, 'adx_14': 48.15, 'adx_signal': 'strong_trend', 'atr_14': 149.64, 'expected_intraday_range_pct': 3.53, 'bb_upper': 4772.81, 'bb_lower': 3985.65, 'bb_width_pct': 17.97, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 353856, 'latest_vol': 826769, 'volume_vs_avg': 'high'}
+
+{'prev_session': {'high': 4178.10009765625, 'low': 4021.60009765625, 'close': 4039.300048828125, 'open': 4178.10009765625}, 'today_open': 4107.89990234375, 'latest_close': 4237.7001953125, 'classic_pivots': {'PP': 4079.67, 'R1': 4137.73, 'R2': 4236.17, 'R3': 4294.23, 'S1': 3981.23, 'S2': 3923.17, 'S3': 3824.73}, 'camarilla_pivots': {'H4': 4125.38, 'H3': 4082.34, 'L3': 3996.26, 'L4': 3953.23}, 'nearest_support': 3981.23, 'nearest_resistance': 4294.23, 'bearish_setup': {'entry': 4237.7001953125, 'target': 3923.17, 'stop': 4082.34, 'reward_pts': 314.53, 'risk_pts': -155.36, 'rr_ratio': -2.02, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 4237.7001953125, 'target': 4236.17, 'stop': 3996.26, 'reward_pts': -1.53, 'risk_pts': 241.44, 'rr_ratio': -0.01, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': 1.7}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 4237.7, 'latest_vwap': 4180.94, 'price_vs_vwap': 'above', 'session_high': 4320.0, 'session_low': 4021.9, 'avg_volume_per_candle': 20606, 'last_20_candles': '                       Open    High     Low   Close  Volume     VWAP\nDatetime                                                            \n2026-03-20 10:30:00  4193.0  4209.5  4177.3  4209.0   28469  4162.21\n2026-03-20 10:45:00  4207.0  4230.0  4205.9  4230.0   37132  4163.34\n2026-03-20 11:00:00  4229.3  4252.8  4225.6  4241.0   39447  4164.84\n2026-03-20 11:15:00  4241.4  4263.0  4240.9  4253.6   32952  4166.26\n2026-03-20 11:30:00  4255.0  4270.0  4253.0  4262.1   32435  4167.76\n2026-03-20 11:45:00  4264.0  4280.0  4207.1  4217.7   90539  4170.58\n2026-03-20 12:00:00  4214.9  4231.9  4185.9  4228.7   67531  4171.95\n2026-03-20 12:15:00  4226.0  4233.0  4207.7  4217.3   26284  4172.50\n2026-03-20 12:30:00  4219.0  4241.3  4210.3  4237.5   21601  4173.04\n2026-03-20 12:45:00  4239.0  4248.0  4221.2  4231.7   29828  4173.83\n2026-03-20 13:00:00  4231.7  4251.9  4226.6  4250.0   20076  4174.42\n2026-03-20 13:15:00  4250.1  4259.8  4237.5  4241.7   24078  4175.16\n2026-03-20 13:30:00  4242.8  4260.0  4240.7  4255.0   15271  4175.66\n2026-03-20 13:45:00  4255.0  4262.0  4248.0  4250.7   18485  4176.26\n2026-03-20 14:00:00  4250.7  4264.0  4230.0  4242.8   34856  4177.26\n2026-03-20 14:15:00  4244.0  4253.9  4237.5  4243.0   15049  4177.68\n2026-03-20 14:30:00  4244.7  4252.0  4220.8  4220.8   19094  4178.10\n2026-03-20 14:45:00  4222.4  4238.4  4218.7  4232.3   16654  4178.45\n2026-03-20 15:00:00  4233.5  4259.0  4225.4  4233.0   58075  4179.84\n2026-03-20 15:15:00  4234.0  4240.9  4223.4  4237.7   51915  4180.94'}
+
+{'company': 'TATA ELXSI LIMITED', 'sector': 'Technology', 'industry': 'Software - Application', 'market_cap_cr': 26399.0, 'pe_ratio': 45.454254, 'pb_ratio': 9.768765, 'ev_ebitda': 31.597, 'beta': 0.262, 'beta_signal': 'low_volatility_defensive', '52w_high': 6735.0, '52w_low': 4021.6, '200d_avg': 5429.932, '50d_avg': 4921.938, 'float_shares': 34318485, 'shares_outstanding': 62296683, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 1.77, 'earnings_date': '1768298400', 'recommendation': 'underperform', 'analyst_count': 14, 'target_price': 4896.9287}
+
+[{'id': '7b7bf052-02b9-3d89-b4f5-b41feff87929', 'content': {'id': '7b7bf052-02b9-3d89-b4f5-b41feff87929', 'contentType': 'STORY', 'title': 'Tata Elxsi Ltd (BOM:500408) Q3 2026 Earnings Call Highlights: Strong Transportation Growth ...', 'description': '', 'summary': 'Tata Elxsi Ltd (BOM:500408) reports a 3.2% revenue growth with significant gains in the Transportation sector, while facing hurdles in Media & Communications.', 'pubDate': '2026-01-13T21:00:28Z', 'displayTime': '2026-01-13T21:00:28Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/tata-elxsi-ltd-bom-500408-210028527.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/tata-elxsi-ltd-bom-500408-210028527.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '8f844bc7-03d8-3d70-9d9b-d18a68590392', 'content': {'id': '8f844bc7-03d8-3d70-9d9b-d18a68590392', 'contentType': 'STORY', 'title': "India's Tata Elxsi Q3 profit falls on one-time labour code charge", 'description': '', 'summary': "Jan 13 (Reuters) - Indian engineering research and development (ER&D) firm Tata Elxsi reported a 45.3% drop in third-quarter profit on Tuesday, primarily due to a one-time charge tied to the country's", 'pubDate': '2026-01-13T13:50:10Z', 'displayTime': '2026-01-13T13:50:10Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/2ef98e503bbdf164f7f5ee5eb2900eea', 'originalWidth': 800, 'originalHeight': 534, 'caption': 'Tata Elxsi logo is seen in this illustration taken July 7, 2025. REUTERS/Dado Ruvic/Illustration/File Photo', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/_ikcRACZ2ILJFghNW93j5w--~B/aD01MzQ7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/2ef98e503bbdf164f7f5ee5eb2900eea', 'width': 800, 'height': 534, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/JuMzBoOQeDGHwFVBv48Ayw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/2ef98e503bbdf164f7f5ee5eb2900eea', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-tata-elxsi-q3-profit-135010404.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-tata-elxsi-q3-profit-135010404.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'abccd3ac-63ce-32e0-90fd-e7834bf13d29', 'content': {'id': 'abccd3ac-63ce-32e0-90fd-e7834bf13d29', 'contentType': 'STORY', 'title': 'MSCI to add Paytm, 3 other Indian stocks to flagship global index', 'description': '', 'summary': '(Corrects market capitalisation size requirement in paragraph 12 to $505 million from $404 million) By Vivek Kumar M and Bharath Rajeswaran (Reuters) -MSCI will add four India-listed companies,', 'pubDate': '2025-11-06T06:20:01Z', 'displayTime': '2025-11-06T06:20:01Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/ac35977c819dbb127aeb34bfb794c551', 'originalWidth': 800, 'originalHeight': 489, 'caption': 'FILE PHOTO: A smartphone with the Paytm logo is placed on a laptop in this illustration taken on July 14, 2021. REUTERS/Dado Ruvic/Illustration/File Photo', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/Ca7rI4eFqZwwm2V1ONWvKA--~B/aD00ODk7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/ac35977c819dbb127aeb34bfb794c551', 'width': 800, 'height': 489, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/NbV2GsPQ7yJgCpVCsIckgA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/ac35977c819dbb127aeb34bfb794c551', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/msci-add-paytm-3-other-062001483.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/msci-add-paytm-3-other-062001483.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'b691bbc4-40f3-394a-8c81-95f03e56166a', 'content': {'id': 'b691bbc4-40f3-394a-8c81-95f03e56166a', 'contentType': 'STORY', 'title': 'Fast chargers are ‘critical’ for EV industry to sustain growth, says Tata Elxsi CEO', 'description': '', 'summary': '“Unless the charging infrastructure keeps up, it will be difficult for the EV industry to sustain growth,” said Tata Elxsi CEO Manoj Raghavan.View on euronews', 'pubDate': '2025-11-03T05:47:21Z', 'displayTime': '2025-11-03T05:47:21Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/euronews_us_articles_576/d7111f0deaf5319fa1d8493e8ea77ede', 'originalWidth': 800, 'originalHeight': 450, 'caption': '', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/mDmBA7.fg0pcG4HX5N3hKw--~B/aD00NTA7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/euronews_us_articles_576/d7111f0deaf5319fa1d8493e8ea77ede', 'width': 800, 'height': 450, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/bwQIka_Qqe1xv9pnSezi9g--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/euronews_us_articles_576/d7111f0deaf5319fa1d8493e8ea77ede', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Euronews', 'url': 'https://www.euronews.com'}, 'canonicalUrl': {'url': 'https://www.euronews.com/business/2025/11/03/fast-chargers-are-critical-for-ev-industry-to-sustain-growth-says-tata-elxsi-ceo?utm_source=yahoo&utm_campaign=feeds_business_articles_2024&utm_medium=referral', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/fast-chargers-critical-ev-industry-054721716.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'bb9eeb05-b062-335a-8ee0-7d37664a745f', 'content': {'id': 'bb9eeb05-b062-335a-8ee0-7d37664a745f', 'contentType': 'STORY', 'title': 'India’s Tata Elxsi posts fourth straight quarterly profit fall amid auto slowdown', 'description': '', 'summary': '(Reuters) -Indian engineering research and development (ER&D) firm Tata Elxsi reported a fourth straight quarter of widening profit fall on Thursday, as its key transportation business declined amid', 'pubDate': '2025-10-09T12:35:27Z', 'displayTime': '2025-10-09T12:35:27Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/065a56e5a48df4480bb61b3eb9a6f93e', 'originalWidth': 800, 'originalHeight': 534, 'caption': 'Tata Elxsi logo is seen in this illustration taken July 7, 2025. REUTERS/Dado Ruvic/Illustration', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/MWAxhYxqTWmDeV1zTdZYdA--~B/aD01MzQ7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/065a56e5a48df4480bb61b3eb9a6f93e', 'width': 800, 'height': 534, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/6Qf_i5Tj74uI4232zIGetg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/065a56e5a48df4480bb61b3eb9a6f93e', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/india-tata-elxsi-posts-fourth-123527829.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/india-tata-elxsi-posts-fourth-123527829.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'b32bac60-b87c-355d-928a-e14551ffb640', 'content': {'id': 'b32bac60-b87c-355d-928a-e14551ffb640', 'contentType': 'STORY', 'title': 'Tata Elxsi and Suzuki open new engineering centre for SDVs', 'description': '', 'summary': 'The Cloud HIL Centre is engineered for early-stage, full-vehicle simulation and validation through a cloud-native infrastructure.', 'pubDate': '2025-08-21T10:28:40Z', 'displayTime': '2025-08-21T10:28:40Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/just_auto_187/858de291d62a41c7a7452e19faac4222', 'originalWidth': 733, 'originalHeight': 540, 'caption': '', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/Fw4Hw3kg11TMdWhYYMHlTg--~B/aD01NDA7dz03MzM7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/just_auto_187/858de291d62a41c7a7452e19faac4222', 'width': 733, 'height': 540, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/Ht3R1JcV5Hn4HgD5gcNS2Q--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/just_auto_187/858de291d62a41c7a7452e19faac4222', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Just Auto', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.just-auto.com/news/tata-elxsi-and-suzuki-open-new-engineering-centre-for-sdvs/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/tata-elxsi-suzuki-open-engineering-102840548.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Technology', 'peers': {'TCS.NS': {'1d_change_pct': 1.47, '5d_change_pct': -0.83, 'latest_close': 2390.6}, 'INFY.NS': {'1d_change_pct': 2.88, '5d_change_pct': 0.61, 'latest_close': 1255.9}, 'WIPRO.NS': {'1d_change_pct': 1.32, '5d_change_pct': -3.38, 'latest_close': 190.9}, 'HCLTECH.NS': {'1d_change_pct': 1.67, '5d_change_pct': 0.63, 'latest_close': 1333.7}, 'TECHM.NS': {'1d_change_pct': 3.3, '5d_change_pct': 3.9, 'latest_close': 1384.8}}, 'sector_avg_1d_pct': 2.13, 'stock_vs_sector': -2.13, 'relative_strength': 'underperforming'}
+
+{'symbol': 'TATAELXSI.NS', 'checks_run': 3, 'flags_found': 2, 'flags': ['52w_high mismatch: technical_indicators=5950.0 vs extended_company_info=6735.0 (11.7% difference). Use technical_indicators value (rolling 252-day) for intraday analysis.', 'Price (4237.7001953125) is already ABOVE R2 (4236.17). Standard bullish setup may have played out. Consider R3 (4294.23) as target.'], 'status': 'REVIEW_REQUIRED', 'warnings': {'52w_high': '52w_high mismatch: technical_indicators=5950.0 vs extended_company_info=6735.0 (11.7% difference). Use technical_indicators value (rolling 252-day) for intraday analysis.', 'price_above_r2': 'Price (4237.7001953125) is already ABOVE R2 (4236.17). Standard bullish setup may have played out. Consider R3 (4294.23) as target.'}}
+
+
+
+{'symbol': 'TATAELXSI.NS', 'direction': 'Bullish', 'factors': {'technical_aligned': False, 'nifty_aligned': False, 'obv_confirming': True, 'news_clear': True, 'non_expiry_day': True}, 'score': 1, 'confidence': 'Low', 'macro_override': False, 'macro_override_reason': None, 'contradiction': True, 'contradiction_reason': 'CONTRADICTION: Direction=Bullish but target (4236.17) < entry (4293.2). Setup from wrong side used.', 'tradeable': False, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — TATAELXSI.NS  
+Date: 2026-03-13 | As of: 11:30 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bullish  
+  Expected Move   : +-1.00% (30min scaled)  
+  Price Targets   : Entry=4293.2, Target=4236.17, Stop=3996.26, R:R=-0.01  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 37.14 -> neutral  
+  MACD            : macd_trend=bullish | macd_crossover=bullish_crossover  
+  EMA Trend       : bearish  
+  ATR(14)         : 149.64 pts -> +-0.99% scaled to 30min  
+  ADX(14)         : 48.15 -> strong_trend  
+  OBV Trend       : rising  
+  VWAP            : Price 4237.7 is above VWAP 4180.94  
+
+MARKET CONTEXT:  
+  NIFTY50         : 23114.5 [0.49% change] | 5d trend: down  
+  BANKNIFTY       : 53427.05 [-0.04% change]  
+  India VIX       : 22.81 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: No  
+  - OBV confirming: Yes  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 1/5 -> Low  
+
+FINAL REASONING: The analysis indicates a bullish direction; however, the target price is below the entry price, leading to a contradiction in the setup. The overall confidence is low due to misalignment in technical indicators and market trends. The next 30 minutes may see limited movement, and the trade is not recommended due to the unfavorable risk-reward ratio.
+
+Now call: log_forecast(symbol="TATAELXSI.NS", date="2026-03-13", direction="Bullish", entry_price=4293.2, target_price=4236.17, stop_price=3996.26, rr_ratio=-0.01, confidence="Low", score=1, tradeable=False)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'TATAELXSI.NS', 'date': '2026-03-13', 'direction': 'Bullish', 'entry_price': 4293.2, 'target_price': 4236.17, 'stop_price': 3996.26, 'rr_ratio': -0.01, 'confidence': 'Low', 'score': 1, 'tradeable': False, 'factors': {}, 'logged_at': '2026-03-22T14:14:50.488424', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

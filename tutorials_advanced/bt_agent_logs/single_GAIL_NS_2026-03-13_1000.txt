@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-13. Time: 10:00 IST.
+Target stock: GAIL.NS. THIS IS A BACKTEST as of 2026-03-13 10:00 IST.
+Historical entry price at this time: 149.76
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 10:00 IST on 2026-03-13.
+ENTRY PRICE = latest_close from get_intraday_data() = 149.76
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="GAIL.NS")
+STEP 2: get_stock_data(symbol="GAIL.NS", start_date="2026-02-11", end_date="2026-03-13")
+        get_technical_indicators(symbol="GAIL.NS")
+        get_support_resistance(symbol="GAIL.NS")
+        get_intraday_data(symbol="GAIL.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="GAIL.NS")
+        get_company_news(symbol="GAIL.NS")
+        get_sector_peers(symbol="GAIL.NS")
+        get_data_sanity_check(symbol="GAIL.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — GAIL.NS
+Date: 2026-03-13 | As of: 10:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=149.76, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="GAIL.NS", date="2026-03-13", direction=<Direction>,
+  entry_price=149.76, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 22512.65, 'prev_close': 23114.5, 'change_pct': -2.6, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 22851.7, 'session_low': 22471.25}, 'banknifty': {'latest_close': 51437.75, 'change_pct': -3.72, 'trend': 'down'}, 'india_vix': {'latest': 26.73, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.187, 'change_pct': 0.1125, 'rupee_signal': 'rupee_weakening_fii_outflow_risk'}, 'brent_crude_proxy': {'latest_usd': 88.82, 'change_pct': -9.66, 'data_anomaly': True, 'data_note': 'WARNING: change_pct exceeds 5% — likely a yfinance data anomaly (futures roll-over). Do NOT use this value in analysis.', 'signal': 'data_anomaly_ignore'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+                  Open        High         Low       Close    Volume  Dividends  Stock Splits
+Date                                                                                         
+2026-02-11  164.639999  164.639999  161.800003  163.470001   8859790        0.0           0.0
+2026-02-12  163.000000  164.500000  162.039993  163.720001  13190080        0.0           0.0
+2026-02-13  162.399994  163.330002  161.119995  161.690002   8523271        0.0           0.0
+2026-02-16  161.679993  165.100006  161.300003  164.820007  10223455        0.0           0.0
+2026-02-17  164.199997  165.899994  163.860001  165.750000   8756094        0.0           0.0
+2026-02-18  166.500000  169.289993  165.589996  167.309998  11790520        0.0           0.0
+2026-02-19  167.309998  169.360001  165.850006  166.880005  17067659        0.0           0.0
+2026-02-20  166.009995  170.000000  165.800003  168.470001  14668133        0.0           0.0
+2026-02-23  168.800003  169.300003  166.470001  167.130005   7494561        0.0           0.0
+2026-02-24  165.600006  168.589996  165.600006  167.860001   8809408        0.0           0.0
+2026-02-25  168.000000  170.309998  167.750000  170.000000  10027465        0.0           0.0
+2026-02-26  170.500000  171.199997  168.410004  169.960007  13026917        0.0           0.0
+2026-02-27  169.449997  171.460007  167.669998  169.529999  17164115        0.0           0.0
+2026-03-02  165.500000  167.960007  163.500000  165.070007  17268287        0.0           0.0
+2026-03-04  160.000000  160.529999  154.000000  154.610001  30080625        0.0           0.0
+2026-03-05  155.490005  157.860001  154.410004  156.729996  18400202        0.0           0.0
+2026-03-06  155.899994  157.800003  153.649994  155.710007  14633439        0.0           0.0
+2026-03-09  152.000000  152.000000  146.410004  148.979996  20704576        0.0           0.0
+2026-03-10  151.000000  152.500000  149.250000  150.289993  20823909        0.0           0.0
+2026-03-11  151.389999  154.899994  147.320007  147.970001  23526066        0.0           0.0
+2026-03-12  147.000000  153.929993  144.669998  152.350006  16072499        0.0           0.0
+
+{'latest_close': 135.39999389648438, '52w_high': 181.22, '52w_low': 134.36, 'pct_from_52w_high': -25.28, 'rsi_14': 23.06, 'rsi_signal': 'oversold', 'stoch_k': 3.97, 'stoch_d': 2.45, 'stoch_signal': 'oversold', 'macd': -5.64, 'macd_signal_line': -4.02, 'macd_histogram': -1.6273, 'macd_prev_histogram': -1.232, 'macd_crossover': 'none', 'macd_trend': 'bearish', 'macd_signal': 'bearish', 'ema_trend': 'strongly_bearish', 'ema_9': 145.76, 'ema_21': 151.84, 'ema_50': 157.72, 'ema_200': 167.45, 'adx_14': 55.25, 'adx_signal': 'strong_trend', 'atr_14': 6.24, 'expected_intraday_range_pct': 4.61, 'bb_upper': 175.27, 'bb_lower': 133.86, 'bb_width_pct': 26.79, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'falling', 'avg_vol_20d': 15595349, 'latest_vol': 16538331, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 147.35000610351562, 'low': 142.44000244140625, 'close': 142.8699951171875, 'open': 146.02000427246094}, 'today_open': 141.22999572753906, 'latest_close': 135.39999389648438, 'classic_pivots': {'PP': 144.22, 'R1': 146.0, 'R2': 149.13, 'R3': 150.91, 'S1': 141.09, 'S2': 139.31, 'S3': 136.18}, 'camarilla_pivots': {'H4': 145.57, 'H3': 144.22, 'L3': 141.52, 'L4': 140.17}, 'nearest_support': 136.18, 'nearest_resistance': 146.0, 'bearish_setup': {'entry': 135.39999389648438, 'target': 139.31, 'stop': 144.22, 'reward_pts': -3.91, 'risk_pts': 8.82, 'rr_ratio': -0.44, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 135.39999389648438, 'target': 149.13, 'stop': 140.17, 'reward_pts': 13.73, 'risk_pts': -4.77, 'rr_ratio': -2.88, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': -1.15}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 135.25, 'latest_vwap': 143.94, 'price_vs_vwap': 'below', 'session_high': 151.57, 'session_low': 134.41, 'avg_volume_per_candle': 543519, 'last_20_candles': '                       Open    High     Low   Close   Volume    VWAP\nDatetime                                                            \n2026-03-23 10:30:00  136.93  137.37  136.77  137.12   343959  145.73\n2026-03-23 10:45:00  137.10  137.14  136.11  136.11   412712  145.66\n2026-03-23 11:00:00  136.12  136.60  135.72  136.51   884935  145.52\n2026-03-23 11:15:00  136.55  136.90  136.26  136.88   445939  145.45\n2026-03-23 11:30:00  136.85  137.20  136.07  136.12   379809  145.39\n2026-03-23 11:45:00  136.11  136.82  136.01  136.61   761941  145.27\n2026-03-23 12:00:00  136.64  137.47  136.35  136.75   647539  145.18\n2026-03-23 12:15:00  136.75  136.79  136.00  136.32   268908  145.14\n2026-03-23 12:30:00  136.25  136.58  136.02  136.45   227861  145.11\n2026-03-23 12:45:00  136.42  136.42  135.53  135.85   323130  145.06\n2026-03-23 13:00:00  135.85  136.00  135.52  135.76   574732  144.97\n2026-03-23 13:15:00  135.82  136.31  135.70  135.86   362602  144.91\n2026-03-23 13:30:00  135.85  136.25  135.67  136.14   359974  144.86\n2026-03-23 13:45:00  136.08  136.70  136.08  136.45   353697  144.81\n2026-03-23 14:00:00  136.27  136.33  135.75  135.82   380991  144.76\n2026-03-23 14:15:00  135.75  135.90  134.50  134.87  1323285  144.56\n2026-03-23 14:30:00  134.77  135.00  134.41  135.00   588750  144.47\n2026-03-23 14:45:00  134.95  136.10  134.80  136.00  1177892  144.31\n2026-03-23 15:00:00  135.81  135.89  135.02  135.44  1513322  144.11\n2026-03-23 15:15:00  135.42  135.59  135.15  135.25  1294880  143.94'}
+
+{'company': 'GAIL (INDIA) LTD', 'sector': 'Utilities', 'industry': 'Utilities - Regulated Gas', 'market_cap_cr': 89027.0, 'pe_ratio': 10.383435, 'pb_ratio': 1.0099804, 'ev_ebitda': 8.926, 'beta': 0.371, 'beta_signal': 'low_volatility_defensive', '52w_high': 202.79, '52w_low': 134.36, '200d_avg': 173.77126, '50d_avg': 160.8364, 'float_shares': 2697529739, 'shares_outstanding': 6575079643, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 8.75, 'earnings_date': '1769853600', 'recommendation': 'buy', 'analyst_count': 31, 'target_price': 195.19354}
+
+[{'id': '49fed2c1-d3e7-32ea-942b-c2efa3f87fa8', 'content': {'id': '49fed2c1-d3e7-32ea-942b-c2efa3f87fa8', 'contentType': 'STORY', 'title': 'GAIL (India) Ltd (GAILF) Q3 2026 Earnings Call Highlights: Navigating Challenges with Strategic ...', 'description': '', 'summary': 'Despite a dip in profits, GAIL (India) Ltd (GAILF) focuses on expanding its clean energy portfolio and strategic growth opportunities.', 'pubDate': '2026-02-03T01:06:40Z', 'displayTime': '2026-02-03T01:06:40Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/gail-india-ltd-gailf-q3-010640108.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/gail-india-ltd-gailf-q3-010640108.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '59e5cdd4-a8fe-3808-abe2-e37f22a39534', 'content': {'id': '59e5cdd4-a8fe-3808-abe2-e37f22a39534', 'contentType': 'STORY', 'title': "India's GAIL seeks 5-to-10-year LNG deal, sources say", 'description': '', 'summary': 'NEW DELHI (Reuters) -State-run GAIL (India) Ltd is seeking liquefied natural gas (LNG) for delivery from 2027 under a five-to-10-year deal linked to Brent crude oil prices, four sources aware of the inquiry said.  The Indian company is looking to buy six cargoes of the super chilled gas in 2027, and eight cargoes in the second year of the deal, they said.  From the third year onward, GAIL is seeking to buy one cargo every month, they said.', 'pubDate': '2025-07-16T02:05:16Z', 'displayTime': '2025-07-16T02:05:16Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/b8d6d920faeb322c1123851b1c04ffb6', 'originalWidth': 800, 'originalHeight': 498, 'caption': 'Gastech 2023 in Singapore', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/o0sgihDNhgBEWfN0ijKCLA--~B/aD00OTg7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/b8d6d920faeb322c1123851b1c04ffb6', 'width': 800, 'height': 498, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/MIIbxs3kVgHigH8fc52CHA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/b8d6d920faeb322c1123851b1c04ffb6', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-gail-seeks-5-10-020516535.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-gail-seeks-5-10-020516535.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '52575fe9-0bab-39da-92c7-857cc9393b9c', 'content': {'id': '52575fe9-0bab-39da-92c7-857cc9393b9c', 'contentType': 'STORY', 'title': 'Gail India extends gas purchase agreement with Oil India for 15 years', 'description': '', 'summary': "As per the agreement, which is effective July 1, up to 900,000 standard cubic meters per day of natural gas will be supplied from Oil India's Bakhri Tibba block in the western state of Rajasthan to a power plant operated by the state's electricity generation company.  GAIL owns and operates a 16,421 km network of natural gas pipelines spread across the country.", 'pubDate': '2025-07-09T13:53:36Z', 'displayTime': '2025-07-09T13:53:36Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/97b31f40e4cb8aa63112be6d557751a4', 'originalWidth': 800, 'originalHeight': 498, 'caption': 'Gastech 2023 in Singapore', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/1CJG7y6Ew.NaUq7VXc7OSg--~B/aD00OTg7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/97b31f40e4cb8aa63112be6d557751a4', 'width': 800, 'height': 498, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/zXP5teY.bOfo3tk.EX_h3A--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/97b31f40e4cb8aa63112be6d557751a4', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/gail-india-extends-gas-purchase-135336746.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/gail-india-extends-gas-purchase-135336746.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '889176e4-869c-35ec-8b73-861bec6f85fd', 'content': {'id': '889176e4-869c-35ec-8b73-861bec6f85fd', 'contentType': 'STORY', 'title': "GAIL India's Dabhol LNG terminal goes all-weather with first monsoon cargo", 'description': '', 'summary': 'This marks the start of year-round operations at the terminal, the company said in a press release.  The commissioning of a breakwater facility — structures that protect a port against high tides — at the terminal last month allows ships to dock safely and allow it to function as an "all-weather port".  Earlier, the terminal used to be shut for four months during the rainy season.', 'pubDate': '2025-06-06T09:42:53Z', 'displayTime': '2025-06-06T09:42:53Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/a452cc3b03a343736ec3ce20592293eb', 'originalWidth': 800, 'originalHeight': 538, 'caption': "Logo of India's state-owned natural gas utility GAIL (India) Ltd is pictured in New Delhi", 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/By7rhkgBMuWAxXGSkfAY7g--~B/aD01Mzg7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/a452cc3b03a343736ec3ce20592293eb', 'width': 800, 'height': 538, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/vKvhz4BLGxWsTYUFoyy8fg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/a452cc3b03a343736ec3ce20592293eb', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/gail-indias-dabhol-lng-terminal-094253474.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/gail-indias-dabhol-lng-terminal-094253474.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '22060e4b-adc8-3ff8-acd9-7a94eceed060', 'content': {'id': '22060e4b-adc8-3ff8-acd9-7a94eceed060', 'contentType': 'STORY', 'title': 'GAIL (India) Ltd (FRA:GQI) Q4 2025 Earnings Call Highlights: Record Profits and Strategic ...', 'description': '', 'summary': 'GAIL (India) Ltd (FRA:GQI) reports its highest-ever profits, strategic project completions, and robust growth in key segments, despite facing challenges in certain areas.', 'pubDate': '2025-05-15T13:00:39Z', 'displayTime': '2025-05-15T13:00:39Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/us.finance.gurufocus/af55eecb7684add72c1580246a43c1be', 'originalWidth': 471, 'originalHeight': 471, 'caption': '', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/wFv8zkMnci.2UCcWsc2jaw--~B/aD00NzE7dz00NzE7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/us.finance.gurufocus/af55eecb7684add72c1580246a43c1be', 'width': 471, 'height': 471, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/9dEVCttbMpPG8jNnRM0f1A--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/us.finance.gurufocus/af55eecb7684add72c1580246a43c1be', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/gail-india-ltd-fra-gqi-130039767.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/gail-india-ltd-fra-gqi-130039767.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'a627a361-9715-35b0-8578-3377e6bce391', 'content': {'id': 'a627a361-9715-35b0-8578-3377e6bce391', 'contentType': 'STORY', 'title': "India's GAIL to run Dabhol LNG terminal during monsoons, plans expansion", 'description': '', 'summary': 'The company typically shuts the Ratnagiri terminal — popularly known as the Dabhol LNG plant — for four months from May 25 each year to avoid high tides.  The new breakwater will now enable ship arrivals during the monsoon.', 'pubDate': '2025-05-13T11:14:35Z', 'displayTime': '2025-05-13T11:14:35Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/bba6fff2e5bf92fb3d147b949de26724', 'originalWidth': 800, 'originalHeight': 524, 'caption': "Birds fly past the logo of India's state-owned natural gas utility GAIL (India) Ltd in New Delhi", 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/FZHU.MYRiynv_D0OBqcG1g--~B/aD01MjQ7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/bba6fff2e5bf92fb3d147b949de26724', 'width': 800, 'height': 524, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/VHTbQSHltHlSiKMuLXXElg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/bba6fff2e5bf92fb3d147b949de26724', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-gail-run-dabhol-lng-111435767.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-gail-run-dabhol-lng-111435767.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'b50ba2d6-bca1-3ac8-af24-5e77ec4a8df9', 'content': {'id': 'b50ba2d6-bca1-3ac8-af24-5e77ec4a8df9', 'contentType': 'STORY', 'title': 'GAIL India eyes 26% stake in US LNG project, enhancing energy ties', 'description': '', 'summary': 'GAIL aims to commence LNG imports from the US project by 2029–30, with the bid submission deadline set for 28 April.', 'pubDate': '2025-04-14T11:27:47Z', 'displayTime': '2025-04-14T11:27:47Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/offshore_technology_431/8bbdd2bde3dfe2a7684c12f4a2d79b92', 'originalWidth': 1440, 'originalHeight': 810, 'caption': 'GAIL plans to procure 1mtpa of LNG from a US plant on a free-on-board basis for 15 years. Credit: Piotr Swat/Shutterstock.', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/kHOTQEnlTo0KBh9YLsADZw--~B/aD04MTA7dz0xNDQwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/offshore_technology_431/8bbdd2bde3dfe2a7684c12f4a2d79b92', 'width': 1440, 'height': 810, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/hp2t_k_zzwN4ee6O.aYcCg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/offshore_technology_431/8bbdd2bde3dfe2a7684c12f4a2d79b92', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Offshore Technology', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.offshore-technology.com/news/gail-india-stake-us-lng-project/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/gail-india-eyes-26-stake-112747019.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'ceef970a-7b87-39bd-b577-144dcc69da28', 'content': {'id': 'ceef970a-7b87-39bd-b577-144dcc69da28', 'contentType': 'STORY', 'title': 'Indian gas firm GAIL seeks 26% stake in US LNG', 'description': '', 'summary': "GAIL India Ltd issued a tender on Friday to buy an up to 26% stake in a liquefied natural gas project in the United States combined with a 15-year gas import deal, aiding New Delhi's efforts to narrow its trade surplus with Washington.  India is racing to become one of the first to agree a trade deal with the United States, as President Donald Trump's announcement of sweeping tariffs has triggered a trade war with China and efforts by other countries to negotiate.  Trump has made clear he regards U.S. gas as a bargaining chip.", 'pubDate': '2025-04-11T15:10:31Z', 'displayTime': '2025-04-11T15:10:31Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters-finance.com/5de9c05526add22c61ae1afac352badc', 'originalWidth': 800, 'originalHeight': 498, 'caption': "Gail India Ltd's logo is seen at Gastech 2023 in Singapore", 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/bwpRsZowhyh2B1W96oDpLw--~B/aD00OTg7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters-finance.com/5de9c05526add22c61ae1afac352badc', 'width': 800, 'height': 498, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/jL_9UUfc4LexmsYJipuRRg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters-finance.com/5de9c05526add22c61ae1afac352badc', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'http://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/indian-gas-firm-gail-seeks-151031477.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indian-gas-firm-gail-seeks-151031477.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Utilities', 'peers': {'NTPC.NS': {'1d_change_pct': -2.24, '5d_change_pct': -2.62, 'latest_close': 372.4}, 'POWERGRID.NS': {'1d_change_pct': 1.51, '5d_change_pct': 1.46, 'latest_close': 302.1}, 'TATAPOWER.NS': {'1d_change_pct': -3.84, '5d_change_pct': -0.92, 'latest_close': 386.95}, 'ADANIGREEN.NS': {'1d_change_pct': -5.4, '5d_change_pct': -5.83, 'latest_close': 816.45}}, 'sector_avg_1d_pct': -2.49, 'stock_vs_sector': 2.49, 'relative_strength': 'outperforming'}
+
+{'symbol': 'GAIL.NS', 'checks_run': 3, 'flags_found': 2, 'flags': ['52w_high mismatch: technical_indicators=181.22 vs extended_company_info=202.79 (10.6% difference). Use technical_indicators value (rolling 252-day) for intraday analysis.', 'Price (135.39999389648438) is already BELOW S2 (139.31). Standard bearish setup may have played out. Consider S3 (136.18) as target.'], 'status': 'REVIEW_REQUIRED', 'warnings': {'52w_high': '52w_high mismatch: technical_indicators=181.22 vs extended_company_info=202.79 (10.6% difference). Use technical_indicators value (rolling 252-day) for intraday analysis.', 'price_below_s2': 'Price (135.39999389648438) is already BELOW S2 (139.31). Standard bearish setup may have played out. Consider S3 (136.18) as target.'}}
+
+
+
+{'symbol': 'GAIL.NS', 'direction': 'Bearish', 'factors': {'technical_aligned': True, 'nifty_aligned': True, 'obv_confirming': True, 'news_clear': True, 'non_expiry_day': True}, 'score': 1, 'confidence': 'Low', 'macro_override': False, 'macro_override_reason': None, 'contradiction': True, 'contradiction_reason': 'CONTRADICTION: Negative R:R (-0.44) — target and stop are on the same side of entry.', 'tradeable': False, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — GAIL.NS  
+Date: 2026-03-13 | As of: 10:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bearish  
+  Expected Move   : +-1.30% (30min scaled)  
+  Price Targets   : Entry=149.76, Target=139.31, Stop=144.22, R:R=-0.44  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 23.06 -> oversold  
+  MACD            : macd_trend=bearish | macd_crossover=none  
+  EMA Trend       : strongly_bearish  
+  ATR(14)         : 6.24 pts -> +-0.84% scaled to 30min  
+  ADX(14)         : 55.25 -> strong_trend  
+  OBV Trend       : falling  
+  VWAP            : Price 135.40 is below VWAP 143.94  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22512.65 [-2.6% change] | 5d trend: down  
+  BANKNIFTY       : 51437.75 [-3.72% change]  
+  India VIX       : 26.73 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: Yes  
+  - NIFTY trend aligned: Yes  
+  - OBV confirming: Yes  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 1/5 -> Low  
+
+FINAL REASONING: The bearish trend is supported by technical indicators, including a bearish MACD and a strongly bearish EMA trend. However, the negative risk-reward ratio indicates that the setup is untradeable. Given the current market context and the bearish signals, a downward movement is expected in the next 30 minutes, but caution is advised due to the low confidence in this prediction.
+
+Now call: log_forecast(symbol="GAIL.NS", date="2026-03-13", direction="Bearish", entry_price=149.76, target_price=139.31, stop_price=144.22, rr_ratio=-0.44, confidence="Low", score=1, tradeable=False)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'GAIL.NS', 'date': '2026-03-13', 'direction': 'Bearish', 'entry_price': 149.76, 'target_price': 139.31, 'stop_price': 144.22, 'rr_ratio': -0.44, 'confidence': 'Low', 'score': 1, 'tradeable': False, 'factors': {}, 'logged_at': '2026-03-23T20:17:02.105936', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

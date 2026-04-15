@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-12. Time: 10:00 IST.
+Target stock: ADANIGREEN.NS. THIS IS A BACKTEST as of 2026-03-12 10:00 IST.
+Historical entry price at this time: 851.0
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 10:00 IST on 2026-03-12.
+ENTRY PRICE = latest_close from get_intraday_data() = 851.0
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="ADANIGREEN.NS")
+STEP 2: get_stock_data(symbol="ADANIGREEN.NS", start_date="2026-02-10", end_date="2026-03-12")
+        get_technical_indicators(symbol="ADANIGREEN.NS")
+        get_support_resistance(symbol="ADANIGREEN.NS")
+        get_intraday_data(symbol="ADANIGREEN.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="ADANIGREEN.NS")
+        get_company_news(symbol="ADANIGREEN.NS")
+        get_sector_peers(symbol="ADANIGREEN.NS")
+        get_data_sanity_check(symbol="ADANIGREEN.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — ADANIGREEN.NS
+Date: 2026-03-12 | As of: 10:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=851.0, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="ADANIGREEN.NS", date="2026-03-12", direction=<Direction>,
+  entry_price=851.0, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 22512.65, 'prev_close': 23114.5, 'change_pct': -2.6, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 22851.7, 'session_low': 22471.25}, 'banknifty': {'latest_close': 51437.75, 'change_pct': -3.72, 'trend': 'down'}, 'india_vix': {'latest': 26.73, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.189, 'change_pct': 0.1146, 'rupee_signal': 'rupee_weakening_fii_outflow_risk'}, 'brent_crude_proxy': {'latest_usd': 88.47, 'change_pct': -10.02, 'data_anomaly': True, 'data_note': 'WARNING: change_pct exceeds 5% — likely a yfinance data anomaly (futures roll-over). Do NOT use this value in analysis.', 'signal': 'data_anomaly_ignore'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+                   Open         High         Low        Close   Volume  Dividends  Stock Splits
+Date                                                                                           
+2026-02-10   985.799988   987.799988  953.049988   978.299988  2057124        0.0           0.0
+2026-02-11   977.000000   998.150024  975.049988   994.750000  1489878        0.0           0.0
+2026-02-12   992.450012   999.599976  980.049988   997.650024  1250477        0.0           0.0
+2026-02-13   988.900024   989.900024  943.750000   950.500000  2943844        0.0           0.0
+2026-02-16   949.500000   999.000000  936.450012   991.250000  4171950        0.0           0.0
+2026-02-17   982.650024  1018.950012  979.250000  1016.799988  3770349        0.0           0.0
+2026-02-18  1019.000000  1019.950012  987.400024  1000.099976  1964869        0.0           0.0
+2026-02-19  1000.099976  1005.000000  970.000000   976.500000  1500530        0.0           0.0
+2026-02-20   976.400024   980.750000  965.000000   968.250000  1221495        0.0           0.0
+2026-02-23   978.250000   987.549988  962.000000   970.349976  1188654        0.0           0.0
+2026-02-24   970.150024   988.000000  956.450012   981.349976  1290484        0.0           0.0
+2026-02-25   984.950012   988.599976  960.000000   964.150024  1345367        0.0           0.0
+2026-02-26   964.150024   973.500000  956.549988   965.950012   911136        0.0           0.0
+2026-02-27   960.349976   969.500000  942.000000   947.349976  1156653        0.0           0.0
+2026-03-02   915.000000   926.950012  880.250000   903.549988  3482707        0.0           0.0
+2026-03-04   880.000000   882.799988  867.000000   871.950012  1976974        0.0           0.0
+2026-03-05   886.250000   889.750000  864.599976   884.549988  4655262        0.0           0.0
+2026-03-06   879.599976   894.549988  855.150024   858.400024  5784124        0.0           0.0
+2026-03-09   841.000000   858.000000  825.000000   854.150024  1922632        0.0           0.0
+2026-03-10   875.000000   878.950012  843.250000   856.900024  3240047        0.0           0.0
+2026-03-11   866.599976   877.900024  846.900024   849.650024  3005645        0.0           0.0
+
+{'latest_close': 816.4500122070312, '52w_high': 1112.9, '52w_low': 765.0, 'pct_from_52w_high': -26.64, 'rsi_14': 30.89, 'rsi_signal': 'neutral', 'stoch_k': 6.41, 'stoch_d': 21.49, 'stoch_signal': 'oversold', 'macd': -25.65, 'macd_signal_line': -22.22, 'macd_histogram': -3.4247, 'macd_prev_histogram': -1.1898, 'macd_crossover': 'none', 'macd_trend': 'bearish', 'macd_signal': 'bearish', 'ema_trend': 'strongly_bearish', 'ema_9': 859.9, 'ema_21': 884.92, 'ema_50': 920.35, 'ema_200': 1004.62, 'adx_14': 52.06, 'adx_signal': 'strong_trend', 'atr_14': 34.92, 'expected_intraday_range_pct': 4.28, 'bb_upper': 986.81, 'bb_lower': 792.95, 'bb_width_pct': 21.78, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'falling', 'avg_vol_20d': 2891656, 'latest_vol': 2746144, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 887.0, 'low': 860.0, 'close': 863.0999755859375, 'open': 865.4500122070312}, 'today_open': 863.0, 'latest_close': 816.4500122070312, 'classic_pivots': {'PP': 870.03, 'R1': 880.07, 'R2': 897.03, 'R3': 907.07, 'S1': 853.07, 'S2': 843.03, 'S3': 826.07}, 'camarilla_pivots': {'H4': 877.95, 'H3': 870.52, 'L3': 855.67, 'L4': 848.25}, 'nearest_support': 826.07, 'nearest_resistance': 880.07, 'bearish_setup': {'entry': 816.4500122070312, 'target': 843.03, 'stop': 870.52, 'reward_pts': -26.58, 'risk_pts': 54.07, 'rr_ratio': -0.49, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 816.4500122070312, 'target': 897.03, 'stop': 848.25, 'reward_pts': 80.58, 'risk_pts': -31.8, 'rr_ratio': -2.53, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': -0.01}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 816.45, 'latest_vwap': 860.38, 'price_vs_vwap': 'below', 'session_high': 903.8, 'session_low': 810.8, 'avg_volume_per_candle': 90366, 'last_20_candles': '                       Open    High     Low   Close  Volume    VWAP\nDatetime                                                           \n2026-03-23 10:30:00  819.50  827.90  819.00  822.95  106732  867.18\n2026-03-23 10:45:00  822.90  823.45  818.60  819.00   65110  866.87\n2026-03-23 11:00:00  818.85  823.65  815.75  820.15   98478  866.40\n2026-03-23 11:15:00  820.00  821.00  817.50  820.50   53443  866.15\n2026-03-23 11:30:00  820.45  822.95  817.10  817.80   55258  865.89\n2026-03-23 11:45:00  817.80  820.35  817.20  819.25   40037  865.71\n2026-03-23 12:00:00  819.25  821.00  816.60  817.95   42859  865.51\n2026-03-23 12:15:00  817.75  818.05  814.00  817.00   93929  865.05\n2026-03-23 12:30:00  816.80  818.00  814.80  816.85   41707  864.86\n2026-03-23 12:45:00  816.80  816.80  811.50  812.60   63978  864.54\n2026-03-23 13:00:00  812.30  813.70  810.80  812.50   63958  864.21\n2026-03-23 13:15:00  812.50  816.30  812.40  813.25   40969  864.02\n2026-03-23 13:30:00  813.25  819.15  813.00  818.70   77721  863.67\n2026-03-23 13:45:00  818.50  822.45  817.50  820.45   91680  863.29\n2026-03-23 14:00:00  820.45  822.00  818.10  818.90   98738  862.89\n2026-03-23 14:15:00  818.90  822.10  817.90  818.50  173738  862.19\n2026-03-23 14:30:00  818.30  820.45  814.05  820.25   71822  861.90\n2026-03-23 14:45:00  820.10  822.15  818.00  820.55   92999  861.55\n2026-03-23 15:00:00  818.80  819.25  814.95  816.45  121078  861.06\n2026-03-23 15:15:00  816.45  818.15  814.50  816.45  173342  860.38'}
+
+{'company': 'ADANI GREEN ENERGY LTD', 'sector': 'Utilities', 'industry': 'Utilities - Renewable', 'market_cap_cr': 134484.0, 'pe_ratio': 95.60304, 'pb_ratio': 7.134805, 'ev_ebitda': 22.315, 'beta': 0.731, 'beta_signal': 'low_volatility_defensive', '52w_high': 1177.55, '52w_low': 765.0, '200d_avg': 985.9412, '50d_avg': 908.28, 'float_shares': 334508534, 'shares_outstanding': 1647176155, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 0, 'earnings_date': '1777284000', 'recommendation': 'strong_buy', 'analyst_count': 8, 'target_price': 1220.5}
+
+[{'id': '8e6dcf7a-3b4f-3fad-88fe-993b2f062a4d', 'content': {'id': '8e6dcf7a-3b4f-3fad-88fe-993b2f062a4d', 'contentType': 'STORY', 'title': 'India’s Adani Group to Invest $100 Billion in AI Infrastructure', 'description': '', 'summary': 'The conglomerate’s investment would be a boost to the country’s ambitions to become a global leader in artificial intelligence.', 'pubDate': '2026-02-17T14:50:00Z', 'displayTime': '2026-02-17T14:50:00Z', 'isHosted': False, 'bypassModal': False, 'previewUrl': 'https://finance.yahoo.com/m/8e6dcf7a-3b4f-3fad-88fe-993b2f062a4d/india%E2%80%99s-adani-group-to-invest.html', 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/wsj.com/08308d218e751353b33a88d62249ed04', 'originalWidth': 1280, 'originalHeight': 640, 'caption': '', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/BOfo.P8OxTJUNakmj38QaA--~B/aD02NDA7dz0xMjgwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/wsj.com/08308d218e751353b33a88d62249ed04', 'width': 1280, 'height': 640, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/TNsBj39kfweUGd78tZVWiA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/wsj.com/08308d218e751353b33a88d62249ed04', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'The Wall Street Journal', 'url': 'http://www.wsj.com/'}, 'canonicalUrl': {'url': 'https://www.wsj.com/tech/indias-adani-group-to-invest-100-billion-on-ai-infrastructure-7d428962?siteid=yhoof2&yptr=yahoo', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': None, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '8b732739-6d66-3949-8005-4007386efc0d', 'content': {'id': '8b732739-6d66-3949-8005-4007386efc0d', 'contentType': 'STORY', 'title': 'Adani Green Energy Ltd (BOM:541450) Q3 2026 Earnings Call Highlights: Record Growth in ...', 'description': '', 'summary': 'Adani Green Energy Ltd (BOM:541450) reports significant increases in energy sales and operational capacity, while addressing grid and market challenges.', 'pubDate': '2026-01-23T17:01:17Z', 'displayTime': '2026-01-23T17:01:17Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/adani-green-energy-ltd-bom-170117713.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/adani-green-energy-ltd-bom-170117713.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'afd70a2c-0188-36d4-b391-d298fcf8781c', 'content': {'id': 'afd70a2c-0188-36d4-b391-d298fcf8781c', 'contentType': 'STORY', 'title': "India's Adani Green quarterly profit slumps on higher finance costs\xa0", 'description': '', 'summary': "BENGALURU, Jan 23 (Reuters) - India's Adani Green Energy posted a 99% drop in third‑quarter profit on Friday, as higher finance costs inflated its expenses and offset gains from strong power sales and", 'pubDate': '2026-01-23T10:10:11Z', 'displayTime': '2026-01-23T10:10:11Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/449cd5c8e9ec8ac890bf1b5dec8dc577', 'originalWidth': 800, 'originalHeight': 534, 'caption': 'A view of power-generating windmill turbines at a wind park of Adani Green Energy at Ahmedabad-Narayan Sarovar state highway near Nakhatrana village in the western state of Gujarat, India, November 29, 2024. REUTERS/Amit Dave', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/ohKpluP99CiIhMHBVGMldg--~B/aD01MzQ7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/449cd5c8e9ec8ac890bf1b5dec8dc577', 'width': 800, 'height': 534, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/C241SgEQdsKvImk97TRUaA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/449cd5c8e9ec8ac890bf1b5dec8dc577', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-adani-green-quarterly-profit-101011452.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-adani-green-quarterly-profit-101011452.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'c99c4ca1-6342-30a9-b566-8c35ef126144', 'content': {'id': 'c99c4ca1-6342-30a9-b566-8c35ef126144', 'contentType': 'STORY', 'title': 'US regulator seeks to bypass Indian government to serve Adani summons', 'description': '', 'summary': 'By Arpan Chaturvedi NEW DELHI, Jan 22 (Reuters) - The U. Securities and Exchange Commission has asked a U.', 'pubDate': '2026-01-22T10:59:55Z', 'displayTime': '2026-01-22T10:59:55Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/c422836221f7c0bea9a84e6c0d97ec7e', 'originalWidth': 800, 'originalHeight': 533, 'caption': 'FILE PHOTO: Indian billionaire Gautam Adani attends the 51st Gems and Jewellery Awards in Jaipur, India, November 30, 2024. REUTERS/Stringer/File Photo', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/KxUU3VyfzlsDBQFld.AG0g--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/c422836221f7c0bea9a84e6c0d97ec7e', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/qw4g9cVqZ7xbZ2fLqZKZ7Q--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/c422836221f7c0bea9a84e6c0d97ec7e', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/us-regulator-seeks-bypass-indian-105559159.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/us-regulator-seeks-bypass-indian-105559159.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'bdbbd7eb-fbe3-377a-a440-822369177235', 'content': {'id': 'bdbbd7eb-fbe3-377a-a440-822369177235', 'contentType': 'STORY', 'title': 'India markets regulator drops case against Pranav Adani', 'description': '', 'summary': "By Jayshree P Upadhyay Dec 12 (Reuters) - India's markets regulator said on Friday it had dropped a case of alleged insider trading in the shares of Adani Green Energy against Pranav Adani,\xa0director", 'pubDate': '2025-12-12T16:34:02Z', 'displayTime': '2025-12-12T16:34:02Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/266ad8f59f4d5236558baa1695f8a991', 'originalWidth': 800, 'originalHeight': 545, 'caption': 'A bird flies past the Securities and Exchange Board of India (SEBI) logo on the exterior of the building of its headquarters in Mumbai, India, September 12, 2025. REUTERS/Francis Mascarenhas', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/i5sUA4usC6DHx7eaJUw.0A--~B/aD01NDU7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/266ad8f59f4d5236558baa1695f8a991', 'width': 800, 'height': 545, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/1F1RrDmyNg_sgeq3I95Lgg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/266ad8f59f4d5236558baa1695f8a991', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/india-markets-regulator-drops-case-163402674.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/india-markets-regulator-drops-case-163402674.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '57cf0e58-bc8b-3680-a121-acdf464fb816', 'content': {'id': '57cf0e58-bc8b-3680-a121-acdf464fb816', 'contentType': 'STORY', 'title': 'SWREL secures EPC order for Adani Green’s Khavda solar projects in India', 'description': '', 'summary': 'The contract includes materials and onsite services, with a total order value of $154.5m excluding taxes.', 'pubDate': '2025-12-01T11:06:22Z', 'displayTime': '2025-12-01T11:06:22Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/power_technology_866/eff4aa0f99e2b7fc8eb714fc17c34d55', 'originalWidth': 1440, 'originalHeight': 810, 'caption': 'The order covers a balance of system package for three solar power projects. Credit: ultramansk/Shutterstock.com.', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/OwqatbWG.kUqJiytGENQ5Q--~B/aD04MTA7dz0xNDQwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/power_technology_866/eff4aa0f99e2b7fc8eb714fc17c34d55', 'width': 1440, 'height': 810, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/0GsOQwjDsh3q6Hp6sjc2WA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/power_technology_866/eff4aa0f99e2b7fc8eb714fc17c34d55', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Power Technology', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.power-technology.com/news/swrel-adani-green-india/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/swrel-secures-epc-order-adani-110622190.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '6ed70258-4d7a-3b83-927d-9757324ed5af', 'content': {'id': '6ed70258-4d7a-3b83-927d-9757324ed5af', 'contentType': 'STORY', 'title': 'Sector Update: Energy Stocks Retreat Late Afternoon', 'description': '', 'summary': 'Energy stocks declined late Monday afternoon, with the NYSE Energy Sector Index shedding 0.4% and th', 'pubDate': '2025-11-24T20:48:09Z', 'displayTime': '2025-11-24T20:48:09Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/sector-energy-stocks-retreat-afternoon-204809972.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/sector-energy-stocks-retreat-afternoon-204809972.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '2611bd27-f889-3e9c-a50e-ca38e3efddd5', 'content': {'id': '2611bd27-f889-3e9c-a50e-ca38e3efddd5', 'contentType': 'STORY', 'title': 'Sector Update: Energy Stocks Decline Monday Afternoon', 'description': '', 'summary': 'Energy stocks were lower Monday afternoon, with the NYSE Energy Sector Index and the Energy Select S', 'pubDate': '2025-11-24T18:59:28Z', 'displayTime': '2025-11-24T18:59:28Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/sector-energy-stocks-decline-monday-185928888.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/sector-energy-stocks-decline-monday-185928888.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '24bb09e7-e0fc-3119-ab89-bef8fbab9d4c', 'content': {'id': '24bb09e7-e0fc-3119-ab89-bef8fbab9d4c', 'contentType': 'STORY', 'title': 'Singaporean energy firm Sembcorp plans IPO of Indian unit, sources say', 'description': '', 'summary': "By Vibhuti Sharma MUMBAI (Reuters) -Singapore's Temasek-backed Sembcorp Industries has started talks over an initial public offering of its India unit in Mumbai and appointed three investment banks,", 'pubDate': '2025-11-24T10:29:23Z', 'displayTime': '2025-11-24T10:29:23Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/9eb56b347bae3e3e5f195d593ff8ca56', 'originalWidth': 800, 'originalHeight': 533, 'caption': 'FILE PHOTO: A signage of Sembcorp Industries is pictured outside their office in Singapore May 14, 2025. REUTERS/Edgar Su/File Photo', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/gyqGTO0FMhVwFmagUG2i_Q--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/9eb56b347bae3e3e5f195d593ff8ca56', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/d1m4osru_Yu_gQ2B0M1q.Q--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/9eb56b347bae3e3e5f195d593ff8ca56', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/singaporean-energy-firm-sembcorp-plans-102923075.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/singaporean-energy-firm-sembcorp-plans-102923075.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '8c2b5902-c45a-3d95-ad8e-0d275fed0f6d', 'content': {'id': '8c2b5902-c45a-3d95-ad8e-0d275fed0f6d', 'contentType': 'STORY', 'title': 'Indian renewable energy firm SAEL Industries files for $521 million IPO', 'description': '', 'summary': '(Reuters) -Renewable energy firm SAEL Industries has filed draft documents late Monday for a stock market listing valued at 45.75 billion rupees ($520.51 million).', 'pubDate': '2025-11-04T02:43:33Z', 'displayTime': '2025-11-04T02:43:33Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/86911d1aea22bf4a4ac9143f0460a291', 'originalWidth': 800, 'originalHeight': 522, 'caption': 'Miniatures of windmill, solar panel and electric pole are seen in front of words Renewable energy in this illustration taken January 17, 2023. REUTERS/Dado Ruvic/Illustration', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/_xXUOR9GqqEJ2gQh9Q1ssA--~B/aD01MjI7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/86911d1aea22bf4a4ac9143f0460a291', 'width': 800, 'height': 522, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/CNGXRul..tYAiIKTKfvphA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/86911d1aea22bf4a4ac9143f0460a291', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indian-renewable-energy-firm-sael-024333906.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indian-renewable-energy-firm-sael-024333906.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Utilities', 'peers': {'NTPC.NS': {'1d_change_pct': -2.24, '5d_change_pct': -2.62, 'latest_close': 372.4}, 'POWERGRID.NS': {'1d_change_pct': 1.51, '5d_change_pct': 1.46, 'latest_close': 302.1}, 'TATAPOWER.NS': {'1d_change_pct': -3.84, '5d_change_pct': -0.92, 'latest_close': 386.95}, 'ADANIGREEN.NS': {'1d_change_pct': -5.4, '5d_change_pct': -5.83, 'latest_close': 816.45}}, 'sector_avg_1d_pct': -2.49, 'stock_vs_sector': -2.91, 'relative_strength': 'underperforming'}
+
+{'symbol': 'ADANIGREEN.NS', 'checks_run': 3, 'flags_found': 2, 'flags': ['52w_high mismatch: technical_indicators=1112.9 vs extended_company_info=1177.55 (5.5% difference). Use technical_indicators value (rolling 252-day) for intraday analysis.', 'Price (816.4500122070312) is already BELOW S2 (843.03). Standard bearish setup may have played out. Consider S3 (826.07) as target.'], 'status': 'REVIEW_REQUIRED', 'warnings': {'52w_high': '52w_high mismatch: technical_indicators=1112.9 vs extended_company_info=1177.55 (5.5% difference). Use technical_indicators value (rolling 252-day) for intraday analysis.', 'price_below_s2': 'Price (816.4500122070312) is already BELOW S2 (843.03). Standard bearish setup may have played out. Consider S3 (826.07) as target.'}}
+
+
+
+{'symbol': 'ADANIGREEN.NS', 'direction': 'Bearish', 'factors': {'technical_aligned': True, 'nifty_aligned': True, 'obv_confirming': True, 'news_clear': True, 'non_expiry_day': True}, 'score': 1, 'confidence': 'Low', 'macro_override': False, 'macro_override_reason': None, 'contradiction': True, 'contradiction_reason': 'CONTRADICTION: Negative R:R (-0.49) — target and stop are on the same side of entry.', 'tradeable': False, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — ADANIGREEN.NS  
+Date: 2026-03-12 | As of: 10:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bearish  
+  Expected Move   : +-1.21% (30min scaled)  
+  Price Targets   : Entry=851.0, Target=826.07, Stop=870.52, R:R=-0.49  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 30.89 -> neutral  
+  MACD            : macd_trend=bearish | macd_crossover=none  
+  EMA Trend       : strongly_bearish  
+  ATR(14)         : 34.92 pts -> +-1.21% scaled to 30min  
+  ADX(14)         : 52.06 -> strong_trend  
+  OBV Trend       : falling  
+  VWAP            : Price 816.45 is below VWAP 860.38  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22512.65 [-2.6% change] | 5d trend: down  
+  BANKNIFTY       : 51437.75 [-3.72% change]  
+  India VIX       : 26.73 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: Yes  
+  - NIFTY trend aligned: Yes  
+  - OBV confirming: Yes  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 1/5 -> Low  
+
+FINAL REASONING: The stock is currently in a bearish trend with strong technical indicators supporting this direction. The expected move is limited, and the risk-reward ratio is negative, making this trade untradeable. The overall market context is also bearish, which aligns with the prediction. However, the low confidence score suggests caution in execution.
+
+Now call: log_forecast(symbol="ADANIGREEN.NS", date="2026-03-12", direction="Bearish", entry_price=851.0, target_price=826.07, stop_price=870.52, rr_ratio=-0.49, confidence="Low", score=1, tradeable=False)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'ADANIGREEN.NS', 'date': '2026-03-12', 'direction': 'Bearish', 'entry_price': 851.0, 'target_price': 826.07, 'stop_price': 870.52, 'rr_ratio': -0.49, 'confidence': 'Low', 'score': 1, 'tradeable': False, 'factors': {}, 'logged_at': '2026-03-23T19:58:28.265522', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

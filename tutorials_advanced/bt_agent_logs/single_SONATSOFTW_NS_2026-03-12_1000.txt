@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-12. Time: 10:00 IST.
+Target stock: SONATSOFTW.NS. THIS IS A BACKTEST as of 2026-03-12 10:00 IST.
+Historical entry price at this time: 239.4
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 10:00 IST on 2026-03-12.
+ENTRY PRICE = latest_close from get_intraday_data() = 239.4
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="SONATSOFTW.NS")
+STEP 2: get_stock_data(symbol="SONATSOFTW.NS", start_date="2026-02-10", end_date="2026-03-12")
+        get_technical_indicators(symbol="SONATSOFTW.NS")
+        get_support_resistance(symbol="SONATSOFTW.NS")
+        get_intraday_data(symbol="SONATSOFTW.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="SONATSOFTW.NS")
+        get_company_news(symbol="SONATSOFTW.NS")
+        get_sector_peers(symbol="SONATSOFTW.NS")
+        get_data_sanity_check(symbol="SONATSOFTW.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — SONATSOFTW.NS
+Date: 2026-03-12 | As of: 10:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=239.4, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="SONATSOFTW.NS", date="2026-03-12", direction=<Direction>,
+  entry_price=239.4, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 23015.35, 'prev_close': 22512.65, 'change_pct': 2.23, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 23057.3, 'session_low': 22624.2}, 'banknifty': {'latest_close': 52838.95, 'change_pct': 2.72, 'trend': 'down'}, 'india_vix': {'latest': 24.9, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.83, 'change_pct': -0.0695, 'rupee_signal': 'rupee_strengthening_fii_inflow_favorable'}, 'brent_crude_proxy': {'latest_usd': 90.09, 'change_pct': 2.22, 'data_anomaly': False, 'data_note': 'data_ok', 'signal': 'bearish_for_india_importers'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+                  Open        High         Low       Close   Volume  Dividends  Stock Splits
+Date                                                                                        
+2026-02-10  314.631544  322.895588  311.993026  317.469208   446003       0.00           0.0
+2026-02-11  318.116405  320.257088  312.142388  313.586121   326775       0.00           0.0
+2026-02-12  311.196489  311.644552  275.700877  287.399994  1774175       0.00           0.0
+2026-02-13  279.000000  286.799988  275.000000  279.100006  1956919       1.25           0.0
+2026-02-16  280.000000  281.000000  270.000000  273.500000   773560       0.00           0.0
+2026-02-17  275.000000  291.200012  272.200012  283.950012  2345100       0.00           0.0
+2026-02-18  286.350006  289.450012  277.600006  283.700012   550514       0.00           0.0
+2026-02-19  284.000000  289.700012  281.000000  287.750000  1297494       0.00           0.0
+2026-02-20  286.750000  292.500000  283.600006  285.649994   662190       0.00           0.0
+2026-02-23  285.600006  291.799988  280.049988  281.649994   616926       0.00           0.0
+2026-02-24  282.399994  282.399994  268.950012  270.149994   751337       0.00           0.0
+2026-02-25  272.950012  278.000000  271.049988  272.600006   454794       0.00           0.0
+2026-02-26  273.149994  280.299988  270.000000  270.950012   556152       0.00           0.0
+2026-02-27  271.950012  275.700012  267.000000  268.200012   632253       0.00           0.0
+2026-03-02  252.699997  265.399994  252.250000  260.250000   586936       0.00           0.0
+2026-03-04  258.500000  263.100006  254.500000  255.649994   821270       0.00           0.0
+2026-03-05  257.049988  259.000000  248.250000  250.250000   795444       0.00           0.0
+2026-03-06  250.000000  252.500000  245.699997  246.449997   916440       0.00           0.0
+2026-03-09  243.000000  259.399994  238.449997  247.000000  6389341       0.00           0.0
+2026-03-10  251.050003  252.000000  245.449997  250.449997   868718       0.00           0.0
+2026-03-11  250.949997  256.500000  243.100006  244.800003   876692       0.00           0.0
+
+{'latest_close': 225.0, '52w_high': 397.4, '52w_low': 222.75, 'pct_from_52w_high': -43.38, 'rsi_14': 25.26, 'rsi_signal': 'oversold', 'stoch_k': 5.58, 'stoch_d': 10.61, 'stoch_signal': 'oversold', 'macd': -16.9, 'macd_signal_line': -17.2, 'macd_histogram': 0.3005, 'macd_prev_histogram': 0.5811, 'macd_crossover': 'none', 'macd_trend': 'bullish', 'macd_signal': 'bullish', 'ema_trend': 'strongly_bearish', 'ema_9': 236.81, 'ema_21': 251.29, 'ema_50': 280.54, 'ema_200': 333.43, 'adx_14': 51.35, 'adx_signal': 'strong_trend', 'atr_14': 10.38, 'expected_intraday_range_pct': 4.61, 'bb_upper': 282.12, 'bb_lower': 217.48, 'bb_width_pct': 25.88, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 964156, 'latest_vol': 865043, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 236.10000610351562, 'low': 222.75, 'close': 225.0, 'open': 235.5}, 'today_open': 233.9499969482422, 'latest_close': 230.0, 'classic_pivots': {'PP': 227.95, 'R1': 233.15, 'R2': 241.3, 'R3': 246.5, 'S1': 219.8, 'S2': 214.6, 'S3': 206.45}, 'camarilla_pivots': {'H4': 232.34, 'H3': 228.67, 'L3': 221.33, 'L4': 217.66}, 'nearest_support': 219.8, 'nearest_resistance': 233.15, 'bearish_setup': {'entry': 230.0, 'target': 214.6, 'stop': 228.67, 'reward_pts': 15.4, 'risk_pts': -1.33, 'rr_ratio': -11.58, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 230.0, 'target': 241.3, 'stop': 221.33, 'reward_pts': 11.3, 'risk_pts': 8.67, 'rr_ratio': 1.3, 'tradeable': True, 'note': 'viable setup'}, 'gap_up_down': 3.98}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 230.0, 'latest_vwap': 233.18, 'price_vs_vwap': 'below', 'session_high': 243.5, 'session_low': 222.85, 'avg_volume_per_candle': 24119, 'last_20_candles': '                       Open    High     Low   Close  Volume    VWAP\nDatetime                                                           \n2026-03-24 09:30:00  228.90  229.25  226.25  226.25   28548  233.99\n2026-03-24 09:45:00  226.25  226.50  224.60  225.65   28199  233.90\n2026-03-24 10:00:00  225.80  226.00  224.55  224.85   13178  233.85\n2026-03-24 10:15:00  224.85  225.90  224.15  225.40   26431  233.76\n2026-03-24 10:30:00  225.20  225.20  223.30  224.05   19098  233.68\n2026-03-24 10:45:00  223.90  225.45  223.90  224.15   15174  233.63\n2026-03-24 11:00:00  224.35  225.65  224.20  225.25   11233  233.59\n2026-03-24 11:15:00  225.10  226.45  224.50  225.30   37615  233.47\n2026-03-24 11:30:00  225.45  227.20  225.15  227.20   13493  233.43\n2026-03-24 11:45:00  227.20  229.35  226.70  229.15   41680  233.35\n2026-03-24 12:00:00  229.30  229.50  228.60  228.90   15323  233.33\n2026-03-24 12:15:00  229.05  230.40  228.45  228.80   14413  233.30\n2026-03-24 12:30:00  228.80  229.70  228.00  229.30   19046  233.27\n2026-03-24 12:45:00  229.75  230.15  229.35  230.10    9809  233.26\n2026-03-24 13:00:00  230.30  230.55  229.10  229.90   12674  233.24\n2026-03-24 13:15:00  229.85  232.85  229.80  231.70   38915  233.22\n2026-03-24 13:30:00  232.00  234.20  231.60  233.85   62820  233.22\n2026-03-24 13:45:00  234.00  235.15  233.50  234.20   43001  233.24\n2026-03-24 14:00:00  234.10  234.65  229.50  229.75   84895  233.18\n2026-03-24 14:15:00  229.95  230.10  229.85  230.00    2371  233.18'}
+
+{'company': 'SONATA SOFTWARE LTD', 'sector': 'Technology', 'industry': 'Information Technology Services', 'market_cap_cr': 6382.0, 'pe_ratio': 14.456317, 'pb_ratio': 3.6024747, 'ev_ebitda': 9.602, 'beta': 0.108, 'beta_signal': 'low_volatility_defensive', '52w_high': 464.2, '52w_low': 223.15, '200d_avg': 353.38724, '50d_avg': 287.259, 'float_shares': 160989177, 'shares_outstanding': 277362018, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 3.62, 'earnings_date': '1770372000', 'recommendation': 'buy', 'analyst_count': 7, 'target_price': 344.85715}
+
+[{'id': 'ba0d4338-12e2-3763-985f-60b0984d3a2f', 'content': {'id': 'ba0d4338-12e2-3763-985f-60b0984d3a2f', 'contentType': 'STORY', 'title': 'Sonata Software Ltd (BOM:532221) Q3 2026 Earnings Call Highlights: AI-Driven Growth and ...', 'description': '', 'summary': 'Sonata Software Ltd (BOM:532221) reports robust AI business expansion and key BFSI deals, while navigating client headwinds and sector pressures.', 'pubDate': '2026-02-06T19:01:29Z', 'displayTime': '2026-02-06T19:01:29Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/sonata-software-ltd-bom-532221-190129015.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/sonata-software-ltd-bom-532221-190129015.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '42118aaa-0ed9-34d1-b668-9e03aab55aa8', 'content': {'id': '42118aaa-0ed9-34d1-b668-9e03aab55aa8', 'contentType': 'STORY', 'title': 'Sonata Software Ltd (BOM:532221) Q2 2026 Earnings Call Highlights: AI Adoption Fuels Growth ...', 'description': '', 'summary': 'Sonata Software Ltd (BOM:532221) reports a 10% EBITDA increase driven by AI, while navigating headwinds from its largest BFSI client.', 'pubDate': '2025-11-14T09:01:04Z', 'displayTime': '2025-11-14T09:01:04Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/sonata-software-ltd-bom-532221-090104082.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/sonata-software-ltd-bom-532221-090104082.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'a00ce924-2669-3563-8bb4-cc292eb45608', 'content': {'id': 'a00ce924-2669-3563-8bb4-cc292eb45608', 'contentType': 'STORY', 'title': 'Sonata Software Ltd (BOM:532221) Q4 2025 Earnings Call Highlights: Navigating Growth Amidst ...', 'description': '', 'summary': 'Sonata Software Ltd (BOM:532221) reports strong international growth and strategic wins despite facing profitability pressures and sector-specific headwinds.', 'pubDate': '2025-05-08T07:09:06Z', 'displayTime': '2025-05-08T07:09:06Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/sonata-software-ltd-bom-532221-070906964.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/sonata-software-ltd-bom-532221-070906964.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Technology', 'peers': {'TCS.NS': {'1d_change_pct': 1.41, '5d_change_pct': 1.08, 'latest_close': 2417.5}, 'INFY.NS': {'1d_change_pct': 2.74, '5d_change_pct': 4.73, 'latest_close': 1291.2}, 'WIPRO.NS': {'1d_change_pct': 1.18, '5d_change_pct': -0.82, 'latest_close': 189.75}, 'HCLTECH.NS': {'1d_change_pct': 1.73, '5d_change_pct': 4.62, 'latest_close': 1382.1}, 'TECHM.NS': {'1d_change_pct': 3.26, '5d_change_pct': 6.51, 'latest_close': 1429.1}}, 'sector_avg_1d_pct': 2.06, 'stock_vs_sector': -2.06, 'relative_strength': 'underperforming'}
+
+{'symbol': 'SONATSOFTW.NS', 'checks_run': 3, 'flags_found': 1, 'flags': ['52w_high mismatch: technical_indicators=397.4 vs extended_company_info=464.2 (14.4% difference). Use technical_indicators value (rolling 252-day) for intraday analysis.'], 'status': 'REVIEW_REQUIRED', 'warnings': {'52w_high': '52w_high mismatch: technical_indicators=397.4 vs extended_company_info=464.2 (14.4% difference). Use technical_indicators value (rolling 252-day) for intraday analysis.'}}
+
+
+
+{'symbol': 'SONATSOFTW.NS', 'direction': 'Bearish', 'factors': {'technical_aligned': False, 'nifty_aligned': False, 'obv_confirming': False, 'news_clear': True, 'non_expiry_day': True}, 'score': 1, 'confidence': 'Low', 'macro_override': False, 'macro_override_reason': None, 'contradiction': True, 'contradiction_reason': 'CONTRADICTION: Direction=Bearish but target (241.3) > entry (239.4). Setup from wrong side used.', 'tradeable': False, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — SONATSOFTW.NS  
+Date: 2026-03-12 | As of: 10:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bearish  
+  Expected Move   : +-1.30% (30min scaled)  
+  Price Targets   : Entry=239.4, Target=214.6, Stop=228.67, R:R=-11.58  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 25.26 -> oversold  
+  MACD            : macd_trend=bullish | macd_crossover=none  
+  EMA Trend       : strongly_bearish  
+  ATR(14)         : 10.38 pts -> +-1.38% scaled to 30min  
+  ADX(14)         : 51.35 -> strong_trend  
+  OBV Trend       : rising  
+  VWAP            : Price 239.4 is below VWAP 233.18  
+
+MARKET CONTEXT:  
+  NIFTY50         : 23015.35 [2.23% change] | 5d trend: down  
+  BANKNIFTY       : 52838.95 [2.72% change]  
+  India VIX       : 24.9 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: No  
+  - OBV confirming: No  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 1/5 -> Low  
+
+FINAL REASONING: The bearish setup indicates a target of 214.6, but the confidence is low due to contradictions in the analysis. The technical indicators suggest a bearish trend, but the overall market context and the direction of the NIFTY are not aligned. The stock is currently below the VWAP, indicating weakness.  
+
+Now call: log_forecast(symbol="SONATSOFTW.NS", date="2026-03-12", direction="Bearish", entry_price=239.4, target_price=214.6, stop_price=228.67, rr_ratio=-11.58, confidence="Low", score=1, tradeable=False)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'SONATSOFTW.NS', 'date': '2026-03-12', 'direction': 'Bearish', 'entry_price': 239.4, 'target_price': 214.6, 'stop_price': 228.67, 'rr_ratio': -11.58, 'confidence': 'Low', 'score': 1, 'tradeable': False, 'factors': {}, 'logged_at': '2026-03-24T08:47:30.920188', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

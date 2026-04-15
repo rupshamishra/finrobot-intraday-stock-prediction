@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-13. Time: 10:00 IST.
+Target stock: WIPRO.NS. THIS IS A BACKTEST as of 2026-03-13 10:00 IST.
+Historical entry price at this time: 200.75
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 10:00 IST on 2026-03-13.
+ENTRY PRICE = latest_close from get_intraday_data() = 200.75
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="WIPRO.NS")
+STEP 2: get_stock_data(symbol="WIPRO.NS", start_date="2026-02-11", end_date="2026-03-13")
+        get_technical_indicators(symbol="WIPRO.NS")
+        get_support_resistance(symbol="WIPRO.NS")
+        get_intraday_data(symbol="WIPRO.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="WIPRO.NS")
+        get_company_news(symbol="WIPRO.NS")
+        get_sector_peers(symbol="WIPRO.NS")
+        get_data_sanity_check(symbol="WIPRO.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — WIPRO.NS
+Date: 2026-03-13 | As of: 10:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=200.75, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="WIPRO.NS", date="2026-03-13", direction=<Direction>,
+  entry_price=200.75, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 22948.75, 'prev_close': 22512.65, 'change_pct': 1.94, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 23057.3, 'session_low': 22624.2}, 'banknifty': {'latest_close': 52733.85, 'change_pct': 2.52, 'trend': 'down'}, 'india_vix': {'latest': 24.88, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.818, 'change_pct': -0.0823, 'rupee_signal': 'rupee_strengthening_fii_inflow_favorable'}, 'brent_crude_proxy': {'latest_usd': 89.93, 'change_pct': 2.04, 'data_anomaly': False, 'data_note': 'data_ok', 'signal': 'bearish_for_india_importers'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+                  Open        High         Low       Close    Volume  Dividends  Stock Splits
+Date                                                                                         
+2026-02-11  231.470001  233.000000  229.500000  229.809998   7874912        0.0           0.0
+2026-02-12  226.199997  226.259995  218.500000  219.080002  40899346        0.0           0.0
+2026-02-13  210.649994  216.479996  209.009995  214.089996  23721186        0.0           0.0
+2026-02-16  214.619995  216.910004  210.110001  213.259995  20754327        0.0           0.0
+2026-02-17  213.259995  219.389999  212.259995  215.690002  26941553        0.0           0.0
+2026-02-18  216.199997  216.399994  210.259995  211.949997  22679760        0.0           0.0
+2026-02-19  214.000000  215.440002  210.399994  211.210007  14151588        0.0           0.0
+2026-02-20  209.699997  211.960007  208.250000  209.860001  17690420        0.0           0.0
+2026-02-23  210.360001  211.740005  204.279999  205.889999  20946229        0.0           0.0
+2026-02-24  203.000000  203.289993  199.360001  200.139999  25036686        0.0           0.0
+2026-02-25  201.309998  205.479996  201.309998  201.919998  13979068        0.0           0.0
+2026-02-26  203.710007  204.630005  199.119995  201.080002  14378069        0.0           0.0
+2026-02-27  204.000000  204.000000  200.050003  200.960007  13288519        0.0           0.0
+2026-03-02  195.000000  200.360001  194.699997  198.570007  10486866        0.0           0.0
+2026-03-04  196.009995  197.119995  194.509995  195.550003  19562075        0.0           0.0
+2026-03-05  196.399994  196.970001  193.220001  195.679993  13149281        0.0           0.0
+2026-03-06  195.600006  198.929993  195.000000  195.399994   9022914        0.0           0.0
+2026-03-09  194.000000  199.500000  193.029999  198.750000  25862728        0.0           0.0
+2026-03-10  200.500000  201.309998  197.419998  200.929993  12982340        0.0           0.0
+2026-03-11  202.690002  205.949997  201.580002  202.229996  29199002        0.0           0.0
+2026-03-12  201.059998  203.800003  199.699997  202.509995  19042475        0.0           0.0
+
+{'latest_close': 187.5399932861328, '52w_high': 266.23, '52w_low': 187.0, 'pct_from_52w_high': -29.56, 'rsi_14': 34.87, 'rsi_signal': 'neutral', 'stoch_k': 2.85, 'stoch_d': 8.16, 'stoch_signal': 'oversold', 'macd': -8.09, 'macd_signal_line': -8.42, 'macd_histogram': 0.3275, 'macd_prev_histogram': 0.4835, 'macd_crossover': 'none', 'macd_trend': 'bullish', 'macd_signal': 'bullish', 'ema_trend': 'strongly_bearish', 'ema_9': 193.04, 'ema_21': 199.76, 'ema_50': 214.12, 'ema_200': 229.92, 'adx_14': 45.76, 'adx_signal': 'strong_trend', 'atr_14': 5.08, 'expected_intraday_range_pct': 2.71, 'bb_upper': 207.22, 'bb_lower': 187.26, 'bb_width_pct': 10.12, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 17430033, 'latest_vol': 12014988, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 190.6199951171875, 'low': 187.0, 'close': 187.5399932861328, 'open': 189.41000366210938}, 'today_open': 191.5, 'latest_close': 189.42999267578125, 'classic_pivots': {'PP': 188.39, 'R1': 189.77, 'R2': 192.01, 'R3': 193.39, 'S1': 186.15, 'S2': 184.77, 'S3': 182.53}, 'camarilla_pivots': {'H4': 189.53, 'H3': 188.54, 'L3': 186.54, 'L4': 185.55}, 'nearest_support': 186.15, 'nearest_resistance': 189.77, 'bearish_setup': {'entry': 189.42999267578125, 'target': 184.77, 'stop': 188.54, 'reward_pts': 4.66, 'risk_pts': -0.89, 'rr_ratio': -5.24, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 189.42999267578125, 'target': 192.01, 'stop': 186.54, 'reward_pts': 2.58, 'risk_pts': 2.89, 'rr_ratio': 0.89, 'tradeable': True, 'note': 'viable setup'}, 'gap_up_down': 2.11}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 189.43, 'latest_vwap': 191.54, 'price_vs_vwap': 'below', 'session_high': 197.98, 'session_low': 187.03, 'avg_volume_per_candle': 647768, 'last_20_candles': '                       Open    High     Low   Close  Volume    VWAP\nDatetime                                                           \n2026-03-24 09:30:00  189.99  190.13  189.09  189.18  611982  191.75\n2026-03-24 09:45:00  189.18  189.37  188.61  189.00  639047  191.73\n2026-03-24 10:00:00  189.00  189.11  188.57  188.65  385708  191.71\n2026-03-24 10:15:00  188.58  188.99  188.54  188.78  433807  191.69\n2026-03-24 10:30:00  188.76  188.76  187.80  188.01  395676  191.68\n2026-03-24 10:45:00  188.01  188.78  187.94  188.17  327958  191.66\n2026-03-24 11:00:00  188.15  188.67  187.97  188.40  330620  191.65\n2026-03-24 11:15:00  188.48  189.55  188.40  189.41  515546  191.63\n2026-03-24 11:30:00  189.42  190.18  189.36  189.90  366592  191.62\n2026-03-24 11:45:00  189.93  190.50  189.73  190.45  342957  191.61\n2026-03-24 12:00:00  190.47  190.70  189.71  189.76  299238  191.61\n2026-03-24 12:15:00  189.69  190.40  189.35  189.48  353995  191.60\n2026-03-24 12:30:00  189.51  190.45  189.51  190.04  244880  191.59\n2026-03-24 12:45:00  190.20  190.25  189.74  189.91  315776  191.59\n2026-03-24 13:00:00  189.88  189.96  189.30  189.75  309896  191.58\n2026-03-24 13:15:00  189.78  190.07  189.45  190.05  264230  191.57\n2026-03-24 13:30:00  190.05  190.31  189.90  190.10  331571  191.57\n2026-03-24 13:45:00  190.10  190.15  189.61  189.69  316331  191.56\n2026-03-24 14:00:00  189.67  189.92  189.40  189.68  342039  191.55\n2026-03-24 14:15:00  189.72  189.85  189.12  189.43  278996  191.54'}
+
+{'company': 'WIPRO LTD', 'sector': 'Technology', 'industry': 'Information Technology Services', 'market_cap_cr': 198620.0, 'pe_ratio': 15.010301, 'pb_ratio': 2.212657, 'ev_ebitda': 9.437, 'beta': 0.365, 'beta_signal': 'low_volatility_defensive', '52w_high': 274.7, '52w_low': 187.68, '200d_avg': 244.64445, '50d_avg': 220.2058, 'float_shares': 3049559991, 'shares_outstanding': 10476917284, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 9.06, 'earnings_date': '1768557600', 'recommendation': 'hold', 'analyst_count': 42, 'target_price': 248.38095}
+
+[{'id': '118d79a3-9af8-3ff4-b62a-05ae7115c97a', 'content': {'id': '118d79a3-9af8-3ff4-b62a-05ae7115c97a', 'contentType': 'STORY', 'title': 'Asian Equities Traded in the US as American Depositary Receipts Fall Sharply in Friday Trading; Down 3.5% for Week', 'description': '', 'summary': 'Asian equities traded in the US as American depositary receipts were falling sharply lower Friday mo', 'pubDate': '2026-03-20T14:57:24Z', 'displayTime': '2026-03-20T14:57:24Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-145724031.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-145724031.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'eaa28974-6c5a-3cd7-aa34-5c188b18064b', 'content': {'id': 'eaa28974-6c5a-3cd7-aa34-5c188b18064b', 'contentType': 'STORY', 'title': 'Wipro (WIT) Surges 10.4% on Chip Assembly Hype', 'description': '', 'summary': 'Wipro Ltd. (NYSE:WIT) is one of the 10 Stocks Investors Are Watching. Wipro saw its share prices jump by 10.39 percent on Tuesday to close at $2.55 apiece, as investor sentiment was fueled by its sister firm’s planned foray into the semiconductor business, coupled with bargain-hunting activities after falling to a 52-week low last week. […]', 'pubDate': '2026-03-11T01:43:00Z', 'displayTime': '2026-03-11T01:43:00Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/insidermonkey.com/38132271611fe864c6208804c8a8170e', 'originalWidth': 768, 'originalHeight': 512, 'caption': 'Semiconductor', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/EJGhd4XU68K_zobpqhIbFA--~B/aD01MTI7dz03Njg7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/insidermonkey.com/38132271611fe864c6208804c8a8170e', 'width': 768, 'height': 512, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/eJCzBWlwq7Y7Dm4uzk707w--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/insidermonkey.com/38132271611fe864c6208804c8a8170e', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Insider Monkey', 'url': 'http://www.insidermonkey.com'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/wipro-wit-surges-10-4-014300559.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/wipro-wit-surges-10-4-014300559.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '3210304a-8d77-3d40-a46f-5b2a347b3074', 'content': {'id': '3210304a-8d77-3d40-a46f-5b2a347b3074', 'contentType': 'STORY', 'title': 'Asian Equities Traded in the US as American Depositary Receipts Rebound in Tuesday Trading', 'description': '', 'summary': 'Asian equities traded in the US as American depositary receipts were higher Tuesday morning, rising', 'pubDate': '2026-03-10T14:47:00Z', 'displayTime': '2026-03-10T14:47:00Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-american-144700151.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-american-144700151.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '73e88da0-b10f-3689-8d51-68faf5763116', 'content': {'id': '73e88da0-b10f-3689-8d51-68faf5763116', 'contentType': 'STORY', 'title': 'Vertiv Stock Surges After S&P 500 Inclusion Announcement', 'description': '', 'summary': 'VRT jumps 9.3% on news that it will join the S&P 500 on March 23, a move expected to drive demand from index funds and spotlight its role in data-center infrastructure.', 'pubDate': '2026-03-10T12:02:00Z', 'displayTime': '2026-03-10T12:02:00Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/zacks.com/d43cb7b76527c97c59494165d3dffeae', 'originalWidth': 635, 'originalHeight': 400, 'caption': '', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/as5m4_sYhwbum22y4k2zVQ--~B/aD00MDA7dz02MzU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/zacks.com/d43cb7b76527c97c59494165d3dffeae', 'width': 635, 'height': 400, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/ZOiWKOkYdnIgUT2QkjlFKQ--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/zacks.com/d43cb7b76527c97c59494165d3dffeae', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Zacks', 'url': 'http://www.zacks.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/vertiv-stock-surges-p-500-120200199.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/vertiv-stock-surges-p-500-120200199.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '3c2d4a06-80da-38b9-b749-e598b96fc677', 'content': {'id': '3c2d4a06-80da-38b9-b749-e598b96fc677', 'contentType': 'STORY', 'title': 'Wall Street Cautious on Wipro Limited (WIT) Since Q3 2026 Earnings', 'description': '', 'summary': '\u200bWipro Limited (NYSE:WIT) is one of the Best Value Penny Stocks to Buy Now. Wall Street has maintained a cautious stance on Wipro Limited (NYSE:WIT) since the company’s fiscal Q3 2026 earnings. The company missed revenue estimates during the quarter. \u200bRecently, on February 24, Akshat Agarwal from Jefferies maintained a Sell rating on Wipro Limited […]', 'pubDate': '2026-02-28T09:47:02Z', 'displayTime': '2026-02-28T09:47:02Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/insidermonkey.com/d8be3582d002ac839c69e787d29296a0', 'originalWidth': 768, 'originalHeight': 513, 'caption': 'Jim Cramer Discusses Salesforce (CRM) Stock', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/cxdv80LGQx1GDeoPbmAtmA--~B/aD01MTM7dz03Njg7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/insidermonkey.com/d8be3582d002ac839c69e787d29296a0', 'width': 768, 'height': 513, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/7FLgaZ2nSYuzDbZ7W7Oe5A--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/insidermonkey.com/d8be3582d002ac839c69e787d29296a0', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Insider Monkey', 'url': 'http://www.insidermonkey.com'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/wall-street-cautious-wipro-limited-094702458.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/wall-street-cautious-wipro-limited-094702458.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '45254a47-f0b8-36e3-938f-93c5009a56fe', 'content': {'id': '45254a47-f0b8-36e3-938f-93c5009a56fe', 'contentType': 'STORY', 'title': 'Asian Equities Traded in the US as American Depositary Receipts Fall in Friday Trading', 'description': '', 'summary': 'Asian equities traded in the US as American depositary receipts were sharply lower Friday morning, d', 'pubDate': '2026-02-27T15:39:44Z', 'displayTime': '2026-02-27T15:39:44Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-american-153944521.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-american-153944521.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'd767b993-b718-32cc-bde0-b10172939f00', 'content': {'id': 'd767b993-b718-32cc-bde0-b10172939f00', 'contentType': 'STORY', 'title': 'Asian Equities Traded in US as ADRs Drop in Thursday Trading', 'description': '', 'summary': 'Asian equities traded in the US as American depositary receipts fell Thursday morning with the S&P A', 'pubDate': '2026-02-26T15:37:44Z', 'displayTime': '2026-02-26T15:37:44Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-adrs-153744682.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-adrs-153744682.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'c63407a6-db3f-3dfa-98cb-91b3ce05eb71', 'content': {'id': 'c63407a6-db3f-3dfa-98cb-91b3ce05eb71', 'contentType': 'STORY', 'title': 'Wipro executive says AI is an opportunity, not a threat', 'description': '', 'summary': '(Corrects to "executive" from "CTO" in headline, adds designation in paragraph 3) By Haripriya Suresh BENGALURU, Feb 23 (Reuters) - India\'s Wipro expects rapid AI adoption to boost rather than shrink', 'pubDate': '2026-02-23T11:39:32Z', 'displayTime': '2026-02-23T11:39:32Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/6374e89f52a3048ad289a2cbd4c3ca2b', 'originalWidth': 800, 'originalHeight': 533, 'caption': "FILE PHOTO: An employee works on his laptop near Wipro's logo inside the premises of the company in Bengaluru, India, August 13, 2025. REUTERS/Priyanshu Singh/File Photo", 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/J_8Di0eXNibRvr9SuiVvRw--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/6374e89f52a3048ad289a2cbd4c3ca2b', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/dxTipEFapMXCJfsIGheB7g--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/6374e89f52a3048ad289a2cbd4c3ca2b', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/wipros-cto-says-ai-opportunity-104857150.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/wipros-cto-says-ai-opportunity-104857150.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'd4b35abf-da4d-3089-87c4-a2a0bda2a772', 'content': {'id': 'd4b35abf-da4d-3089-87c4-a2a0bda2a772', 'contentType': 'STORY', 'title': 'Wipro (WIT) Bets on AI Agents With Factory.ai Partnership After Mixed Earnings', 'description': '', 'summary': 'Wipro Ltd (NYSE:WIT) is one of Goldman Sachs’ top penny stock picks. On January 28, Wipro Ltd (NYSE:WIT) entered into a strategic collaboration with Factory.ai, an agent-native software development platform. The two are joining forces to help enterprises operationalize agent-native development across engineering organizations. Factory.ai has carved a niche by enabling engineering teams to delegate […]', 'pubDate': '2026-02-13T12:17:04Z', 'displayTime': '2026-02-13T12:17:04Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/insidermonkey.com/ea88fd39b1f683fe24df0c56e2b5ce95', 'originalWidth': 1280, 'originalHeight': 854, 'caption': 'Wipro Limited (WIT) and the Changing Landscape of Enterprise Technology', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/SnsnjRDadtkpTt_N3SeCYQ--~B/aD04NTQ7dz0xMjgwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/insidermonkey.com/ea88fd39b1f683fe24df0c56e2b5ce95', 'width': 1280, 'height': 854, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/Qd2O1f0sz_Nxma5SC3vY5g--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/insidermonkey.com/ea88fd39b1f683fe24df0c56e2b5ce95', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Insider Monkey', 'url': 'http://www.insidermonkey.com'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/wipro-wit-bets-ai-agents-121704684.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/wipro-wit-bets-ai-agents-121704684.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '36d72e00-9020-381e-9f5b-3b652f3b702e', 'content': {'id': '36d72e00-9020-381e-9f5b-3b652f3b702e', 'contentType': 'STORY', 'title': 'Asian Equities Traded in the US as American Depositary Receipts Rise Sharply in Tuesday Trading', 'description': '', 'summary': 'Asian equities traded in the US as American depositary receipts were sharply higher Tuesday morning,', 'pubDate': '2026-02-10T15:38:38Z', 'displayTime': '2026-02-10T15:38:38Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-american-153838068.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-american-153838068.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Technology', 'peers': {'TCS.NS': {'1d_change_pct': 0.76, '5d_change_pct': 0.42, 'latest_close': 2401.8}, 'INFY.NS': {'1d_change_pct': 2.39, '5d_change_pct': 4.37, 'latest_close': 1286.8}, 'WIPRO.NS': {'1d_change_pct': 1.01, '5d_change_pct': -0.99, 'latest_close': 189.43}, 'HCLTECH.NS': {'1d_change_pct': 1.27, '5d_change_pct': 4.14, 'latest_close': 1375.8}, 'TECHM.NS': {'1d_change_pct': 3.15, '5d_change_pct': 6.39, 'latest_close': 1427.6}}, 'sector_avg_1d_pct': 1.72, 'stock_vs_sector': -0.71, 'relative_strength': 'underperforming'}
+
+{'symbol': 'WIPRO.NS', 'checks_run': 3, 'flags_found': 0, 'flags': [], 'status': 'ALL_CLEAR', 'warnings': {}}
+
+
+
+{'symbol': 'WIPRO.NS', 'direction': 'Bearish', 'factors': {'technical_aligned': False, 'nifty_aligned': False, 'obv_confirming': False, 'news_clear': True, 'non_expiry_day': True}, 'score': 2, 'confidence': 'Low', 'macro_override': False, 'macro_override_reason': None, 'contradiction': False, 'contradiction_reason': None, 'tradeable': True, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — WIPRO.NS  
+Date: 2026-03-13 | As of: 10:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bearish  
+  Expected Move   : +-0.77% (30min scaled)  
+  Price Targets   : Entry=200.75, Target=192.01, Stop=186.54, R:R=0.89  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 34.87 -> neutral  
+  MACD            : macd_trend=bullish | macd_crossover=none  
+  EMA Trend       : strongly_bearish  
+  ATR(14)         : 5.08 pts -> +-0.77% scaled to 30min  
+  ADX(14)         : 45.76 -> strong_trend  
+  OBV Trend       : rising  
+  VWAP            : Price 200.75 is below VWAP 191.54  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22948.75 [1.94% change] | 5d trend: down  
+  BANKNIFTY       : 52733.85 [2.52% change]  
+  India VIX       : 24.88 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: No  
+  - OBV confirming: No  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 2/5 -> Low  
+
+FINAL REASONING: The bearish setup indicates a potential downward movement in the next 30 minutes, despite the bullish MACD trend. The overall market context shows a strong fear level with rising VIX, which may lead to volatility. However, the technical indicators are not aligned for a strong bearish move, resulting in low confidence for this prediction.
+
+Now call: log_forecast(symbol="WIPRO.NS", date="2026-03-13", direction="Bearish", entry_price=200.75, target_price=192.01, stop_price=186.54, rr_ratio=0.89, confidence="Low", score=2, tradeable=True)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'WIPRO.NS', 'date': '2026-03-13', 'direction': 'Bearish', 'entry_price': 200.75, 'target_price': 192.01, 'stop_price': 186.54, 'rr_ratio': 0.89, 'confidence': 'Low', 'score': 2, 'tradeable': True, 'factors': {}, 'logged_at': '2026-03-24T09:00:16.307071', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

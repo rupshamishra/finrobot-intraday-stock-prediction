@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-13. Time: 11:30 IST.
+Target stock: TECHM.NS. THIS IS A BACKTEST as of 2026-03-13 11:30 IST.
+Historical entry price at this time: 1330.5
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 11:30 IST on 2026-03-13.
+ENTRY PRICE = latest_close from get_intraday_data() = 1330.5
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="TECHM.NS")
+STEP 2: get_stock_data(symbol="TECHM.NS", start_date="2026-02-11", end_date="2026-03-13")
+        get_technical_indicators(symbol="TECHM.NS")
+        get_support_resistance(symbol="TECHM.NS")
+        get_intraday_data(symbol="TECHM.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="TECHM.NS")
+        get_company_news(symbol="TECHM.NS")
+        get_sector_peers(symbol="TECHM.NS")
+        get_data_sanity_check(symbol="TECHM.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — TECHM.NS
+Date: 2026-03-13 | As of: 11:30 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=1330.5, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="TECHM.NS", date="2026-03-13", direction=<Direction>,
+  entry_price=1330.5, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 23114.5, 'prev_close': 23002.15, 'change_pct': 0.49, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 23345.15, 'session_low': 23067.6}, 'banknifty': {'latest_close': 53427.05, 'change_pct': -0.04, 'trend': 'down'}, 'india_vix': {'latest': 22.81, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.652, 'change_pct': 0.612, 'rupee_signal': 'rupee_weakening_fii_outflow_risk'}, 'brent_crude_proxy': {'latest_usd': 98.23, 'change_pct': 2.17, 'data_anomaly': False, 'data_note': 'data_ok', 'signal': 'bearish_for_india_importers'}}
+
+{'today': '2026-03-22', 'is_expiry_day': False, 'days_to_next_expiry': 4, 'is_monthly_expiry_week': True, 'expiry_implication': 'normal'}
+
+                   Open         High          Low        Close   Volume  Dividends  Stock Splits
+Date                                                                                            
+2026-02-11  1655.000000  1658.000000  1625.000000  1634.400024  1521823        0.0           0.0
+2026-02-12  1605.000000  1611.000000  1528.000000  1536.599976  5343729        0.0           0.0
+2026-02-13  1482.599976  1548.000000  1464.400024  1534.400024  7058376        0.0           0.0
+2026-02-16  1526.000000  1541.900024  1494.699951  1512.699951  1873472        0.0           0.0
+2026-02-17  1512.699951  1547.500000  1506.000000  1523.800049  1781501        0.0           0.0
+2026-02-18  1524.599976  1528.599976  1481.699951  1504.800049  1989222        0.0           0.0
+2026-02-19  1506.800049  1532.800049  1472.300049  1479.300049  1108260        0.0           0.0
+2026-02-20  1465.000000  1477.300049  1453.099976  1456.900024  1599813        0.0           0.0
+2026-02-23  1459.500000  1470.000000  1430.000000  1440.900024  2660793        0.0           0.0
+2026-02-24  1420.000000  1423.199951  1335.300049  1345.400024  7441035        0.0           0.0
+2026-02-25  1355.099976  1397.699951  1351.400024  1361.800049  2683571        0.0           0.0
+2026-02-26  1366.400024  1396.599976  1360.400024  1361.800049  1587449        0.0           0.0
+2026-02-27  1391.000000  1410.400024  1354.000000  1357.800049  2601590        0.0           0.0
+2026-03-02  1335.000000  1362.800049  1322.199951  1345.400024  1564363        0.0           0.0
+2026-03-04  1321.000000  1362.199951  1321.000000  1351.199951  1820421        0.0           0.0
+2026-03-05  1358.000000  1366.699951  1319.300049  1333.300049  1210010        0.0           0.0
+2026-03-06  1330.000000  1359.500000  1326.599976  1331.699951  1033627        0.0           0.0
+2026-03-09  1305.000000  1340.400024  1304.099976  1336.300049  1032250        0.0           0.0
+2026-03-10  1340.000000  1347.900024  1316.699951  1336.599976  1069187        0.0           0.0
+2026-03-11  1343.900024  1355.400024  1330.199951  1334.400024  1499971        0.0           0.0
+2026-03-12  1334.400024  1356.500000  1327.000000  1349.800049  3067753        0.0           0.0
+
+{'latest_close': 1384.800048828125, '52w_high': 1854.0, '52w_low': 1304.1, 'pct_from_52w_high': -25.31, 'rsi_14': 56.18, 'rsi_signal': 'neutral', 'stoch_k': 80.22, 'stoch_d': 63.62, 'stoch_signal': 'overbought', 'macd': -45.8, 'macd_signal_line': -58.95, 'macd_histogram': 13.1479, 'macd_prev_histogram': 10.4365, 'macd_crossover': 'none', 'macd_trend': 'bullish', 'macd_signal': 'bullish', 'ema_trend': 'bearish', 'ema_9': 1358.05, 'ema_21': 1390.02, 'ema_50': 1464.52, 'ema_200': 1480.74, 'adx_14': 57.73, 'adx_signal': 'strong_trend', 'atr_14': 39.2, 'expected_intraday_range_pct': 2.83, 'bb_upper': 1427.83, 'bb_lower': 1288.97, 'bb_width_pct': 10.22, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 2165159, 'latest_vol': 3396834, 'volume_vs_avg': 'high'}
+
+{'prev_session': {'high': 1379.300048828125, 'low': 1331.0999755859375, 'close': 1340.5999755859375, 'open': 1364.0999755859375}, 'today_open': 1360.699951171875, 'latest_close': 1384.800048828125, 'classic_pivots': {'PP': 1350.33, 'R1': 1369.57, 'R2': 1398.53, 'R3': 1417.77, 'S1': 1321.37, 'S2': 1302.13, 'S3': 1273.17}, 'camarilla_pivots': {'H4': 1367.11, 'H3': 1353.85, 'L3': 1327.34, 'L4': 1314.09}, 'nearest_support': 1321.37, 'nearest_resistance': 1398.53, 'bearish_setup': {'entry': 1384.800048828125, 'target': 1302.13, 'stop': 1353.85, 'reward_pts': 82.67, 'risk_pts': -30.95, 'rr_ratio': -2.67, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 1384.800048828125, 'target': 1398.53, 'stop': 1327.34, 'reward_pts': 13.73, 'risk_pts': 57.46, 'rr_ratio': 0.24, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': 1.5}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 1384.8, 'latest_vwap': 1366.85, 'price_vs_vwap': 'above', 'session_high': 1404.7, 'session_low': 1315.9, 'avg_volume_per_candle': 87311, 'last_20_candles': '                       Open    High     Low   Close  Volume     VWAP\nDatetime                                                            \n2026-03-20 10:30:00  1387.0  1390.4  1384.5  1390.4   44351  1360.68\n2026-03-20 10:45:00  1390.1  1390.5  1387.5  1388.0   55329  1360.87\n2026-03-20 11:00:00  1387.5  1389.5  1386.0  1387.8   31447  1360.98\n2026-03-20 11:15:00  1387.8  1390.3  1386.8  1389.7   34436  1361.09\n2026-03-20 11:30:00  1389.8  1390.7  1382.5  1386.8  108209  1361.43\n2026-03-20 11:45:00  1386.8  1388.6  1381.7  1385.0  221998  1362.05\n2026-03-20 12:00:00  1385.0  1389.9  1382.7  1389.7   74711  1362.27\n2026-03-20 12:15:00  1389.6  1389.6  1383.5  1384.0   63875  1362.45\n2026-03-20 12:30:00  1384.0  1385.9  1380.2  1384.2   36450  1362.53\n2026-03-20 12:45:00  1384.1  1385.5  1381.2  1381.4   29942  1362.60\n2026-03-20 13:00:00  1381.3  1388.1  1380.5  1387.9   78515  1362.81\n2026-03-20 13:15:00  1387.9  1389.9  1383.2  1385.8  110606  1363.10\n2026-03-20 13:30:00  1386.6  1388.3  1382.5  1383.8  105105  1363.36\n2026-03-20 13:45:00  1383.7  1386.8  1383.2  1386.3   78780  1363.55\n2026-03-20 14:00:00  1386.2  1387.0  1384.0  1385.1   75985  1363.73\n2026-03-20 14:15:00  1384.9  1385.2  1382.3  1382.9   72674  1363.89\n2026-03-20 14:30:00  1382.7  1384.7  1378.3  1379.3  100642  1364.07\n2026-03-20 14:45:00  1379.0  1380.1  1373.9  1378.2  106341  1364.22\n2026-03-20 15:00:00  1378.0  1388.5  1375.9  1384.3  830732  1365.74\n2026-03-20 15:15:00  1384.3  1388.2  1377.2  1384.8  683742  1366.85'}
+
+{'company': 'TECH MAHINDRA LIMITED', 'sector': 'Technology', 'industry': 'Information Technology Services', 'market_cap_cr': 122703.0, 'pe_ratio': 26.594969, 'pb_ratio': 4.4615993, 'ev_ebitda': 15.557, 'beta': 0.175, 'beta_signal': 'low_volatility_defensive', '52w_high': 1854.0, '52w_low': 1209.4, '200d_avg': 1524.3665, '50d_avg': 1524.596, 'float_shares': 536840663, 'shares_outstanding': 885605623, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 3.25, 'earnings_date': '1768557600', 'recommendation': 'buy', 'analyst_count': 40, 'target_price': 1686.325}
+
+[{'id': 'e6ff82f8-4ad7-39e4-a1d4-6f703aa5a1b9', 'content': {'id': 'e6ff82f8-4ad7-39e4-a1d4-6f703aa5a1b9', 'contentType': 'STORY', 'title': 'An AI jobs apocalypse? The CEO of Tech Mahindra is not so sure', 'description': '', 'summary': 'The real disruption may not be job loss, but a complete rewrite of what it means to work according to Mohit Joshi.', 'pubDate': '2026-03-19T12:08:20Z', 'displayTime': '2026-03-19T12:08:20Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/fortune_175/74aac35736e213788be58ebd26a1f4a1', 'originalWidth': 2016, 'originalHeight': 1368, 'caption': '“What I tell my kids,\xa0almost obsessively, is\xa0that\xa0the ability to read and write well will never go away. So read as widely as you can early in life..," Mohit Joshi.', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/m62bLDf8gytKPBB.hTVwug--~B/aD0xMzY4O3c9MjAxNjthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/en/fortune_175/74aac35736e213788be58ebd26a1f4a1', 'width': 2016, 'height': 1368, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/cEkTxYUwALkCzBceVR2MHg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fortune_175/74aac35736e213788be58ebd26a1f4a1', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Fortune', 'url': 'http://fortune.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/sectors/technology/articles/ai-jobs-apocalypse-ceo-tech-120820995.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/sectors/technology/articles/ai-jobs-apocalypse-ceo-tech-120820995.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '569c2e8e-f4ae-3298-b855-69eebda146f3', 'content': {'id': '569c2e8e-f4ae-3298-b855-69eebda146f3', 'contentType': 'STORY', 'title': 'Orange Business partners with Tech Mahindra for enterprise digital solutions', 'description': '', 'summary': 'The agreement would see Tech Mahindra take on Orange Business’s global support operations outside France to boost efficiency.', 'pubDate': '2026-03-03T12:01:00Z', 'displayTime': '2026-03-03T12:01:00Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/verdict_626/25487e31c11a2f9435b7b51566d9b818', 'originalWidth': 1440, 'originalHeight': 811, 'caption': 'The partnership is projected to strengthen Orange Business’ competitiveness internationally.', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/xLVEtGe0O_HC6QrKDaI78Q--~B/aD04MTE7dz0xNDQwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/verdict_626/25487e31c11a2f9435b7b51566d9b818', 'width': 1440, 'height': 811, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/sqP.fyOyvAkfNoDuisMemQ--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/verdict_626/25487e31c11a2f9435b7b51566d9b818', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Verdict', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.verdict.co.uk/orange-business-partners-tech-mahindra/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/orange-business-partners-tech-mahindra-120100614.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '7b4aa52e-42bd-36b0-9393-c324b610c318', 'content': {'id': '7b4aa52e-42bd-36b0-9393-c324b610c318', 'contentType': 'STORY', 'title': 'FICO Deepens Credit Infrastructure Role With Score 10T And Tech Mahindra Partnership', 'description': '', 'summary': "FICO (NYSE:FICO) reports wider adoption of its FICO Score 10T credit scoring model among community lenders. The company also announces a global partnership with Tech Mahindra to create a Centre of Excellence for the FICO Platform. The partnership focuses on AI powered decisioning and digital transformation for financial institutions across multiple sectors. For you as an investor, this relates directly to Fair Isaac's core business in analytics driven credit scoring and decision software...", 'pubDate': '2026-02-04T01:09:51Z', 'displayTime': '2026-02-04T01:09:51Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/simply_wall_st__316/0fe4d5d105492213ce106a92b49639d4', 'originalWidth': 1194, 'originalHeight': 432, 'caption': '', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/gnGTQ_q9KCdl7Xvx_ppB0g--~B/aD00MzI7dz0xMTk0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/simply_wall_st__316/0fe4d5d105492213ce106a92b49639d4', 'width': 1194, 'height': 432, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/ohfGTui2cNwMrQr9fJT_kw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/simply_wall_st__316/0fe4d5d105492213ce106a92b49639d4', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Simply Wall St.', 'url': 'https://simplywall.st/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/fico-deepens-credit-infrastructure-role-010951536.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/fico-deepens-credit-infrastructure-role-010951536.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '09cd7d3d-e5f5-3bb7-9874-e0f1f0047fe1', 'content': {'id': '09cd7d3d-e5f5-3bb7-9874-e0f1f0047fe1', 'contentType': 'STORY', 'title': 'FICO, Tech Mahindra form global alliance to speed AI decisioning for banks', 'description': '', 'summary': 'Under the agreement, Tech Mahindra will set up a dedicated Centre of Excellence (CoE) focused on the FICO Platform.', 'pubDate': '2026-01-30T12:27:52Z', 'displayTime': '2026-01-30T12:27:52Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/retail_banker_international_407/c6be90e5f0eee46aef621d2ca30cdb8f', 'originalWidth': 1000, 'originalHeight': 621, 'caption': 'The tie-up is aimed at reshaping core banking set-ups by consolidating multiple', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/_gGdixExbzm0I5.K0vNpXA--~B/aD02MjE7dz0xMDAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/retail_banker_international_407/c6be90e5f0eee46aef621d2ca30cdb8f', 'width': 1000, 'height': 621, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/VlxpOjGdCDeg6bQj1EPlng--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/retail_banker_international_407/c6be90e5f0eee46aef621d2ca30cdb8f', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Retail Banker International', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.retailbankerinternational.com/news/fico-tech-mahindra-form-global-alliance/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/fico-tech-mahindra-form-global-122752467.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '5394a441-d278-3513-9cc7-1c26b65ec1fe', 'content': {'id': '5394a441-d278-3513-9cc7-1c26b65ec1fe', 'contentType': 'STORY', 'title': 'Tech Mahindra Ltd (BOM:532755) Q3 2026 Earnings Call Highlights: Record Deal Wins and Margin ...', 'description': '', 'summary': 'Tech Mahindra Ltd (BOM:532755) reports robust financial performance with significant deal wins and improved operating margins, despite challenges in certain segments.', 'pubDate': '2026-01-19T01:00:26Z', 'displayTime': '2026-01-19T01:00:26Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/tech-mahindra-ltd-bom-532755-010026189.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/tech-mahindra-ltd-bom-532755-010026189.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '36a850b4-2720-3e7b-ba20-5845dbece45e', 'content': {'id': '36a850b4-2720-3e7b-ba20-5845dbece45e', 'contentType': 'STORY', 'title': "India's Tech Mahindra beats quarterly revenue view on manufacturing strength", 'description': '', 'summary': "Indian software services provider Tech Mahindra reported bigger-than-expected third-quarter revenue \u200bon Friday, aided by growth in its \u200ccommunications and manufacturing segments. Revenue at India's fifth-largest IT firm \u200crose 8.3% to 143.93 billion rupees ($1.58 billion) in the three months ended December 31. Analysts, on average, expected revenue of 141.58 billion rupees, according \u2060to data compiled \u200cby LSEG.", 'pubDate': '2026-01-16T10:35:24Z', 'displayTime': '2026-01-16T10:35:24Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'Reuters', 'url': 'http://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/indias-tech-mahindra-beats-quarterly-103524308.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-tech-mahindra-beats-quarterly-103524308.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'fdd7483a-4325-32df-b606-fdf82caf9f8f', 'content': {'id': 'fdd7483a-4325-32df-b606-fdf82caf9f8f', 'contentType': 'STORY', 'title': "India's Tech Mahindra beats quarterly revenue estimate", 'description': '', 'summary': 'BENGALURU, Jan 16 (Reuters) - Indian software services provider Tech Mahindra reported larger-than-expected third-quarter revenue on Friday, aided by a pickup in the banking and manufacturing segments', 'pubDate': '2026-01-16T10:35:24Z', 'displayTime': '2026-01-16T10:35:24Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-tech-mahindra-beats-quarterly-103524022.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-tech-mahindra-beats-quarterly-103524022.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '96b59e6f-33d4-3bad-beac-5290cec22edb', 'content': {'id': '96b59e6f-33d4-3bad-beac-5290cec22edb', 'contentType': 'STORY', 'title': 'How Recent Analyst Shifts Are Rewriting the Story for Tech Mahindra', 'description': '', 'summary': "Tech Mahindra's stock price target has been revised upward, with the fair value estimate rising from ₹1,568.60 to ₹1,577.74. This increase follows analysts' consideration of both improved business fundamentals and a dynamic, mixed outlook for the company. Read on to learn what is influencing these updates and how you can keep track of the evolving narrative surrounding Tech Mahindra's valuation. Analyst Price Targets don't always capture the full story. Head over to our Company Report to find...", 'pubDate': '2025-11-29T19:09:10Z', 'displayTime': '2025-11-29T19:09:10Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/simply_wall_st__316/cf3f0369cec0a4d8742d0cfe2fa44bae', 'originalWidth': 1194, 'originalHeight': 432, 'caption': '', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/vAb1AaKiRI2SntuMfxvkIg--~B/aD00MzI7dz0xMTk0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/simply_wall_st__316/cf3f0369cec0a4d8742d0cfe2fa44bae', 'width': 1194, 'height': 432, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/poaIeEyjfVd6nP7sf.SYQw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/simply_wall_st__316/cf3f0369cec0a4d8742d0cfe2fa44bae', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Simply Wall St.', 'url': 'https://simplywall.st/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/recent-analyst-shifts-rewriting-story-190910715.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/recent-analyst-shifts-rewriting-story-190910715.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '64ee0277-0f18-356e-adf4-4b759926b37d', 'content': {'id': '64ee0277-0f18-356e-adf4-4b759926b37d', 'contentType': 'STORY', 'title': 'How New Partnerships and Analyst Shifts Are Shaping the Story for Tech Mahindra', 'description': '', 'summary': "Tech Mahindra's consensus analyst price target has seen a marginal decrease, moving from ₹1,570.83 to ₹1,568.60. This subtle adjustment reflects both the company’s operational strengths and the caution present in today's market outlook. Read on to find out how you can keep up with the evolving story behind Tech Mahindra’s stock and what these shifts could mean for future updates. Stay updated as the Fair Value for Tech Mahindra shifts by adding it to your watchlist or portfolio...", 'pubDate': '2025-11-15T17:15:48Z', 'displayTime': '2025-11-15T17:15:48Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/simply_wall_st__316/cf3f0369cec0a4d8742d0cfe2fa44bae', 'originalWidth': 1194, 'originalHeight': 432, 'caption': '', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/vAb1AaKiRI2SntuMfxvkIg--~B/aD00MzI7dz0xMTk0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/simply_wall_st__316/cf3f0369cec0a4d8742d0cfe2fa44bae', 'width': 1194, 'height': 432, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/poaIeEyjfVd6nP7sf.SYQw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/simply_wall_st__316/cf3f0369cec0a4d8742d0cfe2fa44bae', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Simply Wall St.', 'url': 'https://simplywall.st/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/partnerships-analyst-shifts-shaping-story-171548986.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/partnerships-analyst-shifts-shaping-story-171548986.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'e09bae5e-faaf-30c8-a0ff-9e9fb2178a13', 'content': {'id': 'e09bae5e-faaf-30c8-a0ff-9e9fb2178a13', 'contentType': 'STORY', 'title': 'Route Mobile Ltd (BOM:543228) Q2 2026 Earnings Call Highlights: Strong Revenue Growth Amidst ...', 'description': '', 'summary': 'Route Mobile Ltd (BOM:543228) reports a 6.5% revenue increase and strategic partnerships, despite facing profitability pressures from exceptional items.', 'pubDate': '2025-11-05T09:01:15Z', 'displayTime': '2025-11-05T09:01:15Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/route-mobile-ltd-bom-543228-090115021.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/route-mobile-ltd-bom-543228-090115021.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Technology', 'peers': {'TCS.NS': {'1d_change_pct': 1.47, '5d_change_pct': -0.83, 'latest_close': 2390.6}, 'INFY.NS': {'1d_change_pct': 2.88, '5d_change_pct': 0.61, 'latest_close': 1255.9}, 'WIPRO.NS': {'1d_change_pct': 1.32, '5d_change_pct': -3.38, 'latest_close': 190.9}, 'HCLTECH.NS': {'1d_change_pct': 1.67, '5d_change_pct': 0.63, 'latest_close': 1333.7}, 'TECHM.NS': {'1d_change_pct': 3.3, '5d_change_pct': 3.9, 'latest_close': 1384.8}}, 'sector_avg_1d_pct': 2.13, 'stock_vs_sector': 1.17, 'relative_strength': 'outperforming'}
+
+{'symbol': 'TECHM.NS', 'checks_run': 3, 'flags_found': 0, 'flags': [], 'status': 'ALL_CLEAR', 'warnings': {}}
+
+
+
+{'symbol': 'TECHM.NS', 'direction': 'Bullish', 'factors': {'technical_aligned': False, 'nifty_aligned': False, 'obv_confirming': True, 'news_clear': True, 'non_expiry_day': True}, 'score': 3, 'confidence': 'Medium', 'macro_override': False, 'macro_override_reason': None, 'contradiction': False, 'contradiction_reason': None, 'tradeable': True, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — TECHM.NS  
+Date: 2026-03-13 | As of: 11:30 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bullish  
+  Expected Move   : +-0.80% (30min scaled)  
+  Price Targets   : Entry=1330.5, Target=1398.53, Stop=1327.34, R:R=0.24  
+  Confidence      : Medium  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 56.18 -> neutral  
+  MACD            : macd_trend=bullish | macd_crossover=none  
+  EMA Trend       : bearish  
+  ATR(14)         : 39.2 pts -> +-0.80% scaled to 30min  
+  ADX(14)         : 57.73 -> strong_trend  
+  OBV Trend       : rising  
+  VWAP            : Price 1384.8 is above VWAP 1366.85  
+
+MARKET CONTEXT:  
+  NIFTY50         : 23114.5 [0.49% change] | 5d trend: down  
+  BANKNIFTY       : 53427.05 [-0.04% change]  
+  India VIX       : 22.81 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: No  
+  - OBV confirming: Yes  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 3/5 -> Medium  
+
+FINAL REASONING: The stock is showing a bullish trend despite mixed technical signals. The MACD indicates bullish momentum, but the EMA trend is bearish, suggesting caution. The OBV is rising, confirming buying interest. Given the current market context and the expected move, a bullish position may be favorable in the next 30 minutes.
+
+Now call: log_forecast(symbol="TECHM.NS", date="2026-03-13", direction="Bullish", entry_price=1330.5, target_price=1398.53, stop_price=1327.34, rr_ratio=0.24, confidence="Medium", score=3, tradeable=True)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'TECHM.NS', 'date': '2026-03-13', 'direction': 'Bullish', 'entry_price': 1330.5, 'target_price': 1398.53, 'stop_price': 1327.34, 'rr_ratio': 0.24, 'confidence': 'Medium', 'score': 3, 'tradeable': True, 'factors': {}, 'logged_at': '2026-03-22T14:13:05.934120', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

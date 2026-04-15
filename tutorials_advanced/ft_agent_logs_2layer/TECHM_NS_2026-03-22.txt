@@ -1,0 +1,75 @@
+TWO-LAYER ANALYSIS — TECHM.NS — 2026-03-22T13:41:16.452356+00:00
+============================================================
+
+LAYER 1A — FINBERT SENTIMENT
+{
+  "source": "FinBERT (ProsusAI/finbert)",
+  "model": "ProsusAI/finbert",
+  "headlines_scored": 0,
+  "net_score": 0.0,
+  "avg_positive": 0.0,
+  "avg_negative": 0.0,
+  "avg_neutral": 1.0,
+  "bullish_count": 0,
+  "bearish_count": 0,
+  "neutral_count": 0,
+  "sentiment_label": "Neutral",
+  "per_headline": [],
+  "error": "no HuggingFace token \u2014 add HF_TOKEN to config_api_keys.json"
+}
+
+LAYER 1B — FINML CLASSIFIER
+{
+  "ml_confidence": 0.578,
+  "ml_label": "Medium",
+  "model_type": "RandomForest (scikit-learn)",
+  "training_samples": 14,
+  "feature_cols": [
+    "rr_ratio",
+    "atr_pct",
+    "score",
+    "exp_move_pct",
+    "hour_ist",
+    "is_morning"
+  ],
+  "feature_importance": {
+    "rr_ratio": 0.1429,
+    "atr_pct": 0.1429,
+    "score": 0.0,
+    "exp_move_pct": 0.5357,
+    "hour_ist": 0.1786,
+    "is_morning": 0.0
+  },
+  "top_feature": "exp_move_pct",
+  "train_accuracy": 0.7143,
+  "error": null
+}
+
+LAYER 1 COMBINED
+{
+  "agreement": "TECHNICAL_ONLY",
+  "note": "Neutral news but FinML confident \u2192 pure technical play",
+  "finbert_label": "Neutral",
+  "finbert_score": 0.0,
+  "finml_label": "Medium",
+  "finml_prob": 0.578,
+  "overall_strength": 0.5468
+}
+
+LAYER 2 — GPT-4 REASONING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NSE 30-MIN TWO-LAYER FORECAST — TECHM.NS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUANTITATIVE SYNTHESIS:
+  FinBERT Interpretation : The neutral sentiment indicates that there is no significant news flow to influence market behavior positively or negatively at this moment.
+  FinML Interpretation   : The ML probability of 0.5780 suggests a moderate confidence in a positive price movement based on historical data, though it is not strongly convincing.
+  Signal Conflict        : Yes — the neutral sentiment from FinBERT does not support the technical bullish indicators from FinML.
+
+FINAL DECISION:
+  Direction    : Sideways
+  Confidence   : Medium
+  Key Reason   : The lack of strong sentiment support combined with a moderate technical probability suggests limited movement in either direction.
+  Risk Note    : The primary risk is the potential for unexpected news or market shifts that could disrupt the current neutral sentiment.
+
+TERMINATE

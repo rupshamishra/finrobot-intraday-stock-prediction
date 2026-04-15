@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-13. Time: 11:00 IST.
+Target stock: POWERGRID.NS. THIS IS A BACKTEST as of 2026-03-13 11:00 IST.
+Historical entry price at this time: 303.25
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 11:00 IST on 2026-03-13.
+ENTRY PRICE = latest_close from get_intraday_data() = 303.25
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="POWERGRID.NS")
+STEP 2: get_stock_data(symbol="POWERGRID.NS", start_date="2026-02-11", end_date="2026-03-13")
+        get_technical_indicators(symbol="POWERGRID.NS")
+        get_support_resistance(symbol="POWERGRID.NS")
+        get_intraday_data(symbol="POWERGRID.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="POWERGRID.NS")
+        get_company_news(symbol="POWERGRID.NS")
+        get_sector_peers(symbol="POWERGRID.NS")
+        get_data_sanity_check(symbol="POWERGRID.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — POWERGRID.NS
+Date: 2026-03-13 | As of: 11:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=303.25, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="POWERGRID.NS", date="2026-03-13", direction=<Direction>,
+  entry_price=303.25, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 22512.65, 'prev_close': 23114.5, 'change_pct': -2.6, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 22851.7, 'session_low': 22471.25}, 'banknifty': {'latest_close': 51437.75, 'change_pct': -3.72, 'trend': 'down'}, 'india_vix': {'latest': 26.73, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.176, 'change_pct': 0.1007, 'rupee_signal': 'rupee_weakening_fii_outflow_risk'}, 'brent_crude_proxy': {'latest_usd': 88.66, 'change_pct': -9.83, 'data_anomaly': True, 'data_note': 'WARNING: change_pct exceeds 5% — likely a yfinance data anomaly (futures roll-over). Do NOT use this value in analysis.', 'signal': 'data_anomaly_ignore'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+                  Open        High         Low       Close    Volume  Dividends  Stock Splits
+Date                                                                                         
+2026-02-11  297.649994  297.649994  292.200012  294.450012  10508852        0.0           0.0
+2026-02-12  294.450012  296.000000  291.750000  293.899994  10482579        0.0           0.0
+2026-02-13  292.000000  294.299988  286.850006  287.200012  10914157        0.0           0.0
+2026-02-16  288.000000  300.950012  287.250000  300.500000  22196951        0.0           0.0
+2026-02-17  299.299988  301.600006  297.000000  300.750000  11190989        0.0           0.0
+2026-02-18  299.450012  302.250000  298.450012  300.549988   9147320        0.0           0.0
+2026-02-19  300.100006  301.600006  293.100006  294.649994   7552362        0.0           0.0
+2026-02-20  295.549988  302.049988  294.250000  298.950012  11762183        0.0           0.0
+2026-02-23  302.000000  304.299988  299.000000  303.350006  11774742        0.0           0.0
+2026-02-24  304.000000  306.200012  300.799988  304.799988  15863867        0.0           0.0
+2026-02-25  307.000000  311.700012  305.149994  307.250000  14240500        0.0           0.0
+2026-02-26  307.100006  307.700012  301.399994  303.250000  14249515        0.0           0.0
+2026-02-27  305.799988  305.799988  297.899994  298.649994  21400679        0.0           0.0
+2026-03-02  290.000000  298.600006  289.500000  296.799988  15690227        0.0           0.0
+2026-03-04  296.000000  296.000000  288.899994  291.950012  28191826        0.0           0.0
+2026-03-05  292.000000  300.100006  291.899994  299.450012  19467441        0.0           0.0
+2026-03-06  299.950012  302.750000  297.000000  299.149994  15887540        0.0           0.0
+2026-03-09  285.500000  296.250000  285.500000  295.200012  21591866        0.0           0.0
+2026-03-10  298.149994  300.049988  293.750000  298.649994  14627316        0.0           0.0
+2026-03-11  298.649994  302.899994  298.049988  298.799988  12618289        0.0           0.0
+2026-03-12  295.799988  304.899994  295.100006  303.600006  15284297        0.0           0.0
+
+{'latest_close': 302.1000061035156, '52w_high': 311.7, '52w_low': 247.22, 'pct_from_52w_high': -3.08, 'rsi_14': 56.53, 'rsi_signal': 'neutral', 'stoch_k': 69.17, 'stoch_d': 55.42, 'stoch_signal': 'neutral', 'macd': 3.37, 'macd_signal_line': 4.47, 'macd_histogram': -1.096, 'macd_prev_histogram': -1.4214, 'macd_crossover': 'none', 'macd_trend': 'bearish', 'macd_signal': 'bearish', 'ema_trend': 'strongly_bullish', 'ema_9': 299.17, 'ema_21': 297.12, 'ema_50': 288.3, 'ema_200': 275.59, 'adx_14': 15.07, 'adx_signal': 'weak_trend', 'atr_14': 8.54, 'expected_intraday_range_pct': 2.83, 'bb_upper': 306.84, 'bb_lower': 292.55, 'bb_width_pct': 4.77, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 17608035, 'latest_vol': 23767446, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 305.0, 'low': 296.6000061035156, 'close': 297.6000061035156, 'open': 300.1000061035156}, 'today_open': 298.0, 'latest_close': 302.1000061035156, 'classic_pivots': {'PP': 299.73, 'R1': 302.87, 'R2': 308.13, 'R3': 311.27, 'S1': 294.47, 'S2': 291.33, 'S3': 286.07}, 'camarilla_pivots': {'H4': 302.22, 'H3': 299.91, 'L3': 295.29, 'L4': 292.98}, 'nearest_support': 294.47, 'nearest_resistance': 302.87, 'bearish_setup': {'entry': 302.1000061035156, 'target': 291.33, 'stop': 299.91, 'reward_pts': 10.77, 'risk_pts': -2.19, 'rr_ratio': -4.92, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 302.1000061035156, 'target': 308.13, 'stop': 295.29, 'reward_pts': 6.03, 'risk_pts': 6.81, 'rr_ratio': 0.89, 'tradeable': True, 'note': 'viable setup'}, 'gap_up_down': 0.13}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 302.1, 'latest_vwap': 299.17, 'price_vs_vwap': 'above', 'session_high': 304.85, 'session_low': 292.3, 'avg_volume_per_candle': 629453, 'last_20_candles': '                       Open    High     Low   Close   Volume    VWAP\nDatetime                                                            \n2026-03-23 10:30:00  294.10  294.45  293.20  294.25   428024  298.78\n2026-03-23 10:45:00  294.85  298.25  294.10  297.45  1298797  298.74\n2026-03-23 11:00:00  297.50  299.85  296.95  299.40   967566  298.74\n2026-03-23 11:15:00  299.45  299.45  297.30  298.40   538764  298.73\n2026-03-23 11:30:00  298.45  298.45  296.45  296.70   545138  298.72\n2026-03-23 11:45:00  296.75  297.70  296.40  297.55   513951  298.71\n2026-03-23 12:00:00  297.45  297.85  296.90  297.10   390924  298.70\n2026-03-23 12:15:00  297.20  297.45  296.35  296.80   677790  298.68\n2026-03-23 12:30:00  296.85  298.60  296.80  298.60   527901  298.67\n2026-03-23 12:45:00  298.65  298.75  297.65  298.10   514606  298.67\n2026-03-23 13:00:00  297.95  298.50  297.65  298.20   557928  298.66\n2026-03-23 13:15:00  298.20  298.55  297.05  297.50   733101  298.65\n2026-03-23 13:30:00  297.60  299.00  297.30  298.60   698392  298.65\n2026-03-23 13:45:00  298.70  301.95  298.55  301.15  1877420  298.70\n2026-03-23 14:00:00  301.15  302.70  300.70  300.90  1887303  298.78\n2026-03-23 14:15:00  300.90  301.45  300.00  301.00  1192386  298.81\n2026-03-23 14:30:00  301.15  302.80  299.95  302.80  1805034  298.89\n2026-03-23 14:45:00  302.85  304.20  302.15  303.85  2464238  299.03\n2026-03-23 15:00:00  303.85  303.85  301.30  301.55  2521700  299.14\n2026-03-23 15:15:00  301.40  302.10  299.30  302.10  1166760  299.17'}
+
+{'company': 'POWER GRID CORP. LTD.', 'sector': 'Utilities', 'industry': 'Utilities - Regulated Electric', 'market_cap_cr': 280971.0, 'pe_ratio': 19.377806, 'pb_ratio': 2.8357944, 'ev_ebitda': 10.407, 'beta': 0.22, 'beta_signal': 'low_volatility_defensive', '52w_high': 322.0, '52w_low': 250.0, '200d_avg': 282.597, '50d_avg': 284.382, 'float_shares': 4291257984, 'shares_outstanding': 9300603819, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 4.12, 'earnings_date': '1769767200', 'recommendation': 'buy', 'analyst_count': 23, 'target_price': 317.78262}
+
+[{'id': '0502dcb8-4fd3-3c3d-b1d0-75fe821eeb79', 'content': {'id': '0502dcb8-4fd3-3c3d-b1d0-75fe821eeb79', 'contentType': 'STORY', 'title': 'GE Vernova to Modernize a Key High-Voltage Power Transmission Link in India', 'description': '', 'summary': 'Contract from POWERGRID for Chandrapur 2 x 500-MW back-to-back high-voltage direct-current (HVDC) link Scope includes advanced HVDC controls and valves, delivered from GE Vernova’s facilities in India First HVDC refurbishment project awarded to GE Vernova in India GE Vernova Inc. announced that its Electrification Systems business has been awarded a contract by Power Grid Corp. […]', 'pubDate': '2025-12-23T18:10:29Z', 'displayTime': '2025-12-23T18:10:29Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/power_magazine_984/6056e05256a617bffc44ebda3ae922d4', 'originalWidth': 1037, 'originalHeight': 692, 'caption': 'HVDC converter station.\nCourtesy: GE Vernova', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/JzSr0gB3que_runPqXckew--~B/aD02OTI7dz0xMDM3O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/power_magazine_984/6056e05256a617bffc44ebda3ae922d4', 'width': 1037, 'height': 692, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/_dygevoR.d24vnVnb54E1w--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/power_magazine_984/6056e05256a617bffc44ebda3ae922d4', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'POWER Magazine', 'url': 'https://www.powermag.com/'}, 'canonicalUrl': {'url': 'https://www.powermag.com/ge-vernova-to-modernize-a-key-high-voltage-power-transmission-link-in-india/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/ge-vernova-modernize-key-high-181029539.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'd41cb89e-0b02-340a-b65a-8e8e7a25ff5e', 'content': {'id': 'd41cb89e-0b02-340a-b65a-8e8e7a25ff5e', 'contentType': 'STORY', 'title': 'KETRACO signs PPP for two high-voltage electricity transmission lines in Kenya', 'description': '', 'summary': 'The project fully aligns with Kenya’s Least Cost Power Development Plan.', 'pubDate': '2025-12-16T09:25:05Z', 'displayTime': '2025-12-16T09:25:05Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/power_technology_866/d78692635a53ddb8893c7b53777a3089', 'originalWidth': 1440, 'originalHeight': 810, 'caption': 'The signing ceremony of the PPP agreement. Credit: KETRACO.', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/eclZVjyoqLNw7YRZPpv.BQ--~B/aD04MTA7dz0xNDQwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/power_technology_866/d78692635a53ddb8893c7b53777a3089', 'width': 1440, 'height': 810, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/2oldbT331W8ni1sLgsrc7w--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/power_technology_866/d78692635a53ddb8893c7b53777a3089', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Power Technology', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.power-technology.com/news/ketraco-signs-ppp-electricity-transmission-lines/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/ketraco-signs-ppp-two-high-092505136.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '6b3f9982-75ee-39c1-b93a-03d365624bcd', 'content': {'id': '6b3f9982-75ee-39c1-b93a-03d365624bcd', 'contentType': 'STORY', 'title': 'Kenya signs $311 million power lines deal with Africa fund, Indian firm', 'description': '', 'summary': 'NAIROBI, Dec 15 (Reuters) - Kenya on Monday signed an agreement for the investment of $311 million in the construction of two high-voltage electricity transmission lines with a pan-African', 'pubDate': '2025-12-15T17:00:09Z', 'displayTime': '2025-12-15T17:00:09Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/2f60a1184f189eb3a65031f3fe1a9f98', 'originalWidth': 800, 'originalHeight': 500, 'caption': 'FILE PHOTO: Pylons of high-tension electricity power lines are seen at the Olkaria II Geothermal power plant near the Rift Valley town of Naivasha, Kenya February 15, 2018. Picture taken February 15, 2018. REUTERS/Thomas Mukoya/File Photo', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/9UZ77KX7LeDFdbnRO7QqvA--~B/aD01MDA7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/2f60a1184f189eb3a65031f3fe1a9f98', 'width': 800, 'height': 500, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/eDOEvMGRvAvejxrdFKBw8g--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/2f60a1184f189eb3a65031f3fe1a9f98', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/kenya-signs-311-million-power-170009747.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/kenya-signs-311-million-power-170009747.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'a2163cf1-91de-3224-99a6-18227f719b8e', 'content': {'id': 'a2163cf1-91de-3224-99a6-18227f719b8e', 'contentType': 'STORY', 'title': 'Power Grid Corp Of India Ltd (BOM:532898) Q2 2026 Earnings Call Highlights: Strong Operational ...', 'description': '', 'summary': 'Power Grid Corp Of India Ltd (BOM:532898) reports high availability rates and international expansion, but faces equipment shortages and project delays.', 'pubDate': '2025-11-04T17:01:49Z', 'displayTime': '2025-11-04T17:01:49Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/power-grid-corp-india-ltd-170149130.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/power-grid-corp-india-ltd-170149130.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '6a267e6c-1516-3be7-b73c-15766f01b587', 'content': {'id': '6a267e6c-1516-3be7-b73c-15766f01b587', 'contentType': 'STORY', 'title': "India's Power Grid Corp posts profit decline due on higher expenses, delayed projects", 'description': '', 'summary': '(Reuters) -Power Grid Corporation of India posted a nearly 6% fall in second-quarter profit due to higher expenses and delayed project awards and execution.', 'pubDate': '2025-11-03T13:42:34Z', 'displayTime': '2025-11-03T13:42:34Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/aeffe45eaaab9efdbd37a1ddb4004680', 'originalWidth': 800, 'originalHeight': 535, 'caption': 'Vehicles move past electricity pylons in Gurugram, India, September 11, 2025. REUTERS/Bhawika Chhabra', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/.MvmGnkvTHl6kppMDhI6CQ--~B/aD01MzU7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/aeffe45eaaab9efdbd37a1ddb4004680', 'width': 800, 'height': 535, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/MnekdSWhyD50jg9UOB3L6w--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/aeffe45eaaab9efdbd37a1ddb4004680', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-power-grid-corp-posts-134234871.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-power-grid-corp-posts-134234871.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '73ab6212-dc51-3234-ad28-9a900cff0947', 'content': {'id': '73ab6212-dc51-3234-ad28-9a900cff0947', 'contentType': 'STORY', 'title': "Indian power regulator takes up solar firms' plea on losses due to transmission delays", 'description': '', 'summary': "By Sethuraman N R NEW DELHI (Reuters) -India's federal power regulator has admitted petitions filed by two renewable energy developers seeking compensation for financial losses incurred due to delays", 'pubDate': '2025-10-06T10:23:16Z', 'displayTime': '2025-10-06T10:23:16Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/80d59014b3e1ba153bce415caabb2c06', 'originalWidth': 800, 'originalHeight': 529, 'caption': 'FILE PHOTO: A man rides a motorcycle along the solar panels in Gujarat Solar Park also called Charanka Solar Park at Patan district in Gujarat, India September 12, 2024. REUTERS/Amit Dave//File Photo', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/0u3VfACRrRL7mKerLcIT7w--~B/aD01Mjk7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/80d59014b3e1ba153bce415caabb2c06', 'width': 800, 'height': 529, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/a2LhYtY_aAuSCbXFE3z8YQ--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/80d59014b3e1ba153bce415caabb2c06', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indian-power-regulator-takes-solar-102316351.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indian-power-regulator-takes-solar-102316351.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '14075cfe-ad12-305b-880c-f7fe65861b7d', 'content': {'id': '14075cfe-ad12-305b-880c-f7fe65861b7d', 'contentType': 'STORY', 'title': 'Corporate bond fundraising in India set to hit new highs as firms chase low-cost capital', 'description': '', 'summary': "MUMBAI (Reuters) -India's record run in corporate bond issuance is expected to continue through August, as higher-rated companies and banks rush to tap the market for cheaper fundraising, underscoring a broader shift in corporate financing strategies amid declining bond yields and ample liquidity, investors said on Monday.  Indian firms are expected to raise at least 300 billion rupees ($3.43 billion) via bonds over the next three weeks, traders said.  Issuers including Manipal Hospitals, State Bank of India, IRB Infrastructure Trust, Delhi International Airport, Torrent Investments, Power Grid Corp and GMR Airports are among those expected to tap the market this month.", 'pubDate': '2025-08-11T08:55:01Z', 'displayTime': '2025-08-11T08:55:01Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/0297dc085e5f2802516602af263a0fd6', 'originalWidth': 800, 'originalHeight': 550, 'caption': 'A general view of the skyline in Mumbai', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/MAW6sVRKjEgsTg5EmzqQEA--~B/aD01NTA7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/0297dc085e5f2802516602af263a0fd6', 'width': 800, 'height': 550, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/DXF0NN0HYmrop6B2.e3XtQ--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/0297dc085e5f2802516602af263a0fd6', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/corporate-bond-fundraising-india-set-085501294.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/corporate-bond-fundraising-india-set-085501294.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '710398ad-5871-3a4c-9d46-1526d7bd8110', 'content': {'id': '710398ad-5871-3a4c-9d46-1526d7bd8110', 'contentType': 'STORY', 'title': 'Power Grid Corp Of India Ltd (BOM:532898) Q4 2025 Earnings Call Highlights: Strong Financial ...', 'description': '', 'summary': 'Power Grid Corp Of India Ltd (BOM:532898) reports robust earnings with significant revenue growth, despite facing project delays and competitive pressures.', 'pubDate': '2025-05-22T07:00:50Z', 'displayTime': '2025-05-22T07:00:50Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/power-grid-corp-india-ltd-070050410.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/power-grid-corp-india-ltd-070050410.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Utilities', 'peers': {'NTPC.NS': {'1d_change_pct': -2.24, '5d_change_pct': -2.62, 'latest_close': 372.4}, 'POWERGRID.NS': {'1d_change_pct': 1.51, '5d_change_pct': 1.46, 'latest_close': 302.1}, 'TATAPOWER.NS': {'1d_change_pct': -3.84, '5d_change_pct': -0.92, 'latest_close': 386.95}, 'ADANIGREEN.NS': {'1d_change_pct': -5.4, '5d_change_pct': -5.83, 'latest_close': 816.45}}, 'sector_avg_1d_pct': -2.49, 'stock_vs_sector': 4.0, 'relative_strength': 'outperforming'}
+
+{'symbol': 'POWERGRID.NS', 'checks_run': 3, 'flags_found': 0, 'flags': [], 'status': 'ALL_CLEAR', 'warnings': {}}
+
+
+
+{'symbol': 'POWERGRID.NS', 'direction': 'Bullish', 'factors': {'technical_aligned': False, 'nifty_aligned': False, 'obv_confirming': True, 'news_clear': True, 'non_expiry_day': True}, 'score': 2, 'confidence': 'Low', 'macro_override': True, 'macro_override_reason': 'MACRO OVERRIDE: NIFTY -2.60% with VIX 26.7 — strong bearish macro opposes Bullish call. Capped at Low.', 'contradiction': False, 'contradiction_reason': None, 'tradeable': True, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — POWERGRID.NS  
+Date: 2026-03-13 | As of: 11:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bullish  
+  Expected Move   : +-0.80% (30min scaled)  
+  Price Targets   : Entry=303.25, Target=308.13, Stop=295.29, R:R=0.89  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 56.53 -> neutral  
+  MACD            : macd_trend=bearish | macd_crossover=none  
+  EMA Trend       : strongly_bullish  
+  ATR(14)         : 8.54 pts -> +-0.85% scaled to 30min  
+  ADX(14)         : 15.07 -> weak_trend  
+  OBV Trend       : rising  
+  VWAP            : Price 302.10 is above VWAP 299.17  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22512.65 [-2.6% change] | 5d trend: down  
+  BANKNIFTY       : 51437.75 [-3.72% change]  
+  India VIX       : 26.73 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: No  
+  - OBV confirming: Yes  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 2/5 -> Low  
+
+FINAL REASONING: The forecast indicates a bullish direction for POWERGRID.NS over the next 30 minutes, despite a bearish macro environment characterized by a declining NIFTY and rising VIX. The technical indicators show a strong bullish EMA trend, but the bearish MACD trend and overall market conditions suggest caution. The expected move is modest, and while the OBV trend is positive, the low confidence score reflects the significant macro headwinds.  
+
+Now call: log_forecast(symbol="POWERGRID.NS", date="2026-03-13", direction="Bullish", entry_price=303.25, target_price=308.13, stop_price=295.29, rr_ratio=0.89, confidence="Low", score=2, tradeable=True)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'POWERGRID.NS', 'date': '2026-03-13', 'direction': 'Bullish', 'entry_price': 303.25, 'target_price': 308.13, 'stop_price': 295.29, 'rr_ratio': 0.89, 'confidence': 'Low', 'score': 2, 'tradeable': True, 'factors': {}, 'logged_at': '2026-03-23T20:23:33.974351', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

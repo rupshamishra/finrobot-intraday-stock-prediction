@@ -1,0 +1,157 @@
+You are an NSE intraday analyst. Date: 2026-03-13. Time: 10:00 IST.
+Target stock: IOC.NS. THIS IS A BACKTEST as of 2026-03-13 10:00 IST.
+Historical entry price at this time: 157.46
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 10:00 IST on 2026-03-13.
+ENTRY PRICE = latest_close from get_intraday_data() = 157.46
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="IOC.NS")
+STEP 2: get_stock_data(symbol="IOC.NS", start_date="2026-02-11", end_date="2026-03-13")
+        get_technical_indicators(symbol="IOC.NS")
+        get_support_resistance(symbol="IOC.NS")
+        get_intraday_data(symbol="IOC.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="IOC.NS")
+        get_company_news(symbol="IOC.NS")
+        get_sector_peers(symbol="IOC.NS")
+        get_data_sanity_check(symbol="IOC.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — IOC.NS
+Date: 2026-03-13 | As of: 10:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=157.46, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="IOC.NS", date="2026-03-13", direction=<Direction>,
+  entry_price=157.46, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 22512.65, 'prev_close': 23114.5, 'change_pct': -2.6, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 22851.7, 'session_low': 22471.25}, 'banknifty': {'latest_close': 51437.75, 'change_pct': -3.72, 'trend': 'down'}, 'india_vix': {'latest': 26.73, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.187, 'change_pct': 0.1125, 'rupee_signal': 'rupee_weakening_fii_outflow_risk'}, 'brent_crude_proxy': {'latest_usd': 88.86, 'change_pct': -9.62, 'data_anomaly': True, 'data_note': 'WARNING: change_pct exceeds 5% — likely a yfinance data anomaly (futures roll-over). Do NOT use this value in analysis.', 'signal': 'data_anomaly_ignore'}}
+
+
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+
+
+                  Open        High         Low       Close    Volume  Dividends  Stock Splits
+Date                                                                                         
+2026-02-11  175.783721  179.338903  174.618420  179.052505  25578553        0.0           0.0
+2026-02-12  179.980801  179.980801  173.117339  175.892349  24014261        0.0           0.0
+2026-02-13  175.072691  175.684966  173.848124  174.569046   9835632        0.0           0.0
+2026-02-16  173.709870  173.709870  171.290377  172.969208   6184219        0.0           0.0
+2026-02-17  172.771694  173.956750  170.026309  173.620987   5249228        0.0           0.0
+2026-02-18  173.670365  176.771268  173.670365  176.514511   8191312        0.0           0.0
+2026-02-19  175.497337  175.773849  171.231118  172.129791  13677449        0.0           0.0
+2026-02-20  171.438508  172.268045  170.154691  171.626129   8935995        0.0           0.0
+2026-02-23  172.712450  175.092447  171.507639  174.262909  11422407        0.0           0.0
+2026-02-24  174.786303  178.746369  174.312269  177.946457  22691029        0.0           0.0
+2026-02-25  178.746375  181.511516  178.262471  180.751099  24353791        0.0           0.0
+2026-02-26  181.215248  184.474163  180.158563  184.148270  17206460        0.0           0.0
+2026-02-27  184.780300  186.607272  183.456988  185.135818  24422609        0.0           0.0
+2026-03-02  179.052503  180.128928  174.648043  176.879898  31464579        0.0           0.0
+2026-03-04  172.821077  173.976507  167.103175  168.317856  27718538        0.0           0.0
+2026-03-05  168.870874  173.235839  167.172289  169.404144  32355154        0.0           0.0
+2026-03-06  169.917678  170.786726  165.957612  166.579758  20979104        0.0           0.0
+2026-03-09  156.032738  160.131060  154.353907  159.212646  40458725        0.0           0.0
+2026-03-10  162.392564  164.782431  157.138796  157.948593  26772223        0.0           0.0
+2026-03-11  158.501619  160.960621  157.672081  158.630005  22703344        0.0           0.0
+2026-03-12  157.399994  162.250000  154.059998  160.160004  21636039        2.0           0.0
+
+{'latest_close': 138.11000061035156, '52w_high': 186.61, '52w_low': 137.75, 'pct_from_52w_high': -25.99, 'rsi_14': 12.92, 'rsi_signal': 'oversold', 'stoch_k': 0.99, 'stoch_d': 3.07, 'stoch_signal': 'oversold', 'macd': -7.37, 'macd_signal_line': -4.46, 'macd_histogram': -2.9055, 'macd_prev_histogram': -2.8389, 'macd_crossover': 'none', 'macd_trend': 'bearish', 'macd_signal': 'bearish', 'ema_trend': 'strongly_bearish', 'ema_9': 148.78, 'ema_21': 157.33, 'ema_50': 162.0, 'ema_200': 162.36, 'adx_14': 38.79, 'adx_signal': 'strong_trend', 'atr_14': 6.58, 'expected_intraday_range_pct': 4.76, 'bb_upper': 191.37, 'bb_lower': 133.16, 'bb_width_pct': 35.88, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 24350032, 'latest_vol': 21036972, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 148.1300048828125, 'low': 143.60000610351562, 'close': 144.60000610351562, 'open': 143.60000610351562}, 'today_open': 141.49000549316406, 'latest_close': 138.11000061035156, 'classic_pivots': {'PP': 145.44, 'R1': 147.29, 'R2': 149.97, 'R3': 151.82, 'S1': 142.76, 'S2': 140.91, 'S3': 138.23}, 'camarilla_pivots': {'H4': 147.09, 'H3': 145.85, 'L3': 143.35, 'L4': 142.11}, 'nearest_support': 138.23, 'nearest_resistance': 147.29, 'bearish_setup': {'entry': 138.11000061035156, 'target': 140.91, 'stop': 145.85, 'reward_pts': -2.8, 'risk_pts': 7.74, 'rr_ratio': -0.36, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 138.11000061035156, 'target': 149.97, 'stop': 142.11, 'reward_pts': 11.86, 'risk_pts': -4.0, 'rr_ratio': -2.97, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': -2.15}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 138.11, 'latest_vwap': 144.83, 'price_vs_vwap': 'below', 'session_high': 149.79, 'session_low': 137.76, 'avg_volume_per_candle': 858085, 'last_20_candles': '                       Open    High     Low   Close   Volume    VWAP\nDatetime                                                            \n2026-03-23 10:30:00  139.05  139.50  138.90  139.08   613810  145.65\n2026-03-23 10:45:00  139.07  139.15  138.75  138.78   528591  145.61\n2026-03-23 11:00:00  138.81  139.00  138.30  138.63   732616  145.55\n2026-03-23 11:15:00  138.63  138.95  138.42  138.69   680647  145.51\n2026-03-23 11:30:00  138.76  138.90  138.17  138.37   549378  145.47\n2026-03-23 11:45:00  138.37  139.05  138.33  138.81   463392  145.44\n2026-03-23 12:00:00  138.82  139.09  138.67  138.73   382651  145.41\n2026-03-23 12:15:00  138.73  138.82  138.45  138.58   321937  145.39\n2026-03-23 12:30:00  138.58  138.90  138.41  138.83   259977  145.37\n2026-03-23 12:45:00  138.80  138.84  138.01  138.14   500888  145.33\n2026-03-23 13:00:00  138.12  138.73  138.03  138.18   444175  145.30\n2026-03-23 13:15:00  138.25  138.50  138.00  138.08   614092  145.26\n2026-03-23 13:30:00  138.10  138.98  138.04  138.82   528280  145.23\n2026-03-23 13:45:00  138.85  139.24  138.78  138.92   707546  145.18\n2026-03-23 14:00:00  138.92  139.11  138.72  138.84   391598  145.16\n2026-03-23 14:15:00  138.81  139.00  138.38  138.51   250981  145.14\n2026-03-23 14:30:00  138.48  138.67  138.00  138.61   938253  145.08\n2026-03-23 14:45:00  138.60  138.93  138.36  138.84   781938  145.03\n2026-03-23 15:00:00  138.70  138.70  138.00  138.10  1275521  144.95\n2026-03-23 15:15:00  138.04  138.20  137.76  138.11  1804578  144.83'}
+
+{'company': 'INDIAN OIL CORP LTD', 'sector': 'Energy', 'industry': 'Oil & Gas Refining & Marketing', 'market_cap_cr': 195028.0, 'pe_ratio': 5.320108, 'pb_ratio': 0.96446204, 'ev_ebitda': 4.718, 'beta': 0.757, 'beta_signal': 'low_volatility_defensive', '52w_high': 188.96, '52w_low': 122.35, '200d_avg': 156.5877, '50d_avg': 166.6118, 'float_shares': 3376287793, 'shares_outstanding': 14121238383, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 6.92, 'earnings_date': '1770285600', 'recommendation': 'buy', 'analyst_count': 31, 'target_price': 182.29031}
+
+[{'id': 'e8e9b757-c44b-3d42-9bc5-4653bc409992', 'content': {'id': 'e8e9b757-c44b-3d42-9bc5-4653bc409992', 'contentType': 'STORY', 'title': 'India fuel retailers seek advance payments from dealers as global price surges', 'description': '', 'summary': 'By Nidhi Verma NEW DELHI, March 17 (Reuters) - Indian state-owned fuel retailers are seeking advance payments for gasoline and gasoil supplied to fuel pumps nationwide, dealers said, as the companies', 'pubDate': '2026-03-17T07:34:01Z', 'displayTime': '2026-03-17T07:34:01Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/1420b23a6b277adad7bdbf28c4f7e241', 'originalWidth': 800, 'originalHeight': 533, 'caption': 'A worker stands next to a machine at an Indian Oil fuel station in New Delhi, India, March 6, 2026. REUTERS/Bhawika Chhabra', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/UpLcKoYsEYh64BmIrZC.PA--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/1420b23a6b277adad7bdbf28c4f7e241', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/rDxvy.pJdmkNMcvaGqhRIg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/1420b23a6b277adad7bdbf28c4f7e241', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/india-fuel-retailers-seek-advance-073401573.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/india-fuel-retailers-seek-advance-073401573.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '4cbb4744-a90f-31a2-8e53-eb419950952b', 'content': {'id': '4cbb4744-a90f-31a2-8e53-eb419950952b', 'contentType': 'STORY', 'title': "India's LPG consumption declines due to shortages in wake of Iran war", 'description': '', 'summary': "By Nidhi Verma NEW DELHI, March 16 (Reuters) - Indian state fuel retailers' sale of liquefied petroleum gas (LPG) slowed in the first half of March, preliminary data showed, as the country reels from", 'pubDate': '2026-03-16T13:15:08Z', 'displayTime': '2026-03-16T13:15:08Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/00ee0d6875c2527f9b5778d5ccf54991', 'originalWidth': 800, 'originalHeight': 583, 'caption': 'A man loads LPG cylinders onto a cart at a warehouse amid supply disruptions following the U.S.-Israeli conflict with Iran, in Mumbai, India, March 11, 2026. REUTERS/Francis Mascarenhas', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/p2PPHZk9YSnXPmc9lbabXw--~B/aD01ODM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/00ee0d6875c2527f9b5778d5ccf54991', 'width': 800, 'height': 583, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/Wnl3OT1aZYCyJGUhBaICTQ--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/00ee0d6875c2527f9b5778d5ccf54991', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-lpg-consumption-declines-due-131508492.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-lpg-consumption-declines-due-131508492.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '751bdd37-4f56-3876-b5d6-2a1ce857bd0e', 'content': {'id': '751bdd37-4f56-3876-b5d6-2a1ce857bd0e', 'contentType': 'STORY', 'title': 'India secures safe passage for LPG tankers through the shuttered Strait of Hormuz', 'description': '', 'summary': 'Investing.com -- Two liquefied petroleum gas (LPG) tankers have successfully navigated the Strait of Hormuz and are en route to India, signaling a potential breakthrough in the supply crisis caused by the ongoing conflict in the Persian Gulf.', 'pubDate': '2026-03-14T09:14:31Z', 'displayTime': '2026-03-14T09:14:31Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'Investing.com', 'url': 'https://www.investing.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/india-secures-safe-passage-lpg-091431334.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/india-secures-safe-passage-lpg-091431334.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '0bd2c7bc-8d3d-3651-9b91-ec64d9dc37f7', 'content': {'id': '0bd2c7bc-8d3d-3651-9b91-ec64d9dc37f7', 'contentType': 'STORY', 'title': 'Indian refiners tumble as crude surges on widening Iran war', 'description': '', 'summary': 'March 9 (Reuters) - Shares of Indian refiners slumped on Monday, as the widening U.S.-Israeli war with Iran propelled Brent crude prices toward $120 per barrel - a near four-year high - threatening', 'pubDate': '2026-03-09T04:30:07Z', 'displayTime': '2026-03-09T04:30:07Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/02b825f3ca24797548ee2faf1477e637', 'originalWidth': 800, 'originalHeight': 533, 'caption': 'A worker stands next to a machine at an Indian Oil fuel station in New Delhi, India, March 6, 2026. REUTERS/Bhawika Chhabra', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/4eTWN_2ud8oPMko2auymvA--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/02b825f3ca24797548ee2faf1477e637', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/oM3mGpcmBww49JJ1OBpn_A--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/02b825f3ca24797548ee2faf1477e637', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indian-refiners-tumble-crude-surges-043007720.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indian-refiners-tumble-crude-surges-043007720.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'eab82005-a9bd-341c-a2ae-177b9a07f6c8', 'content': {'id': 'eab82005-a9bd-341c-a2ae-177b9a07f6c8', 'contentType': 'STORY', 'title': 'Indian Oil Corp books some oil cargoes from Red Sea, source says', 'description': '', 'summary': 'March 7 (Reuters) - Top Indian refiner, Indian Oil Corp, has booked some oil cargoes for loading from the Red Sea port of Yanbu, a company source said on Saturday.', 'pubDate': '2026-03-07T12:08:02Z', 'displayTime': '2026-03-07T12:08:02Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/62c02334f09aa274b579889f83a330a3', 'originalWidth': 800, 'originalHeight': 534, 'caption': 'Indian Oil Corp Ltd logo is seen displayed in this illustration taken, April 10, 2023. REUTERS/Dado Ruvic/Illustration', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/qQefS.uWP98RbCQhSyby0Q--~B/aD01MzQ7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/62c02334f09aa274b579889f83a330a3', 'width': 800, 'height': 534, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/WqVN5L6y3oaGZiTvtbcu2Q--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/62c02334f09aa274b579889f83a330a3', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indian-oil-corp-books-oil-120802464.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indian-oil-corp-books-oil-120802464.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'd50262dc-93d3-3e5b-9258-90c2ebdb1531', 'content': {'id': 'd50262dc-93d3-3e5b-9258-90c2ebdb1531', 'contentType': 'STORY', 'title': 'Indian refiners raise LPG rates for first time in a year amid Iran conflict', 'description': '', 'summary': 'Investing.com — India’s state-run refiners hiked the price of domestic cooking gas for the first time in nearly a year on Saturday, as the intensifying conflict in the Middle East chokes energy flows through the Strait of Hormuz. The move highlights the growing economic toll of the regional war on the world’s third-largest liquefied petroleum gas (LPG) consumer.', 'pubDate': '2026-03-07T09:07:32Z', 'displayTime': '2026-03-07T09:07:32Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'Investing.com', 'url': 'https://www.investing.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/indian-refiners-raise-lpg-rates-090732898.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indian-refiners-raise-lpg-rates-090732898.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '8fcd687f-13ca-326f-acec-ae94a2c4bde2', 'content': {'id': '8fcd687f-13ca-326f-acec-ae94a2c4bde2', 'contentType': 'STORY', 'title': 'India invokes emergency powers, orders refiners to boost LPG output', 'description': '', 'summary': 'By Nidhi Verma NEW DELHI, March 6 (Reuters) - India has invoked emergency powers and directed refiners to maximise production of liquefied petroleum gas (LPG) to prevent a shortage of the cooking fuel', 'pubDate': '2026-03-06T07:33:52Z', 'displayTime': '2026-03-06T07:33:52Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/86e5d153548ed3c74dad7bf7367d20bf', 'originalWidth': 800, 'originalHeight': 533, 'caption': 'FILE PHOTO: Employees work at a furnace on a steel production line at the Jindal Stainless facility in Hisar, Haryana, India, May 30, 2025. REUTERS/Priyanshu Singh/File Photo', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/zyAe8z9ye1lsL8S.VDpewQ--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/86e5d153548ed3c74dad7bf7367d20bf', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/8gIGEkISpTZggeNk2gFvXA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/86e5d153548ed3c74dad7bf7367d20bf', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/india-invokes-emergency-powers-orders-073352805.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/india-invokes-emergency-powers-orders-073352805.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '759780e5-08bf-3064-a1d7-f9db238787d2', 'content': {'id': '759780e5-08bf-3064-a1d7-f9db238787d2', 'contentType': 'STORY', 'title': 'Indian refiners tap Russian oil floating offshore, sources say', 'description': '', 'summary': "By Nidhi Verma NEW DELHI, March 5 (Reuters) - Refiners in India have started tapping Russian oil aboard vessels floating off the country's coast to make up for the loss of Middle Eastern crude due to", 'pubDate': '2026-03-05T12:07:27Z', 'displayTime': '2026-03-05T12:07:27Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/a7af641ce1debea99bfe4a6bcb5ac407', 'originalWidth': 800, 'originalHeight': 566, 'caption': 'FILE PHOTO: FILE PHOTO: A man walks past the Reserve Bank of India (RBI) logo outside its headquarters in Mumbai, India, June 6, 2025. REUTERS/Francis Mascarenhas/File Photo/File Photo', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/GBu23PbaiPYUwhERXVqrzQ--~B/aD01NjY7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/a7af641ce1debea99bfe4a6bcb5ac407', 'width': 800, 'height': 566, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/.9ZXbKs4FsuAuv4cbMf.qw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/a7af641ce1debea99bfe4a6bcb5ac407', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indian-refiners-tap-russian-oil-120727690.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indian-refiners-tap-russian-oil-120727690.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '1169524b-e724-3232-85ca-f2aee817cec6', 'content': {'id': '1169524b-e724-3232-85ca-f2aee817cec6', 'contentType': 'STORY', 'title': 'Pine Labs wins digital payments contracts with Indian oil companies', 'description': '', 'summary': 'The company signed agreements with BPCL, HPCL and IOCL.', 'pubDate': '2026-02-24T10:11:39Z', 'displayTime': '2026-02-24T10:11:39Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/electronic_payments_938/28e9fc4540474eb463e58dca0d25d1c8', 'originalWidth': 1440, 'originalHeight': 810, 'caption': 'In the picture', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/V9xhMPaDNxvHlhhMGmo2mw--~B/aD04MTA7dz0xNDQwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/electronic_payments_938/28e9fc4540474eb463e58dca0d25d1c8', 'width': 1440, 'height': 810, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/E0FwOCCi1por66v5SVq3uA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/electronic_payments_938/28e9fc4540474eb463e58dca0d25d1c8', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Electronic Payments', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.electronicpaymentsinternational.com/news/pine-labs-contracts-indian-oil-companies/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/pine-labs-wins-digital-payments-101139178.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'cac87990-672e-39ff-9a4d-3fb498ae24de', 'content': {'id': 'cac87990-672e-39ff-9a4d-3fb498ae24de', 'contentType': 'STORY', 'title': 'Saudi Aramco begins Jafurah condensate exports with sales to US and India', 'description': '', 'summary': 'Aramco may export four to six cargoes per month from Yanbu port, each comprising around 500,000bbl.', 'pubDate': '2026-02-23T15:03:26Z', 'displayTime': '2026-02-23T15:03:26Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/offshore_technology_431/b425a0016a0b23ceb25dccefa6018b0c', 'originalWidth': 1440, 'originalHeight': 810, 'caption': 'Saudi Aramco reported it is cooperating with the Ministry of Energy to increase production under approved plans and requirements. Credit: Skorzewiak/Shutterstock.com.', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/svfVrTw.zaSnG0AI8_MRGg--~B/aD04MTA7dz0xNDQwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/offshore_technology_431/b425a0016a0b23ceb25dccefa6018b0c', 'width': 1440, 'height': 810, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/gJqYghDxmb63TDVp8ZRjQw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/offshore_technology_431/b425a0016a0b23ceb25dccefa6018b0c', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Offshore Technology', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.offshore-technology.com/news/saudi-aramco-begins-jafurah-condensate/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/saudi-aramco-begins-jafurah-condensate-150326479.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Energy', 'peers': {'RELIANCE.NS': {'1d_change_pct': -0.47, '5d_change_pct': 0.91, 'latest_close': 1407.8}, 'ONGC.NS': {'1d_change_pct': 0.02, '5d_change_pct': 1.92, 'latest_close': 265.45}, 'BPCL.NS': {'1d_change_pct': -5.73, '5d_change_pct': -11.03, 'latest_close': 271.3}, 'IOC.NS': {'1d_change_pct': -4.49, '5d_change_pct': -7.28, 'latest_close': 138.11}, 'HINDPETRO.NS': {'1d_change_pct': -5.1, '5d_change_pct': -9.79, 'latest_close': 319.15}}, 'sector_avg_1d_pct': -3.15, 'stock_vs_sector': -1.34, 'relative_strength': 'underperforming'}
+
+{'symbol': 'IOC.NS', 'checks_run': 3, 'flags_found': 1, 'flags': ['Price (138.11000061035156) is already BELOW S2 (140.91). Standard bearish setup may have played out. Consider S3 (138.23) as target.'], 'status': 'REVIEW_REQUIRED', 'warnings': {'price_below_s2': 'Price (138.11000061035156) is already BELOW S2 (140.91). Standard bearish setup may have played out. Consider S3 (138.23) as target.'}}
+
+
+
+{'symbol': 'IOC.NS', 'direction': 'Bearish', 'factors': {'technical_aligned': True, 'nifty_aligned': True, 'obv_confirming': False, 'news_clear': True, 'non_expiry_day': True}, 'score': 1, 'confidence': 'Low', 'macro_override': False, 'macro_override_reason': None, 'contradiction': True, 'contradiction_reason': 'CONTRADICTION: Negative R:R (-0.36) — target and stop are on the same side of entry.', 'tradeable': False, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — IOC.NS  
+Date: 2026-03-13 | As of: 10:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bearish  
+  Expected Move   : +-1.34% (30min scaled)  
+  Price Targets   : Entry=157.46, Target=140.91, Stop=145.85, R:R=-0.36  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 12.92 -> oversold  
+  MACD            : macd_trend=bearish | macd_crossover=none  
+  EMA Trend       : strongly_bearish  
+  ATR(14)         : 6.58 pts -> +-1.34% scaled to 30min  
+  ADX(14)         : 38.79 -> strong_trend  
+  OBV Trend       : rising  
+  VWAP            : Price 138.11 is below VWAP 144.83  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22512.65 [-2.6% change] | 5d trend: down  
+  BANKNIFTY       : 51437.75 [-3.72% change]  
+  India VIX       : 26.73 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: Yes  
+  - NIFTY trend aligned: Yes  
+  - OBV confirming: No  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 1/5 -> Low  
+
+FINAL REASONING: The stock is currently in a bearish trend with strong technical indicators supporting this direction. However, the risk-reward ratio is negative, making it untradeable. The overall market context is also bearish, but the low confidence score suggests caution in taking any positions.
+
+Now call: log_forecast(symbol="IOC.NS", date="2026-03-13", direction="Bearish", entry_price=157.46, target_price=140.91, stop_price=145.85, rr_ratio=-0.36, confidence="Low", score=1, tradeable=False)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'IOC.NS', 'date': '2026-03-13', 'direction': 'Bearish', 'entry_price': 157.46, 'target_price': 140.91, 'stop_price': 145.85, 'rr_ratio': -0.36, 'confidence': 'Low', 'score': 1, 'tradeable': False, 'factors': {}, 'logged_at': '2026-03-23T20:14:40.109305', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-12. Time: 11:00 IST.
+Target stock: INFY.NS. THIS IS A BACKTEST as of 2026-03-12 11:00 IST.
+Historical entry price at this time: 1273.4
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 11:00 IST on 2026-03-12.
+ENTRY PRICE = latest_close from get_intraday_data() = 1273.4
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="INFY.NS")
+STEP 2: get_stock_data(symbol="INFY.NS", start_date="2026-02-10", end_date="2026-03-12")
+        get_technical_indicators(symbol="INFY.NS")
+        get_support_resistance(symbol="INFY.NS")
+        get_intraday_data(symbol="INFY.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="INFY.NS")
+        get_company_news(symbol="INFY.NS")
+        get_sector_peers(symbol="INFY.NS")
+        get_data_sanity_check(symbol="INFY.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — INFY.NS
+Date: 2026-03-12 | As of: 11:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=1273.4, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="INFY.NS", date="2026-03-12", direction=<Direction>,
+  entry_price=1273.4, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 22971.25, 'prev_close': 22512.65, 'change_pct': 2.04, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 23057.3, 'session_low': 22624.2}, 'banknifty': {'latest_close': 52730.9, 'change_pct': 2.51, 'trend': 'down'}, 'india_vix': {'latest': 24.92, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.82, 'change_pct': -0.0802, 'rupee_signal': 'rupee_strengthening_fii_inflow_favorable'}, 'brent_crude_proxy': {'latest_usd': 90.16, 'change_pct': 2.3, 'data_anomaly': False, 'data_note': 'data_ok', 'signal': 'bearish_for_india_importers'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+                   Open         High          Low        Close    Volume  Dividends  Stock Splits
+Date                                                                                             
+2026-02-10  1500.000000  1515.900024  1491.000000  1497.800049   8657000        0.0           0.0
+2026-02-11  1501.199951  1505.900024  1469.000000  1471.900024   7934411        0.0           0.0
+2026-02-12  1428.900024  1435.699951  1380.500000  1386.000000  26048896        0.0           0.0
+2026-02-13  1293.900024  1377.300049  1281.500000  1369.099976  45785709        0.0           0.0
+2026-02-16  1373.699951  1376.000000  1338.300049  1365.599976  14621891        0.0           0.0
+2026-02-17  1370.000000  1431.000000  1367.000000  1391.199951  25347684        0.0           0.0
+2026-02-18  1390.900024  1401.000000  1345.300049  1373.699951  20241373        0.0           0.0
+2026-02-19  1385.000000  1402.000000  1363.199951  1370.500000  14574228        0.0           0.0
+2026-02-20  1359.199951  1365.000000  1338.199951  1353.199951  12633552        0.0           0.0
+2026-02-23  1352.000000  1352.000000  1318.000000  1327.500000  12887826        0.0           0.0
+2026-02-24  1301.000000  1303.599976  1264.099976  1275.500000  27839061        0.0           0.0
+2026-02-25  1286.199951  1323.599976  1286.199951  1290.099976  16669618        0.0           0.0
+2026-02-26  1305.500000  1314.000000  1286.300049  1289.099976  11493914        0.0           0.0
+2026-02-27  1326.300049  1335.000000  1294.199951  1300.099976  23141724        0.0           0.0
+2026-03-02  1291.000000  1298.800049  1273.000000  1288.900024   9700361        0.0           0.0
+2026-03-04  1292.000000  1317.000000  1292.000000  1307.400024  15154950        0.0           0.0
+2026-03-05  1320.000000  1320.000000  1290.099976  1305.800049  10362147        0.0           0.0
+2026-03-06  1303.000000  1327.199951  1303.000000  1308.400024   8724291        0.0           0.0
+2026-03-09  1290.000000  1318.000000  1282.500000  1315.000000  10068514        0.0           0.0
+2026-03-10  1320.000000  1321.000000  1284.099976  1295.599976   9600171        0.0           0.0
+2026-03-11  1288.000000  1299.500000  1271.300049  1276.300049   7868891        0.0           0.0
+
+{'latest_close': 1256.800048828125, '52w_high': 1728.0, '52w_low': 1215.1, 'pct_from_52w_high': -27.27, 'rsi_14': 43.05, 'rsi_signal': 'neutral', 'stoch_k': 37.2, 'stoch_d': 26.12, 'stoch_signal': 'neutral', 'macd': -52.1, 'macd_signal_line': -59.1, 'macd_histogram': 7.0014, 'macd_prev_histogram': 5.5769, 'macd_crossover': 'none', 'macd_trend': 'bullish', 'macd_signal': 'bullish', 'ema_trend': 'strongly_bearish', 'ema_9': 1258.58, 'ema_21': 1299.01, 'ema_50': 1392.3, 'ema_200': 1476.36, 'adx_14': 26.34, 'adx_signal': 'strong_trend', 'atr_14': 34.49, 'expected_intraday_range_pct': 2.74, 'bb_upper': 1336.44, 'bb_lower': 1221.27, 'bb_width_pct': 9.01, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 13162867, 'latest_vol': 12420293, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 1261.0999755859375, 'low': 1227.4000244140625, 'close': 1256.800048828125, 'open': 1238.199951171875}, 'today_open': 1269.0, 'latest_close': 1288.300048828125, 'classic_pivots': {'PP': 1248.43, 'R1': 1269.47, 'R2': 1282.13, 'R3': 1303.17, 'S1': 1235.77, 'S2': 1214.73, 'S3': 1202.07}, 'camarilla_pivots': {'H4': 1275.34, 'H3': 1266.07, 'L3': 1247.53, 'L4': 1238.27}, 'nearest_support': 1235.77, 'nearest_resistance': 1303.17, 'bearish_setup': {'entry': 1288.300048828125, 'target': 1214.73, 'stop': 1266.07, 'reward_pts': 73.57, 'risk_pts': -22.23, 'rr_ratio': -3.31, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 1288.300048828125, 'target': 1282.13, 'stop': 1247.53, 'reward_pts': -6.17, 'risk_pts': 40.77, 'rr_ratio': -0.15, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': 0.97}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 1288.3, 'latest_vwap': 1256.86, 'price_vs_vwap': 'above', 'session_high': 1296.9, 'session_low': 1215.2, 'avg_volume_per_candle': 568159, 'last_20_candles': '                       Open    High     Low   Close   Volume     VWAP\nDatetime                                                             \n2026-03-24 09:30:00  1258.7  1263.2  1256.2  1257.9   627630  1252.82\n2026-03-24 09:45:00  1258.2  1264.9  1255.8  1263.4   233313  1252.85\n2026-03-24 10:00:00  1263.4  1265.8  1262.0  1265.1   538865  1252.95\n2026-03-24 10:15:00  1265.0  1273.2  1265.0  1272.9   408313  1253.07\n2026-03-24 10:30:00  1272.9  1272.9  1266.6  1269.5   679984  1253.25\n2026-03-24 10:45:00  1270.0  1272.5  1269.0  1271.2   351737  1253.35\n2026-03-24 11:00:00  1271.5  1277.0  1271.0  1275.7   335240  1253.46\n2026-03-24 11:15:00  1275.6  1282.8  1275.3  1282.3   495815  1253.67\n2026-03-24 11:30:00  1282.4  1287.1  1280.4  1283.3   378325  1253.85\n2026-03-24 11:45:00  1283.5  1293.5  1283.0  1292.4   428166  1254.09\n2026-03-24 12:00:00  1292.4  1295.0  1289.7  1290.7  1043583  1254.70\n2026-03-24 12:15:00  1290.7  1296.0  1288.0  1291.6   355978  1254.90\n2026-03-24 12:30:00  1291.5  1293.9  1286.8  1288.3   372032  1255.10\n2026-03-24 12:45:00  1288.3  1292.4  1288.0  1292.1   298937  1255.26\n2026-03-24 13:00:00  1292.1  1292.1  1286.8  1290.0   427730  1255.48\n2026-03-24 13:15:00  1289.8  1294.9  1288.6  1293.7   480400  1255.75\n2026-03-24 13:30:00  1293.6  1296.7  1292.7  1295.9   547684  1256.07\n2026-03-24 13:45:00  1295.9  1296.9  1294.4  1295.1   831116  1256.55\n2026-03-24 14:00:00  1295.3  1295.5  1290.0  1290.4   443462  1256.78\n2026-03-24 14:15:00  1290.3  1292.3  1288.3  1288.3   168797  1256.86'}
+
+{'company': 'INFOSYS LIMITED', 'sector': 'Technology', 'industry': 'Information Technology Services', 'market_cap_cr': 521203.0, 'pe_ratio': 17.822058, 'pb_ratio': 6.0234604, 'ev_ebitda': 1160.293, 'beta': 0.184, 'beta_signal': 'low_volatility_defensive', '52w_high': 1728.0, '52w_low': 1215.1, '200d_avg': 1515.4435, '50d_avg': 1446.522, 'float_shares': 3503764163, 'shares_outstanding': 4046607287, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 3.58, 'earnings_date': '1776333600', 'recommendation': 'buy', 'analyst_count': 41, 'target_price': 1699.7561}
+
+[{'id': '39aebb47-099f-310e-a789-ebd99de8fbc6', 'content': {'id': '39aebb47-099f-310e-a789-ebd99de8fbc6', 'contentType': 'STORY', 'title': 'Asian Equities Traded in the US as American Depositary Receipts Surge in Monday Trading', 'description': '', 'summary': 'Asian equities traded in the US as American depositary receipts opened sharply higher Monday morning', 'pubDate': '2026-03-23T14:48:14Z', 'displayTime': '2026-03-23T14:48:14Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-144814414.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-144814414.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '118d79a3-9af8-3ff4-b62a-05ae7115c97a', 'content': {'id': '118d79a3-9af8-3ff4-b62a-05ae7115c97a', 'contentType': 'STORY', 'title': 'Asian Equities Traded in the US as American Depositary Receipts Fall Sharply in Friday Trading; Down 3.5% for Week', 'description': '', 'summary': 'Asian equities traded in the US as American depositary receipts were falling sharply lower Friday mo', 'pubDate': '2026-03-20T14:57:24Z', 'displayTime': '2026-03-20T14:57:24Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-145724031.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-145724031.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '2ad07818-4c16-3414-83ec-9a86eb587529', 'content': {'id': '2ad07818-4c16-3414-83ec-9a86eb587529', 'contentType': 'STORY', 'title': 'Asian Equities Traded in the US as American Depositary Receipts Tumble in Thursday Trading', 'description': '', 'summary': 'Asian equities traded in the US as American depositary receipts fell sharply Thursday morning, dropp', 'pubDate': '2026-03-19T14:52:48Z', 'displayTime': '2026-03-19T14:52:48Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-145248224.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-145248224.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'b4902c48-4885-3c81-bc4a-6734af481d19', 'content': {'id': 'b4902c48-4885-3c81-bc4a-6734af481d19', 'contentType': 'STORY', 'title': 'Infosys (INFY) Collaborates with Incora to Modernize Global Supply Chain with AI', 'description': '', 'summary': 'Infosys Limited (NYSE:INFY) is one of the most buzzing stocks to buy with the highest upside potential On March 10, Infosys and Incora entered into a multi-year strategic collaboration to integrate AI throughout Incora’s global supply chain operations. The partnership will deploy AI-enabled capabilities across more than 60 countries to modernize Incora’s existing multi-ERP landscape. […]', 'pubDate': '2026-03-18T20:26:53Z', 'displayTime': '2026-03-18T20:26:53Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/insidermonkey.com/2e7aee207d77348b96cf2d57d2896fb1', 'originalWidth': 400, 'originalHeight': 600, 'caption': 'Infosys (INFY) Collaborates with Incora to Modernize Global Supply Chain with AI', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/WkeCFXndtcWnSBr7NaHETQ--~B/aD02MDA7dz00MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/insidermonkey.com/2e7aee207d77348b96cf2d57d2896fb1', 'width': 400, 'height': 600, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/uBdQeJoiOhYYoNutXJS5Nw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/insidermonkey.com/2e7aee207d77348b96cf2d57d2896fb1', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Insider Monkey', 'url': 'http://www.insidermonkey.com'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/infosys-infy-collaborates-incora-modernize-202653239.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/infosys-infy-collaborates-incora-modernize-202653239.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '6b788fc6-4568-3e8e-961f-d476a448d945', 'content': {'id': '6b788fc6-4568-3e8e-961f-d476a448d945', 'contentType': 'STORY', 'title': 'Asian Equities Traded in the US as American Depositary Receipts Edge Lower in Wednesday Trading', 'description': '', 'summary': 'Asian equities traded in the US as American depositary receipts were tracking marginally lower Wedne', 'pubDate': '2026-03-18T14:40:01Z', 'displayTime': '2026-03-18T14:40:01Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-american-144001210.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-american-144001210.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'be188a1c-a5c9-3d2e-94cb-1ed375a9eb22', 'content': {'id': 'be188a1c-a5c9-3d2e-94cb-1ed375a9eb22', 'contentType': 'STORY', 'title': 'Bernstein: Human oversight remains critical despite rapid AI coding integration', 'description': '', 'summary': 'Investing.com -- Generative AI is not yet driving systematic job losses in the technology sector, according to a report from Bernstein, despite the rapid integration of Large Language Models (LLMs) into professional coding workflows. Following 50 hours of intensive interviews with tech professionals globally, analysts found that AI is reshaping role boundaries, but human capital remains "surprisingly resilient," debunking popular narratives of an immediate white-collar "apocalypse."', 'pubDate': '2026-03-14T05:08:15Z', 'displayTime': '2026-03-14T05:08:15Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'Investing.com', 'url': 'https://www.investing.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/bernstein-human-oversight-remains-critical-050815868.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/bernstein-human-oversight-remains-critical-050815868.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '1f0d7e8d-0afb-37bb-b677-684d8c8a944e', 'content': {'id': '1f0d7e8d-0afb-37bb-b677-684d8c8a944e', 'contentType': 'STORY', 'title': 'Asian Equities Traded in the US as American Depositary Receipts Rise in Friday Trading', 'description': '', 'summary': 'Asian equities traded in the US as American depositary receipts were tracking higher Friday morning,', 'pubDate': '2026-03-13T14:55:46Z', 'displayTime': '2026-03-13T14:55:46Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'MT Newswires', 'url': 'https://www.mtnewswires.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-american-145546478.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/asian-equities-traded-us-american-145546478.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': True, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '87d84521-af82-3d95-8110-b8b7edc55f01', 'content': {'id': '87d84521-af82-3d95-8110-b8b7edc55f01', 'contentType': 'STORY', 'title': 'How The Infosys (NSEI:INFY) Story Is Shifting As AI Risks Meet Cautious Optimism', 'description': '', 'summary': 'Infosys has seen its modeled fair value trimmed from ₹1,770.53 to ₹1,724.32, a reduction of about 2.6% in the price target embedded in the latest assumptions. This shift lines up with more cautious Street commentary, where some analysts are tempering expectations around AI related business mix changes, while others still see room for a more balanced risk or reward setup over the medium term. As you read on, you will see how these differing views shape the evolving Infosys narrative and what...', 'pubDate': '2026-03-13T03:11:18Z', 'displayTime': '2026-03-13T03:11:18Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/simply_wall_st__316/d2053148ef16c066918b52f43e6add07', 'originalWidth': 1194, 'originalHeight': 432, 'caption': '', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/wbGrslE2gQlJp6xVzsP9bw--~B/aD00MzI7dz0xMTk0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/simply_wall_st__316/d2053148ef16c066918b52f43e6add07', 'width': 1194, 'height': 432, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/KDOel9DcaEzrZCLpV1x5TQ--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/simply_wall_st__316/d2053148ef16c066918b52f43e6add07', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Simply Wall St.', 'url': 'https://simplywall.st/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/infosys-nsei-infy-story-shifting-031118922.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/infosys-nsei-infy-story-shifting-031118922.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'e2606544-1c60-3604-b72d-674023e9f571', 'content': {'id': 'e2606544-1c60-3604-b72d-674023e9f571', 'contentType': 'STORY', 'title': 'Intel Weighs New AI Edge Wins Against 18A And Security Risks', 'description': '', 'summary': "Intel launched its Core Series 2 processors for industrial edge AI, targeting mission-critical workloads at the network edge. The company announced new and expanded AI partnerships with Infosys, Ericsson, NVIDIA and Corvex, covering enterprise AI, 6G networks and AI security. Regulators are increasing scrutiny of Intel's 18A node capacity and China linked equipment, keeping manufacturing and national security risks in focus. Intel (NasdaqGS: INTC) is trying to anchor itself more firmly in...", 'pubDate': '2026-03-12T01:13:56Z', 'displayTime': '2026-03-12T01:13:56Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/simply_wall_st__316/c6a7ec75e35ec3575683f5d897862705', 'originalWidth': 1194, 'originalHeight': 432, 'caption': '', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/dsDcVK8k0xOUs1ivM6h0XA--~B/aD00MzI7dz0xMTk0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/simply_wall_st__316/c6a7ec75e35ec3575683f5d897862705', 'width': 1194, 'height': 432, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/fmz3iTitiY.RvyYOwSxvfg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/simply_wall_st__316/c6a7ec75e35ec3575683f5d897862705', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Simply Wall St.', 'url': 'https://simplywall.st/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/intel-weighs-ai-edge-wins-011356718.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/intel-weighs-ai-edge-wins-011356718.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '9f06fa36-70a5-3b75-b19f-5773628b88b9', 'content': {'id': '9f06fa36-70a5-3b75-b19f-5773628b88b9', 'contentType': 'STORY', 'title': 'Intel Gains on AI Partnership With Infosys', 'description': '', 'summary': 'Investors react positively to collaboration aimed at enterprise AI deployment.', 'pubDate': '2026-03-10T18:46:08Z', 'displayTime': '2026-03-10T18:46:08Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/intel-gains-ai-partnership-infosys-184608886.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/intel-gains-ai-partnership-infosys-184608886.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Technology', 'peers': {'TCS.NS': {'1d_change_pct': 1.26, '5d_change_pct': 0.92, 'latest_close': 2413.8}, 'INFY.NS': {'1d_change_pct': 2.48, '5d_change_pct': 4.47, 'latest_close': 1288.0}, 'WIPRO.NS': {'1d_change_pct': 1.07, '5d_change_pct': -0.93, 'latest_close': 189.54}, 'HCLTECH.NS': {'1d_change_pct': 1.44, '5d_change_pct': 4.31, 'latest_close': 1378.1}, 'TECHM.NS': {'1d_change_pct': 3.06, '5d_change_pct': 6.3, 'latest_close': 1426.4}}, 'sector_avg_1d_pct': 1.86, 'stock_vs_sector': 0.62, 'relative_strength': 'outperforming'}
+
+{'symbol': 'INFY.NS', 'checks_run': 3, 'flags_found': 0, 'flags': [], 'status': 'ALL_CLEAR', 'warnings': {}}
+
+
+
+{'symbol': 'INFY.NS', 'direction': 'Bullish', 'factors': {'technical_aligned': False, 'nifty_aligned': False, 'obv_confirming': True, 'news_clear': True, 'non_expiry_day': True}, 'score': 1, 'confidence': 'Low', 'macro_override': False, 'macro_override_reason': None, 'contradiction': True, 'contradiction_reason': 'CONTRADICTION: Negative R:R (-0.15) — target and stop are on the same side of entry.', 'tradeable': False, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — INFY.NS  
+Date: 2026-03-12 | As of: 11:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bullish  
+  Expected Move   : +-0.77% (30min scaled)  
+  Price Targets   : Entry=1273.4, Target=1282.13, Stop=1247.53, R:R=-0.15  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 43.05 -> neutral  
+  MACD            : macd_trend=bullish | macd_crossover=none  
+  EMA Trend       : strongly_bearish  
+  ATR(14)         : 34.49 pts -> +-0.77% scaled to 30min  
+  ADX(14)         : 26.34 -> strong_trend  
+  OBV Trend       : rising  
+  VWAP            : Price 1273.4 is above VWAP 1256.86  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22971.25 [2.04% change] | 5d trend: down  
+  BANKNIFTY       : 52730.9 [2.51% change]  
+  India VIX       : 24.92 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: No  
+  - OBV confirming: Yes  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 1/5 -> Low  
+
+FINAL REASONING: The prediction indicates a bullish direction for INFY.NS in the next 30 minutes, but the confidence is low due to a negative risk-reward ratio. The technical indicators show a contradiction with the bullish MACD trend against a strongly bearish EMA trend. The overall market context is mixed, with NIFTY showing a positive change but in a downtrend. Caution is advised as the trade is not considered tradeable.  
+
+Now call: log_forecast(symbol="INFY.NS", date="2026-03-12", direction="Bullish", entry_price=1273.4, target_price=1282.13, stop_price=1247.53, rr_ratio=-0.15, confidence="Low", score=1, tradeable=False)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'INFY.NS', 'date': '2026-03-12', 'direction': 'Bullish', 'entry_price': 1273.4, 'target_price': 1282.13, 'stop_price': 1247.53, 'rr_ratio': -0.15, 'confidence': 'Low', 'score': 1, 'tradeable': False, 'factors': {}, 'logged_at': '2026-03-24T08:51:51.862870', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

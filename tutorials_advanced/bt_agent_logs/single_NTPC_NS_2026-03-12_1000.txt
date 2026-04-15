@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-12. Time: 10:00 IST.
+Target stock: NTPC.NS. THIS IS A BACKTEST as of 2026-03-12 10:00 IST.
+Historical entry price at this time: 383.25
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 10:00 IST on 2026-03-12.
+ENTRY PRICE = latest_close from get_intraday_data() = 383.25
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="NTPC.NS")
+STEP 2: get_stock_data(symbol="NTPC.NS", start_date="2026-02-10", end_date="2026-03-12")
+        get_technical_indicators(symbol="NTPC.NS")
+        get_support_resistance(symbol="NTPC.NS")
+        get_intraday_data(symbol="NTPC.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="NTPC.NS")
+        get_company_news(symbol="NTPC.NS")
+        get_sector_peers(symbol="NTPC.NS")
+        get_data_sanity_check(symbol="NTPC.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — NTPC.NS
+Date: 2026-03-12 | As of: 10:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=383.25, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="NTPC.NS", date="2026-03-12", direction=<Direction>,
+  entry_price=383.25, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 22512.65, 'prev_close': 23114.5, 'change_pct': -2.6, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 22851.7, 'session_low': 22471.25}, 'banknifty': {'latest_close': 51437.75, 'change_pct': -3.72, 'trend': 'down'}, 'india_vix': {'latest': 26.73, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.162, 'change_pct': 0.0856, 'rupee_signal': 'rupee_weakening_fii_outflow_risk'}, 'brent_crude_proxy': {'latest_usd': 88.26, 'change_pct': -10.23, 'data_anomaly': True, 'data_note': 'WARNING: change_pct exceeds 5% — likely a yfinance data anomaly (futures roll-over). Do NOT use this value in analysis.', 'signal': 'data_anomaly_ignore'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+                  Open        High         Low       Close    Volume  Dividends  Stock Splits
+Date                                                                                         
+2026-02-10  361.899994  368.149994  361.250000  366.899994   8319282        0.0           0.0
+2026-02-11  369.000000  369.000000  366.000000  368.450012   5782448        0.0           0.0
+2026-02-12  370.000000  372.000000  366.850006  368.250000   6763353        0.0           0.0
+2026-02-13  367.549988  368.000000  362.399994  363.000000   7111972        0.0           0.0
+2026-02-16  362.600006  369.649994  362.500000  369.100006   6292850        0.0           0.0
+2026-02-17  368.750000  369.500000  366.049988  368.399994   4442793        0.0           0.0
+2026-02-18  368.450012  370.700012  367.399994  368.399994   4871319        0.0           0.0
+2026-02-19  367.000000  370.899994  362.200012  363.200012   5375352        0.0           0.0
+2026-02-20  362.799988  373.649994  362.700012  372.950012  16736731        0.0           0.0
+2026-02-23  374.000000  376.500000  372.149994  375.450012  16135451        0.0           0.0
+2026-02-24  374.950012  385.000000  373.549988  382.750000  20774629        0.0           0.0
+2026-02-25  382.750000  388.549988  382.700012  384.899994  12750016        0.0           0.0
+2026-02-26  385.000000  385.850006  378.399994  381.899994  10721570        0.0           0.0
+2026-02-27  381.000000  385.200012  380.149994  381.899994  11548959        0.0           0.0
+2026-03-02  365.000000  378.950012  365.000000  377.549988  14732253        0.0           0.0
+2026-03-04  370.750000  373.850006  364.100006  365.799988  11433169        0.0           0.0
+2026-03-05  366.950012  379.899994  366.600006  378.049988  16158714        0.0           0.0
+2026-03-06  377.000000  385.549988  374.649994  380.600006  14940896        0.0           0.0
+2026-03-09  373.000000  379.000000  371.399994  376.250000  11286578        0.0           0.0
+2026-03-10  385.000000  385.450012  374.850006  377.299988  10875834        0.0           0.0
+2026-03-11  377.500000  383.899994  376.450012  379.899994   9963701        0.0           0.0
+
+{'latest_close': 372.3999938964844, '52w_high': 394.5, '52w_low': 313.19, 'pct_from_52w_high': -5.6, 'rsi_14': 46.74, 'rsi_signal': 'neutral', 'stoch_k': 27.3, 'stoch_d': 38.49, 'stoch_signal': 'neutral', 'macd': 3.8, 'macd_signal_line': 5.61, 'macd_histogram': -1.8096, 'macd_prev_histogram': -1.35, 'macd_crossover': 'none', 'macd_trend': 'bearish', 'macd_signal': 'bearish', 'ema_trend': 'bullish', 'ema_9': 378.36, 'ema_21': 376.35, 'ema_50': 365.32, 'ema_200': 341.32, 'adx_14': 10.96, 'adx_signal': 'weak_trend', 'atr_14': 10.82, 'expected_intraday_range_pct': 2.91, 'bb_upper': 390.02, 'bb_lower': 368.88, 'bb_width_pct': 5.57, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'falling', 'avg_vol_20d': 14705868, 'latest_vol': 13146963, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 383.29998779296875, 'low': 375.5, 'close': 380.95001220703125, 'open': 375.8500061035156}, 'today_open': 377.1000061035156, 'latest_close': 372.3999938964844, 'classic_pivots': {'PP': 379.92, 'R1': 384.33, 'R2': 387.72, 'R3': 392.13, 'S1': 376.53, 'S2': 372.12, 'S3': 368.73}, 'camarilla_pivots': {'H4': 385.24, 'H3': 383.1, 'L3': 378.81, 'L4': 376.66}, 'nearest_support': 372.12, 'nearest_resistance': 384.33, 'bearish_setup': {'entry': 372.3999938964844, 'target': 372.12, 'stop': 383.1, 'reward_pts': 0.28, 'risk_pts': 10.7, 'rr_ratio': 0.03, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 372.3999938964844, 'target': 387.72, 'stop': 376.66, 'reward_pts': 15.32, 'risk_pts': -4.26, 'rr_ratio': -3.6, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': -1.01}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 371.8, 'latest_vwap': 378.66, 'price_vs_vwap': 'below', 'session_high': 386.35, 'session_low': 369.5, 'avg_volume_per_candle': 505191, 'last_20_candles': '                       Open    High     Low   Close   Volume    VWAP\nDatetime                                                            \n2026-03-23 10:30:00  370.65  373.00  370.55  372.10   317500  379.94\n2026-03-23 10:45:00  372.20  372.50  371.45  371.50   285164  379.89\n2026-03-23 11:00:00  371.40  372.20  371.25  372.00   426051  379.83\n2026-03-23 11:15:00  372.00  372.00  370.70  371.25   219293  379.79\n2026-03-23 11:30:00  371.25  371.80  370.75  370.90   163626  379.77\n2026-03-23 11:45:00  370.90  372.00  370.70  371.05   195015  379.73\n2026-03-23 12:00:00  371.20  371.30  369.50  370.10   197067  379.70\n2026-03-23 12:15:00  370.05  371.00  369.70  370.55   281274  379.65\n2026-03-23 12:30:00  370.45  371.75  370.20  371.75   307546  379.60\n2026-03-23 12:45:00  371.75  371.85  370.70  371.05   333549  379.55\n2026-03-23 13:00:00  370.95  371.95  370.75  371.70   462661  379.48\n2026-03-23 13:15:00  371.70  372.00  370.70  370.85   329740  379.44\n2026-03-23 13:30:00  370.85  372.60  370.80  372.30   389472  379.38\n2026-03-23 13:45:00  372.15  374.65  372.10  373.65   859058  379.29\n2026-03-23 14:00:00  373.55  374.65  372.60  373.15   913684  379.20\n2026-03-23 14:15:00  373.35  374.10  372.85  373.05   719249  379.13\n2026-03-23 14:30:00  373.10  373.60  371.80  373.30  1412015  378.98\n2026-03-23 14:45:00  373.50  375.10  372.85  374.70  1129784  378.89\n2026-03-23 15:00:00  374.70  374.75  372.10  372.40  1206882  378.78\n2026-03-23 15:15:00  372.20  372.45  370.50  371.80  1084590  378.66'}
+
+{'company': 'NTPC LTD', 'sector': 'Utilities', 'industry': 'Utilities - Regulated Electric', 'market_cap_cr': 361104.0, 'pe_ratio': 20.620155, 'pb_ratio': 1.8787112, 'ev_ebitda': 11.319, 'beta': 0.283, 'beta_signal': 'low_volatility_defensive', '52w_high': 394.5, '52w_low': 315.55, '200d_avg': 341.731, '50d_avg': 364.873, 'float_shares': 4340704002, 'shares_outstanding': 9696666134, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 2.98, 'earnings_date': '1769767200', 'recommendation': 'strong_buy', 'analyst_count': 26, 'target_price': 424.46155}
+
+[{'id': 'de693ab1-54ba-3011-bad0-770d92b9df8a', 'content': {'id': 'de693ab1-54ba-3011-bad0-770d92b9df8a', 'contentType': 'STORY', 'title': 'NTPC Ltd (BOM:532555) Q3 2026 Earnings Call Highlights: Profit Growth Amid Renewable Expansion', 'description': '', 'summary': 'NTPC Ltd (BOM:532555) reports a 5.85% profit increase in Q3 FY26, driven by renewable capacity additions and strategic financial maneuvers.', 'pubDate': '2026-01-30T19:00:59Z', 'displayTime': '2026-01-30T19:00:59Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/ntpc-ltd-bom-532555-q3-190059202.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/ntpc-ltd-bom-532555-q3-190059202.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '1bafdfb5-78ac-3c5b-ba11-0284b44af59e', 'content': {'id': '1bafdfb5-78ac-3c5b-ba11-0284b44af59e', 'contentType': 'STORY', 'title': "India's NTPC posts higher Q3 profit on lower fuel costs", 'description': '', 'summary': "Jan 30 (Reuters) - National Power Thermal Corp (NTPC), India's top power producer, reported a rise in third-quarter profit on Friday, driven mainly by lower fuel costs.", 'pubDate': '2026-01-30T13:14:58Z', 'displayTime': '2026-01-30T13:14:58Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/414aaa586f75f02e6530ac50fca3cea9', 'originalWidth': 800, 'originalHeight': 533, 'caption': 'A woman cycles past the NTPC (National Thermal Power Corporation) power plant in Solapur, India, March 3, 2025. REUTERS/Francis Mascarenhas', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/DFikNbphIlK66WIascH1pQ--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/414aaa586f75f02e6530ac50fca3cea9', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/fgbomv36TWip9xRbgO9hNw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/414aaa586f75f02e6530ac50fca3cea9', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-ntpc-posts-higher-q3-131458308.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-ntpc-posts-higher-q3-131458308.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'd3fe9c36-e97b-36b1-87d8-b6da8f873c70', 'content': {'id': 'd3fe9c36-e97b-36b1-87d8-b6da8f873c70', 'contentType': 'STORY', 'title': "Explainer-What are the changes to India's proposed civil nuclear law?", 'description': '', 'summary': 'By Sarita Chaganti Singh NEW DELHI, Dec 16 (Reuters) - India has proposed a law that ends six decades of state monopoly over nuclear power, allowing private companies and even individuals to build and', 'pubDate': '2025-12-16T12:08:03Z', 'displayTime': '2025-12-16T12:08:03Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/explainer-changes-indias-proposed-civil-120803785.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/explainer-changes-indias-proposed-civil-120803785.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'b6b78301-d220-3c19-a519-e8d4cca2b8c0', 'content': {'id': 'b6b78301-d220-3c19-a519-e8d4cca2b8c0', 'contentType': 'STORY', 'title': "India's power giant NTPC plans to enter coal gasification business, source says", 'description': '', 'summary': 'By Sethuraman N R NEW DELHI (Reuters) -Indian coal power giant NTPC is looking to enter the coal gasification business with a plan to start producing 5-10 million tonnes per annum of synthetic gas', 'pubDate': '2025-11-12T11:42:31Z', 'displayTime': '2025-11-12T11:42:31Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/108329d737eb38ce74d2e4e0ef37466d', 'originalWidth': 800, 'originalHeight': 600, 'caption': 'FILE PHOTO: A drone view of solar panels and the NTPC (National Thermal Power Corporation) power plant in Solapur, India, March 2, 2025. REUTERS/Francis Mascarenhas./File Photo', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/vClSAPgJtgCeQvVWbKCyhA--~B/aD02MDA7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/108329d737eb38ce74d2e4e0ef37466d', 'width': 800, 'height': 600, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/.4zduoi8XTo_jVO0.Uie_A--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/108329d737eb38ce74d2e4e0ef37466d', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-power-giant-ntpc-plans-114231922.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-power-giant-ntpc-plans-114231922.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '85024159-20a5-3b03-b2b7-208a05e191ee', 'content': {'id': '85024159-20a5-3b03-b2b7-208a05e191ee', 'contentType': 'STORY', 'title': "India's NTPC posts quarterly profit rise on lower expenses", 'description': '', 'summary': '(Reuters) -Top Indian power producer NTPC reported a rise in its second-quarter adjusted profit on Thursday, on lower expenses due to a drop in fuel costs.', 'pubDate': '2025-10-30T15:00:32Z', 'displayTime': '2025-10-30T15:00:32Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/eb14b82a8bfd35857c2737dceedc2312', 'originalWidth': 800, 'originalHeight': 533, 'caption': 'The logo of the NTPC (National Thermal Power Corporation) power plant is seen inside the facility in Solapur, India, March 2, 2025. REUTERS/Francis Mascarenhas', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/2lG0PXggNDy6puWr01A2rw--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/eb14b82a8bfd35857c2737dceedc2312', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/eEGEvWHw.kT2PJALL150zQ--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/eb14b82a8bfd35857c2737dceedc2312', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-ntpc-posts-quarterly-profit-150032232.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-ntpc-posts-quarterly-profit-150032232.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '4b9ac9be-31c7-3512-a6d4-9c10a1cb27e9', 'content': {'id': '4b9ac9be-31c7-3512-a6d4-9c10a1cb27e9', 'contentType': 'STORY', 'title': 'Yield decline spurs $880 million bond sale by 3 Indian state-run firms, bankers say', 'description': '', 'summary': 'By Dharamraj Dhutia and Khushi Malhotra MUMBAI (Reuters) -A decline in corporate bond yields in secondary market after a dovish monetary policy, encouraged three state-run firms to raise about 77.50', 'pubDate': '2025-10-17T03:23:40Z', 'displayTime': '2025-10-17T03:23:40Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/2d1da00574d51c237562a73d1ad4a143', 'originalWidth': 800, 'originalHeight': 533, 'caption': 'A salesman wears a t-shirt with a logo of Bharat Petroleum, in Gurugram, India, June 4, 2025. REUTERS/Priyanshu Singh', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/b0hB0_XM4_hYNF0W57tIcw--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/2d1da00574d51c237562a73d1ad4a143', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/UT9XhPhCwRq47mxa_TdFYw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/2d1da00574d51c237562a73d1ad4a143', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/yield-decline-spurs-880-million-032340197.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/yield-decline-spurs-880-million-032340197.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'd1d5d998-9d9a-39c1-a601-120e29a1b69e', 'content': {'id': 'd1d5d998-9d9a-39c1-a601-120e29a1b69e', 'contentType': 'STORY', 'title': 'Toshiba JSW Power to provide monitoring platform for India’s NTPC', 'description': '', 'summary': 'The deployment is NTPC’s debut implementation of a centralised plant monitoring solution.', 'pubDate': '2025-10-10T08:53:17Z', 'displayTime': '2025-10-10T08:53:17Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/power_technology_866/997140d00e68d6cb2069c18446886e42', 'originalWidth': 1440, 'originalHeight': 810, 'caption': 'The system will incorporate the EtaPRO software. Credit: Tada Images/Shutterstock.com.', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/iD.BDLqTrMRy8YSx44uDtg--~B/aD04MTA7dz0xNDQwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/power_technology_866/997140d00e68d6cb2069c18446886e42', 'width': 1440, 'height': 810, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/m_hDJwqezVsHxDCTqq2Mgw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/power_technology_866/997140d00e68d6cb2069c18446886e42', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Power Technology', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.power-technology.com/news/toshiba-jsw-power-monitoring-platform-ntpc/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/toshiba-jsw-power-monitoring-platform-085317327.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'a8f9f756-322b-39de-8a1b-1cc30000cc09', 'content': {'id': 'a8f9f756-322b-39de-8a1b-1cc30000cc09', 'contentType': 'STORY', 'title': 'Tata Power signs agreement with Suzlon for wind turbines supply', 'description': '', 'summary': 'The turbines will be distributed across the states of Karnataka, Maharashtra, and Tamil Nadu.', 'pubDate': '2025-09-17T09:30:17Z', 'displayTime': '2025-09-17T09:30:17Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/power_technology_866/c89b7102d517d2e20cd1c9e99147cd2f', 'originalWidth': 1440, 'originalHeight': 810, 'caption': 'The turbines are scheduled for completion over the next few years. Credit: GheorgheGarcu/Shutterstock.com.', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/qIngLu3Gw167eBQisarOwQ--~B/aD04MTA7dz0xNDQwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/power_technology_866/c89b7102d517d2e20cd1c9e99147cd2f', 'width': 1440, 'height': 810, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/B0_Rumy5RiGYqzqNaXuNmA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/power_technology_866/c89b7102d517d2e20cd1c9e99147cd2f', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Power Technology', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.power-technology.com/news/tata-power-signs-agreement-suzlon/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/tata-power-signs-agreement-suzlon-093017374.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '4d7edf04-d740-3958-a020-531242cce926', 'content': {'id': '4d7edf04-d740-3958-a020-531242cce926', 'contentType': 'STORY', 'title': 'Inox Clean Energy acquires 640MW hybrid projects from Evergreen Group', 'description': '', 'summary': 'The projects will be connected via CTUIL 400kV/220kV substations in the region.', 'pubDate': '2025-09-12T10:07:53Z', 'displayTime': '2025-09-12T10:07:53Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/power_technology_866/4791bb83effe2b53dbb8a81a84754ea4', 'originalWidth': 1440, 'originalHeight': 810, 'caption': 'The projects comprise both wind and solar. Credit: Soonthorn Wongsaita/Shutterstock.com.', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/GXihzi75pHoZl_wwbSc6gw--~B/aD04MTA7dz0xNDQwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/power_technology_866/4791bb83effe2b53dbb8a81a84754ea4', 'width': 1440, 'height': 810, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/sVNhxM9HA.prMVp3F6ItWw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/power_technology_866/4791bb83effe2b53dbb8a81a84754ea4', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Power Technology', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.power-technology.com/news/inox-clean-energy-evergreen-group/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/inox-clean-energy-acquires-640mw-100753569.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '8be5c11a-c76f-37cf-978e-291d5208fe6a', 'content': {'id': '8be5c11a-c76f-37cf-978e-291d5208fe6a', 'contentType': 'STORY', 'title': 'India revokes grid access for 17 GW of clean energy projects, says source', 'description': '', 'summary': 'NEW DELHI (Reuters) -India has cancelled grid access for nearly 17 gigawatts (GW) of delayed clean energy projects to prioritise connections for those that are operational or nearing completion, according to a source familiar with the matter and official documents reviewed by Reuters.  The state-run Central Transmission Utility of India Ltd (CTUIL) informed companies including Adani Green Energy, ReNew Power, NTPC, Avaada Group, JSW Energy, and ACME Solar about the cancellations, the documents show.  The affected projects are located in renewable-rich states such as Rajasthan, western Gujarat, and Madhya Pradesh in central India, according to a document from the federal agency overseeing inter-state transmission access.', 'pubDate': '2025-09-08T08:02:04Z', 'displayTime': '2025-09-08T08:02:04Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters.com/5f6c50d1e6e06ac863ded626d03ada63', 'originalWidth': 800, 'originalHeight': 533, 'caption': 'FILE PHOTO: A view of power-generating windmill turbines at a wind park of Adani Green Energy at Ahmedabad-Narayan Sarovar state highway near Nakhatrana village in the western state of Gujarat, India, November 29, 2024. REUTERS/Amit Dave/FIle Photo', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/ba1Ka04B4xO2V5NfAjwE9g--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/5f6c50d1e6e06ac863ded626d03ada63', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/5czGiZtn28lw3Et9ID2W4w--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/5f6c50d1e6e06ac863ded626d03ada63', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/india-revokes-grid-access-17-080204448.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/india-revokes-grid-access-17-080204448.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Utilities', 'peers': {'NTPC.NS': {'1d_change_pct': -2.24, '5d_change_pct': -2.62, 'latest_close': 372.4}, 'POWERGRID.NS': {'1d_change_pct': 1.51, '5d_change_pct': 1.46, 'latest_close': 302.1}, 'TATAPOWER.NS': {'1d_change_pct': -3.84, '5d_change_pct': -0.92, 'latest_close': 386.95}, 'ADANIGREEN.NS': {'1d_change_pct': -5.4, '5d_change_pct': -5.83, 'latest_close': 816.45}}, 'sector_avg_1d_pct': -2.49, 'stock_vs_sector': 0.25, 'relative_strength': 'outperforming'}
+
+{'symbol': 'NTPC.NS', 'checks_run': 3, 'flags_found': 0, 'flags': [], 'status': 'ALL_CLEAR', 'warnings': {}}
+
+
+
+{'symbol': 'NTPC.NS', 'direction': 'Bearish', 'factors': {'technical_aligned': False, 'nifty_aligned': True, 'obv_confirming': True, 'news_clear': True, 'non_expiry_day': True}, 'score': 4, 'confidence': 'High', 'macro_override': False, 'macro_override_reason': None, 'contradiction': False, 'contradiction_reason': None, 'tradeable': True, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — NTPC.NS  
+Date: 2026-03-12 | As of: 10:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bearish  
+  Expected Move   : +-0.82% (30min scaled)  
+  Price Targets   : Entry=383.25, Target=372.12, Stop=383.1, R:R=0.03  
+  Confidence      : High  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 46.74 -> neutral  
+  MACD            : macd_trend=bearish | macd_crossover=none  
+  EMA Trend       : bullish  
+  ATR(14)         : 10.82 pts -> +-0.82% scaled to 30min  
+  ADX(14)         : 10.96 -> weak_trend  
+  OBV Trend       : falling  
+  VWAP            : Price 383.25 is below VWAP 378.66  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22512.65 [-2.6% change] | 5d trend: down  
+  BANKNIFTY       : 51437.75 [-3.72% change]  
+  India VIX       : 26.73 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: Yes  
+  - OBV confirming: Yes  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 4/5 -> High  
+
+FINAL REASONING: The bearish trend is supported by the MACD indicating a bearish signal, while the NIFTY is also trending down. The price is currently below the VWAP, suggesting a lack of buying pressure. Given the expected move and the weak trend indicated by the ADX, a bearish position is favored for the next 30 minutes.
+
+Now call: log_forecast(symbol="NTPC.NS", date="2026-03-12", direction="Bearish", entry_price=383.25, target_price=372.12, stop_price=383.1, rr_ratio=0.03, confidence="High", score=4, tradeable=True)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'NTPC.NS', 'date': '2026-03-12', 'direction': 'Bearish', 'entry_price': 383.25, 'target_price': 372.12, 'stop_price': 383.1, 'rr_ratio': 0.03, 'confidence': 'High', 'score': 4, 'tradeable': True, 'factors': {}, 'logged_at': '2026-03-23T19:50:48.134652', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

@@ -1,0 +1,175 @@
+You are an NSE intraday analyst. Date: 2026-03-13. Time: 10:00 IST.
+Target stock: MPHASIS.NS. THIS IS A BACKTEST as of 2026-03-13 10:00 IST.
+Historical entry price at this time: 2125.5
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 10:00 IST on 2026-03-13.
+ENTRY PRICE = latest_close from get_intraday_data() = 2125.5
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="MPHASIS.NS")
+STEP 2: get_stock_data(symbol="MPHASIS.NS", start_date="2026-02-11", end_date="2026-03-13")
+        get_technical_indicators(symbol="MPHASIS.NS")
+        get_support_resistance(symbol="MPHASIS.NS")
+        get_intraday_data(symbol="MPHASIS.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="MPHASIS.NS")
+        get_company_news(symbol="MPHASIS.NS")
+        get_sector_peers(symbol="MPHASIS.NS")
+        get_data_sanity_check(symbol="MPHASIS.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — MPHASIS.NS
+Date: 2026-03-13 | As of: 10:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=2125.5, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="MPHASIS.NS", date="2026-03-13", direction=<Direction>,
+  entry_price=2125.5, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+Error: 'NoneType' object is not subscriptable
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility', 'fno_options_available': False, 'put_call_ratio': 'UNAVAILABLE — do not estimate or invent this value', 'pcr_signal': 'UNAVAILABLE — do not estimate or invent this value', 'max_pain_level': 'UNAVAILABLE — do not estimate or invent this value', 'fno_options_error': 'Failed to perform, curl: (6) Could not resolve host: query2.finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.'}
+
+Error: 'NoneType' object is not subscriptable
+
+{'latest_close': 2063.60009765625, '52w_high': 2975.0, '52w_low': 2030.5, 'pct_from_52w_high': -30.64, 'rsi_14': 27.77, 'rsi_signal': 'oversold', 'stoch_k': 12.33, 'stoch_d': 13.05, 'stoch_signal': 'oversold', 'macd': -116.33, 'macd_signal_line': -120.7, 'macd_histogram': 4.3691, 'macd_prev_histogram': 3.2928, 'macd_crossover': 'none', 'macd_trend': 'bullish', 'macd_signal': 'bullish', 'ema_trend': 'strongly_bearish', 'ema_9': 2110.77, 'ema_21': 2208.99, 'ema_50': 2402.66, 'ema_200': 2654.43, 'adx_14': 42.29, 'adx_signal': 'strong_trend', 'atr_14': 76.78, 'expected_intraday_range_pct': 3.72, 'bb_upper': 2349.03, 'bb_lower': 2018.31, 'bb_width_pct': 15.15, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 592984, 'latest_vol': 471389, 'volume_vs_avg': 'normal'}
+
+Error: 'NoneType' object is not subscriptable
+
+Error: 'NoneType' object is not subscriptable
+
+Error: Failed to perform, curl: (6) Could not resolve host: query2.finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+
+Error: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+
+Error: Failed to perform, curl: (6) Could not resolve host: query2.finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+
+{'symbol': 'MPHASIS.NS', 'checks_run': 3, 'flags_found': 1, 'flags': ['Sanity check error: Failed to perform, curl: (6) Could not resolve host: query2.finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.'], 'status': 'REVIEW_REQUIRED', 'warnings': {}}
+
+
+
+{'nifty50': {'latest_close': 22912.4, 'prev_close': 22512.65, 'change_pct': 1.78, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 23057.3, 'session_low': 22624.2}, 'banknifty': {'latest_close': 52605.65, 'change_pct': 2.27, 'trend': 'down'}, 'india_vix': {'latest': 24.74, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.79, 'change_pct': -0.1121, 'rupee_signal': 'rupee_strengthening_fii_inflow_favorable'}, 'brent_crude_proxy': {'latest_usd': 91.53, 'change_pct': 3.86, 'data_anomaly': False, 'data_note': 'data_ok', 'signal': 'bearish_for_india_importers'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+                   Open         High          Low        Close   Volume  Dividends  Stock Splits
+Date                                                                                            
+2026-02-11  2617.899902  2632.699951  2546.000000  2588.199951   516056        0.0           0.0
+2026-02-12  2549.899902  2549.899902  2457.800049  2464.000000  1136104        0.0           0.0
+2026-02-13  2387.600098  2501.199951  2355.199951  2458.399902  1725163        0.0           0.0
+2026-02-16  2441.000000  2481.399902  2426.500000  2461.500000   506975        0.0           0.0
+2026-02-17  2458.000000  2520.000000  2442.000000  2465.199951   602309        0.0           0.0
+2026-02-18  2479.600098  2479.600098  2402.199951  2435.800049   403020        0.0           0.0
+2026-02-19  2450.899902  2467.500000  2362.000000  2376.699951   483838        0.0           0.0
+2026-02-20  2360.199951  2402.000000  2321.199951  2373.800049   686221        0.0           0.0
+2026-02-23  2350.600098  2360.500000  2293.899902  2309.800049   812362        0.0           0.0
+2026-02-24  2230.000000  2277.800049  2210.699951  2223.000000  1348323        0.0           0.0
+2026-02-25  2230.000000  2323.399902  2227.300049  2257.600098   667290        0.0           0.0
+2026-02-26  2274.699951  2304.699951  2251.100098  2261.500000   442818        0.0           0.0
+2026-02-27  2318.000000  2358.300049  2286.199951  2296.500000   861454        0.0           0.0
+2026-03-02  2205.000000  2310.100098  2205.000000  2255.500000   349774        0.0           0.0
+2026-03-04  2202.899902  2292.899902  2202.800049  2267.199951   674633        0.0           0.0
+2026-03-05  2297.399902  2299.000000  2199.899902  2231.600098   684794        0.0           0.0
+2026-03-06  2230.000000  2286.899902  2210.000000  2214.800049   287592        0.0           0.0
+2026-03-09  2162.800049  2214.899902  2134.300049  2187.699951   353945        0.0           0.0
+2026-03-10  2222.000000  2250.000000  2172.399902  2202.199951   886101        0.0           0.0
+2026-03-11  2219.899902  2242.000000  2177.800049  2184.899902   355907        0.0           0.0
+2026-03-12  2179.000000  2213.000000  2157.000000  2185.199951   423505        0.0           0.0
+
+{'latest_close': 2063.60009765625, '52w_high': 2975.0, '52w_low': 2030.5, 'pct_from_52w_high': -30.64, 'rsi_14': 27.77, 'rsi_signal': 'oversold', 'stoch_k': 12.33, 'stoch_d': 13.05, 'stoch_signal': 'oversold', 'macd': -116.33, 'macd_signal_line': -120.7, 'macd_histogram': 4.3691, 'macd_prev_histogram': 3.2928, 'macd_crossover': 'none', 'macd_trend': 'bullish', 'macd_signal': 'bullish', 'ema_trend': 'strongly_bearish', 'ema_9': 2110.77, 'ema_21': 2208.99, 'ema_50': 2402.66, 'ema_200': 2654.43, 'adx_14': 42.29, 'adx_signal': 'strong_trend', 'atr_14': 76.78, 'expected_intraday_range_pct': 3.72, 'bb_upper': 2349.03, 'bb_lower': 2018.31, 'bb_width_pct': 15.15, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 592984, 'latest_vol': 471389, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 2090.39990234375, 'low': 2039.0, 'close': 2063.60009765625, 'open': 2079.89990234375}, 'today_open': 2099.60009765625, 'latest_close': 2116.800048828125, 'classic_pivots': {'PP': 2064.33, 'R1': 2089.67, 'R2': 2115.73, 'R3': 2141.07, 'S1': 2038.27, 'S2': 2012.93, 'S3': 1986.87}, 'camarilla_pivots': {'H4': 2091.87, 'H3': 2077.74, 'L3': 2049.47, 'L4': 2035.33}, 'nearest_support': 2038.27, 'nearest_resistance': 2141.07, 'bearish_setup': {'entry': 2116.800048828125, 'target': 2012.93, 'stop': 2077.74, 'reward_pts': 103.87, 'risk_pts': -39.06, 'rr_ratio': -2.66, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 2116.800048828125, 'target': 2115.73, 'stop': 2049.47, 'reward_pts': -1.07, 'risk_pts': 67.33, 'rr_ratio': -0.02, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': 1.74}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 2116.8, 'latest_vwap': 2103.09, 'price_vs_vwap': 'above', 'session_high': 2184.9, 'session_low': 2037.6, 'avg_volume_per_candle': 24468, 'last_20_candles': '                       Open    High     Low   Close  Volume     VWAP\nDatetime                                                            \n2026-03-24 10:30:00  2080.0  2080.0  2063.1  2065.4   52037  2099.32\n2026-03-24 10:45:00  2065.7  2072.9  2065.2  2070.0   14165  2099.15\n2026-03-24 11:00:00  2070.0  2081.2  2070.0  2076.2    5721  2099.09\n2026-03-24 11:15:00  2076.2  2096.9  2076.2  2096.4   19819  2099.02\n2026-03-24 11:30:00  2098.4  2120.0  2094.6  2115.2   38051  2099.19\n2026-03-24 11:45:00  2115.0  2131.0  2113.6  2130.6   17254  2099.36\n2026-03-24 12:00:00  2131.9  2135.9  2122.4  2125.8   22597  2099.61\n2026-03-24 12:15:00  2125.8  2129.1  2110.6  2114.7   31955  2099.84\n2026-03-24 12:30:00  2113.5  2122.9  2110.9  2120.6   94853  2100.48\n2026-03-24 12:45:00  2121.6  2126.8  2114.8  2115.7   16223  2100.59\n2026-03-24 13:00:00  2117.0  2117.7  2107.4  2117.0   48500  2100.83\n2026-03-24 13:15:00  2116.7  2123.4  2113.1  2121.3   19302  2100.96\n2026-03-24 13:30:00  2121.4  2126.1  2120.3  2124.4   54097  2101.39\n2026-03-24 13:45:00  2124.4  2129.8  2121.2  2126.9   22793  2101.59\n2026-03-24 14:00:00  2126.7  2138.0  2123.0  2125.3   18914  2101.77\n2026-03-24 14:15:00  2124.6  2133.2  2122.8  2132.8   78205  2102.50\n2026-03-24 14:30:00  2132.4  2134.7  2120.4  2122.2   24021  2102.69\n2026-03-24 14:45:00  2121.1  2126.9  2115.0  2124.2   24087  2102.85\n2026-03-24 15:00:00  2120.6  2120.6  2112.9  2115.4   24658  2102.95\n2026-03-24 15:15:00  2114.0  2119.0  2114.0  2116.8   31138  2103.09'}
+
+{'company': 'MPHASIS LIMITED', 'sector': 'Technology', 'industry': 'Information Technology Services', 'market_cap_cr': 40360.0, 'pe_ratio': 22.44513, 'pb_ratio': 3.9676857, 'ev_ebitda': 14.467, 'beta': 0.326, 'beta_signal': 'low_volatility_defensive', '52w_high': 3037.2, '52w_low': 2030.5, '200d_avg': 2725.437, '50d_avg': 2486.91, 'float_shares': 131299651, 'shares_outstanding': 190666072, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 2.76, 'earnings_date': '1769076000', 'recommendation': 'buy', 'analyst_count': 35, 'target_price': 2960.9143}
+
+[{'id': 'baf5f15a-21bf-3e22-9e8e-785e4fdcbdc3', 'content': {'id': 'baf5f15a-21bf-3e22-9e8e-785e4fdcbdc3', 'contentType': 'STORY', 'title': 'Mphasis Ltd (BOM:526299) Q3 2026 Earnings Call Highlights: Strong AI-Led Growth and Record Deal Wins', 'description': '', 'summary': 'Mphasis Ltd (BOM:526299) reports robust revenue growth and a significant increase in its AI-driven pipeline, despite challenges in deal ramp-up and rising debt.', 'pubDate': '2026-01-27T01:04:28Z', 'displayTime': '2026-01-27T01:04:28Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/mphasis-ltd-bom-526299-q3-010428775.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/mphasis-ltd-bom-526299-q3-010428775.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'e2efe472-d39c-372a-aa23-548e9f72fb8c', 'content': {'id': 'e2efe472-d39c-372a-aa23-548e9f72fb8c', 'contentType': 'STORY', 'title': "India's Mphasis meets third-quarter revenue estimates as banks resume tech spending", 'description': '', 'summary': 'BENGALURU, Jan 22 (Reuters) - Indian information technology company Mphasis reported third-quarter revenue in line with estimates on Thursday, with banking and financial services clients resuming', 'pubDate': '2026-01-22T12:27:02Z', 'displayTime': '2026-01-22T12:27:02Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-mphasis-meets-third-quarter-122702569.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-mphasis-meets-third-quarter-122702569.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'b9571b71-d5b5-30f8-b5be-ce7e6565b7d9', 'content': {'id': 'b9571b71-d5b5-30f8-b5be-ce7e6565b7d9', 'contentType': 'STORY', 'title': 'Mphasis Ltd (BOM:526299) Q2 2026 Earnings Call Highlights: Record Revenue and Strong TCV Wins ...', 'description': '', 'summary': 'Mphasis Ltd (BOM:526299) achieves its highest quarterly revenue and robust TCV, while navigating macroeconomic uncertainties and sector-specific challenges.', 'pubDate': '2025-11-07T01:00:43Z', 'displayTime': '2025-11-07T01:00:43Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/mphasis-ltd-bom-526299-q2-010043797.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/mphasis-ltd-bom-526299-q2-010043797.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '011d8c30-29ea-3492-ad88-923f152b0e9b', 'content': {'id': '011d8c30-29ea-3492-ad88-923f152b0e9b', 'contentType': 'STORY', 'title': 'Indian IT firm Mphasis counts on banks to power revenue growth, CEO says', 'description': '', 'summary': 'BENGALURU (Reuters) -Blackstone-backed Indian IT services firm Mphasis expects its key financial segment to drive \u200bsales in the six months through March end, its CEO said,\u200c with revenue projected to grow at more than twice the industry\'s pace.  Revenue growth for \u200cIndia\'s $283-billion IT sector has been muted over the past two years as clients tightened budgets amid macroeconomic uncertainty and U.S. tariff and immigration policy headwinds.  Mphasis, which makes half of its revenue from the banking and \u200bfinancial services segment and over 80% from clients in America, \u200csaid an uptick in spending in the segment has become "more of a formal trend", indicating a shift from sporadic investments to structured and strategic tech spending.', 'pubDate': '2025-11-06T09:01:46Z', 'displayTime': '2025-11-06T09:01:46Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'Reuters', 'url': 'http://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/indian-firm-mphasis-counts-banks-090146195.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indian-firm-mphasis-counts-banks-090146195.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '0171e00a-76ec-3161-a372-a28eb2e6b58b', 'content': {'id': '0171e00a-76ec-3161-a372-a28eb2e6b58b', 'contentType': 'STORY', 'title': 'Indian IT stocks slide on US visa crackdown', 'description': '', 'summary': '(Reuters) -Indian information technology majors saw their shares slump on Monday after U.S. President Donald Trump imposed a $100,000 fee on new H-1B visa applications, threatening to inflate costs and slow revenue growth in their biggest market.  "Due to the near-term pressure on margins amid an already tough market, we believe this is sentimentally negative for the sector," ICICI Direct, an online trading platform for ICICI Securities, said in a client note on Monday.  ICICI Securities estimated that Trump\'s order could knock about 1 percentage point off profit margins and about 6% off earnings for IT firms, assuming they continue to hire Indians under the program.', 'pubDate': '2025-09-22T03:52:09Z', 'displayTime': '2025-09-22T03:52:09Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/reuters-finance.com/088ab68e5bffcdb7358abfad0f089a42', 'originalWidth': 800, 'originalHeight': 533, 'caption': 'FILE PHOTO: People walk outside the National Stock Exchange (NSE) in Mumbai', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/0VSCmttrXINzdfcTgMVZ6g--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters-finance.com/088ab68e5bffcdb7358abfad0f089a42', 'width': 800, 'height': 533, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/kjBT07W.PQRe3s3NCiPglg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters-finance.com/088ab68e5bffcdb7358abfad0f089a42', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Reuters', 'url': 'http://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/indian-stocks-slide-amid-us-035209398.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indian-stocks-slide-amid-us-035209398.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '0405cd65-e12b-3bc4-b938-4a26f9b7ea72', 'content': {'id': '0405cd65-e12b-3bc4-b938-4a26f9b7ea72', 'contentType': 'STORY', 'title': 'Mphasis partners with Sixfold to enhance AI-driven insurance underwriting', 'description': '', 'summary': 'As an implementation partner, Mphasis will integrate Sixfold’s AI platform to assist insurers in accelerating their underwriting processes.', 'pubDate': '2025-06-17T14:02:58Z', 'displayTime': '2025-06-17T14:02:58Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/life_insurance_international_186/0120e6708f8408aac17581b7860bc8b4', 'originalWidth': 1440, 'originalHeight': 810, 'caption': 'The partnership aims to help streamline underwriting processes and improve operational efficiency for insurers. Credit: T. Schneider/Shutterstock.', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/PbcHdheA3t3HXdmsrp3F1w--~B/aD04MTA7dz0xNDQwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/life_insurance_international_186/0120e6708f8408aac17581b7860bc8b4', 'width': 1440, 'height': 810, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/4AE9G72Ato__Msb1rrqX0Q--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/life_insurance_international_186/0120e6708f8408aac17581b7860bc8b4', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Life Insurance International', 'url': 'https://www.globaldata.com/'}, 'canonicalUrl': {'url': 'https://www.lifeinsuranceinternational.com/news/mphasis-sixfold-ai-insurance-underwriting/', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/mphasis-partners-sixfold-enhance-ai-140258152.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '65d4619b-63fc-3031-b712-3f8af201c176', 'content': {'id': '65d4619b-63fc-3031-b712-3f8af201c176', 'contentType': 'STORY', 'title': 'Mphasis Ltd (BOM:526299) (Q4 FY25) Earnings Call Highlights: Record Growth Amidst Macroeconomic ...', 'description': '', 'summary': 'Mphasis Ltd (BOM:526299) reports robust deal pipeline and highest-ever EPS, despite facing industry-specific headwinds.', 'pubDate': '2025-04-26T07:00:28Z', 'displayTime': '2025-04-26T07:00:28Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/mphasis-ltd-bom-526299-q4-070028838.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/mphasis-ltd-bom-526299-q4-070028838.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Technology', 'peers': {'TCS.NS': {'1d_change_pct': 0.63, '5d_change_pct': 0.3, 'latest_close': 2398.8}, 'INFY.NS': {'1d_change_pct': 1.71, '5d_change_pct': 3.68, 'latest_close': 1278.3}, 'WIPRO.NS': {'1d_change_pct': 0.64, '5d_change_pct': -1.35, 'latest_close': 188.74}, 'HCLTECH.NS': {'1d_change_pct': 1.08, '5d_change_pct': 3.95, 'latest_close': 1373.3}, 'TECHM.NS': {'1d_change_pct': 3.52, '5d_change_pct': 6.77, 'latest_close': 1432.7}}, 'sector_avg_1d_pct': 1.52, 'stock_vs_sector': -1.52, 'relative_strength': 'underperforming'}
+
+{'symbol': 'MPHASIS.NS', 'checks_run': 3, 'flags_found': 0, 'flags': [], 'status': 'ALL_CLEAR', 'warnings': {}}
+
+
+
+{'symbol': 'MPHASIS.NS', 'direction': 'Bearish', 'factors': {'technical_aligned': False, 'nifty_aligned': False, 'obv_confirming': False, 'news_clear': True, 'non_expiry_day': True}, 'score': 1, 'confidence': 'Low', 'macro_override': False, 'macro_override_reason': None, 'contradiction': True, 'contradiction_reason': 'CONTRADICTION: Negative R:R (-0.02) — target and stop are on the same side of entry.', 'tradeable': False, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — MPHASIS.NS  
+Date: 2026-03-13 | As of: 10:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bearish  
+  Expected Move   : +-1.05% (30min scaled)  
+  Price Targets   : Entry=2125.5, Target=2115.73, Stop=2049.47, R:R=-0.02  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 27.77 -> oversold  
+  MACD            : macd_trend=bullish | macd_crossover=none  
+  EMA Trend       : strongly_bearish  
+  ATR(14)         : 76.78 pts -> +-0.56% scaled to 30min  
+  ADX(14)         : 42.29 -> strong_trend  
+  OBV Trend       : rising  
+  VWAP            : Price 2116.8 is above VWAP 2103.09  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22912.4 [1.78% change] | 5d trend: down  
+  BANKNIFTY       : 52605.65 [2.27% change]  
+  India VIX       : 24.74 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: No  
+  - OBV confirming: No  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 1/5 -> Low  
+
+FINAL REASONING: The bearish outlook is supported by the technical indicators, particularly the RSI indicating oversold conditions. However, the MACD trend is bullish, creating a contradiction in the analysis. The expected move is limited, and the risk-reward ratio is unfavorable, making this trade untradeable. The overall market context shows a rising VIX, indicating potential volatility, but the NIFTY and BANKNIFTY trends are not aligned with a bearish position.  
+
+Now call: log_forecast(symbol="MPHASIS.NS", date="2026-03-13", direction="Bearish", entry_price=2125.5, target_price=2115.73, stop_price=2049.47, rr_ratio=-0.02, confidence="Low", score=1, tradeable=False)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'MPHASIS.NS', 'date': '2026-03-13', 'direction': 'Bearish', 'entry_price': 2125.5, 'target_price': 2115.73, 'stop_price': 2049.47, 'rr_ratio': -0.02, 'confidence': 'Low', 'score': 1, 'tradeable': False, 'factors': {}, 'logged_at': '2026-03-24T13:15:16.918368', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

@@ -1,0 +1,102 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "59e52cd5-d4c4-4b86-a837-7e2a8670037d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import yfinance as yf\n",
+    "import pandas as pd\n",
+    "\n",
+    "\n",
+    "class MarketDataUtils:\n",
+    "\n",
+    "    @staticmethod\n",
+    "    def get_intraday_ohlcv(symbol, interval, end_datetime, lookback_hours):\n",
+    "\n",
+    "        ticker = yf.Ticker(symbol)\n",
+    "\n",
+    "        df = ticker.history(interval=interval, period=\"30d\")\n",
+    "\n",
+    "        if df.empty:\n",
+    "            return f\"No intraday data found for {symbol}\"\n",
+    "\n",
+    "        if df.index.tz is None:\n",
+    "            df.index = df.index.tz_localize(\"UTC\").tz_convert(\"Asia/Kolkata\")\n",
+    "        else:\n",
+    "            df = df.tz_convert(\"Asia/Kolkata\")\n",
+    "\n",
+    "        end_dt = pd.to_datetime(end_datetime)\n",
+    "\n",
+    "        if end_dt.tzinfo is None:\n",
+    "            end_dt = end_dt.tz_localize(\"Asia/Kolkata\")\n",
+    "        else:\n",
+    "            end_dt = end_dt.tz_convert(\"Asia/Kolkata\")\n",
+    "\n",
+    "        df = df[df.index <= end_dt]\n",
+    "\n",
+    "        minutes_per_candle = int(interval.replace(\"m\", \"\"))\n",
+    "        candles_needed = int((lookback_hours * 60) / minutes_per_candle)\n",
+    "\n",
+    "        df = df.tail(candles_needed)\n",
+    "\n",
+    "        df = MarketDataUtils._add_technical_indicators(df)\n",
+    "\n",
+    "        df = df.reset_index()\n",
+    "\n",
+    "        return df.to_json(orient=\"records\")\n",
+    "\n",
+    "    @staticmethod\n",
+    "    def _add_technical_indicators(df):\n",
+    "\n",
+    "        df[\"EMA9\"] = df[\"Close\"].ewm(span=9).mean()\n",
+    "        df[\"EMA20\"] = df[\"Close\"].ewm(span=20).mean()\n",
+    "\n",
+    "        delta = df[\"Close\"].diff()\n",
+    "        gain = delta.clip(lower=0)\n",
+    "        loss = -delta.clip(upper=0)\n",
+    "\n",
+    "        avg_gain = gain.rolling(14).mean()\n",
+    "        avg_loss = loss.rolling(14).mean()\n",
+    "\n",
+    "        rs = avg_gain / avg_loss\n",
+    "        df[\"RSI\"] = 100 - (100 / (1 + rs))\n",
+    "\n",
+    "        df[\"VWAP\"] = (df[\"Close\"] * df[\"Volume\"]).cumsum() / df[\"Volume\"].cumsum()\n",
+    "\n",
+    "        return df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "5ed55c9e-547a-42d8-a0e3-dac9c5c00464",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

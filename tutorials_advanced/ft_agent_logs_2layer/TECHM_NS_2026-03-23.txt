@@ -1,0 +1,75 @@
+TWO-LAYER ANALYSIS — TECHM.NS — 2026-03-23T09:03:02.496440+00:00
+============================================================
+
+LAYER 1A — FINBERT SENTIMENT
+{
+  "source": "FinBERT (ProsusAI/finbert)",
+  "model": "ProsusAI/finbert",
+  "headlines_scored": 0,
+  "net_score": 0.0,
+  "avg_positive": 0.0,
+  "avg_negative": 0.0,
+  "avg_neutral": 1.0,
+  "bullish_count": 0,
+  "bearish_count": 0,
+  "neutral_count": 0,
+  "sentiment_label": "Neutral",
+  "per_headline": [],
+  "error": "no HuggingFace token \u2014 add HF_TOKEN to config_api_keys.json"
+}
+
+LAYER 1B — FINML CLASSIFIER
+{
+  "ml_confidence": 0.5372,
+  "ml_label": "Medium",
+  "model_type": "RandomForest (scikit-learn)",
+  "training_samples": 30,
+  "feature_cols": [
+    "rr_ratio",
+    "atr_pct",
+    "score",
+    "exp_move_pct",
+    "hour_ist",
+    "is_morning"
+  ],
+  "feature_importance": {
+    "rr_ratio": 0.246,
+    "atr_pct": 0.2043,
+    "score": 0.0,
+    "exp_move_pct": 0.2284,
+    "hour_ist": 0.3213,
+    "is_morning": 0.0
+  },
+  "top_feature": "hour_ist",
+  "train_accuracy": 0.4667,
+  "error": null
+}
+
+LAYER 1 COMBINED
+{
+  "agreement": "TECHNICAL_ONLY",
+  "note": "Neutral news but FinML confident \u2192 pure technical play",
+  "finbert_label": "Neutral",
+  "finbert_score": 0.0,
+  "finml_label": "Medium",
+  "finml_prob": 0.5372,
+  "overall_strength": 0.5223
+}
+
+LAYER 2 — GPT-4 REASONING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NSE 30-MIN TWO-LAYER FORECAST — TECHM.NS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUANTITATIVE SYNTHESIS:
+  FinBERT Interpretation : The neutral sentiment indicates a lack of significant news flow that could influence market direction, suggesting no strong support or opposition to the technical signals.
+  FinML Interpretation   : The ML probability of 0.5372 indicates a slight confidence in a correct directional move, but the overall reliability is moderate given the CV accuracy of 0.4667.
+  Signal Conflict        : Yes — the technical indicators show mixed signals with bullish MACD and rising OBV, but bearish EMA, leading to uncertainty.
+
+FINAL DECISION:
+  Direction    : Sideways
+  Confidence   : Medium
+  Key Reason   : The mixed technical indicators and neutral sentiment suggest a lack of clear direction in the short term.
+  Risk Note    : The main risk is the potential for sudden market movements due to external factors not captured in the current signals.
+
+TERMINATE

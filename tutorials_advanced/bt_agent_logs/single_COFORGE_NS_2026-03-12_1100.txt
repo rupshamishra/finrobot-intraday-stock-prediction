@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-12. Time: 11:00 IST.
+Target stock: COFORGE.NS. THIS IS A BACKTEST as of 2026-03-12 11:00 IST.
+Historical entry price at this time: 1109.1
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 11:00 IST on 2026-03-12.
+ENTRY PRICE = latest_close from get_intraday_data() = 1109.1
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="COFORGE.NS")
+STEP 2: get_stock_data(symbol="COFORGE.NS", start_date="2026-02-10", end_date="2026-03-12")
+        get_technical_indicators(symbol="COFORGE.NS")
+        get_support_resistance(symbol="COFORGE.NS")
+        get_intraday_data(symbol="COFORGE.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="COFORGE.NS")
+        get_company_news(symbol="COFORGE.NS")
+        get_sector_peers(symbol="COFORGE.NS")
+        get_data_sanity_check(symbol="COFORGE.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — COFORGE.NS
+Date: 2026-03-12 | As of: 11:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=1109.1, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="COFORGE.NS", date="2026-03-12", direction=<Direction>,
+  entry_price=1109.1, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 22952.1, 'prev_close': 22512.65, 'change_pct': 1.95, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 23057.3, 'session_low': 22624.2}, 'banknifty': {'latest_close': 52737.2, 'change_pct': 2.53, 'trend': 'down'}, 'india_vix': {'latest': 24.87, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.8, 'change_pct': -0.1015, 'rupee_signal': 'rupee_strengthening_fii_inflow_favorable'}, 'brent_crude_proxy': {'latest_usd': 90.07, 'change_pct': 2.2, 'data_anomaly': False, 'data_note': 'data_ok', 'signal': 'bearish_for_india_importers'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+                   Open         High          Low        Close    Volume  Dividends  Stock Splits
+Date                                                                                             
+2026-02-10  1561.000000  1577.699951  1542.400024  1551.000000   3139868        0.0           0.0
+2026-02-11  1558.000000  1560.000000  1513.000000  1520.400024   1685032        0.0           0.0
+2026-02-12  1500.000000  1501.000000  1412.300049  1421.500000   5303522        0.0           0.0
+2026-02-13  1359.400024  1392.500000  1334.000000  1361.800049  12847607        0.0           0.0
+2026-02-16  1357.400024  1399.000000  1335.000000  1392.500000   5116779        0.0           0.0
+2026-02-17  1395.000000  1432.900024  1370.000000  1378.800049   3467546        0.0           0.0
+2026-02-18  1383.599976  1385.000000  1339.000000  1372.800049   2353241        0.0           0.0
+2026-02-19  1407.000000  1418.000000  1355.000000  1361.000000   3014508        0.0           0.0
+2026-02-20  1340.400024  1372.300049  1318.900024  1340.599976   2423179        0.0           0.0
+2026-02-23  1340.800049  1345.500000  1277.599976  1289.000000   4790112        0.0           0.0
+2026-02-24  1278.000000  1282.199951  1198.900024  1212.199951  10454471        0.0           0.0
+2026-02-25  1227.900024  1265.900024  1208.000000  1212.900024   5227982        0.0           0.0
+2026-02-26  1230.000000  1239.500000  1196.000000  1200.400024   6063557        0.0           0.0
+2026-02-27  1217.099976  1235.000000  1182.099976  1185.800049   3210664        0.0           0.0
+2026-03-02  1130.000000  1196.800049  1129.699951  1162.699951   2447816        0.0           0.0
+2026-03-04  1140.000000  1175.900024  1136.000000  1170.000000   3036423        0.0           0.0
+2026-03-05  1186.000000  1191.000000  1137.099976  1152.699951   3099614        0.0           0.0
+2026-03-06  1152.699951  1181.800049  1148.099976  1162.900024   1741522        0.0           0.0
+2026-03-09  1137.000000  1174.400024  1117.500000  1168.500000   2207760        0.0           0.0
+2026-03-10  1180.099976  1182.000000  1136.000000  1139.199951   2443222        0.0           0.0
+2026-03-11  1145.900024  1159.400024  1105.000000  1108.800049   3030604        0.0           0.0
+
+{'latest_close': 1100.4000244140625, '52w_high': 1984.96, '52w_low': 1008.1, 'pct_from_52w_high': -44.56, 'rsi_14': 37.38, 'rsi_signal': 'neutral', 'stoch_k': 50.46, 'stoch_d': 43.53, 'stoch_signal': 'neutral', 'macd': -90.84, 'macd_signal_line': -103.28, 'macd_histogram': 12.4343, 'macd_prev_histogram': 10.5794, 'macd_crossover': 'none', 'macd_trend': 'bullish', 'macd_signal': 'bullish', 'ema_trend': 'strongly_bearish', 'ema_9': 1109.22, 'ema_21': 1179.89, 'ema_50': 1350.55, 'ema_200': 1618.22, 'adx_14': 62.56, 'adx_signal': 'strong_trend', 'atr_14': 49.63, 'expected_intraday_range_pct': 4.51, 'bb_upper': 1258.42, 'bb_lower': 1034.7, 'bb_width_pct': 19.51, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 4009923, 'latest_vol': 3639224, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 1107.5, 'low': 1064.9000244140625, 'close': 1100.4000244140625, 'open': 1077.0}, 'today_open': 1127.0, 'latest_close': 1121.199951171875, 'classic_pivots': {'PP': 1090.93, 'R1': 1116.97, 'R2': 1133.53, 'R3': 1159.57, 'S1': 1074.37, 'S2': 1048.33, 'S3': 1031.77}, 'camarilla_pivots': {'H4': 1123.83, 'H3': 1112.12, 'L3': 1088.69, 'L4': 1076.97}, 'nearest_support': 1074.37, 'nearest_resistance': 1133.53, 'bearish_setup': {'entry': 1121.199951171875, 'target': 1048.33, 'stop': 1112.12, 'reward_pts': 72.87, 'risk_pts': -9.08, 'rr_ratio': -8.03, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 1121.199951171875, 'target': 1133.53, 'stop': 1088.69, 'reward_pts': 12.33, 'risk_pts': 32.51, 'rr_ratio': 0.38, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': 2.42}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 1121.2, 'latest_vwap': 1111.65, 'price_vs_vwap': 'above', 'session_high': 1148.2, 'session_low': 1065.5, 'avg_volume_per_candle': 144269, 'last_20_candles': '                       Open    High     Low   Close  Volume     VWAP\nDatetime                                                            \n2026-03-24 09:30:00  1106.7  1107.7  1100.2  1101.4  116109  1111.55\n2026-03-24 09:45:00  1101.3  1101.3  1096.0  1096.9   66784  1111.49\n2026-03-24 10:00:00  1096.9  1097.5  1090.4  1090.9   96322  1111.38\n2026-03-24 10:15:00  1090.9  1094.1  1090.0  1092.3   51739  1111.31\n2026-03-24 10:30:00  1092.0  1092.0  1086.1  1087.9   56967  1111.23\n2026-03-24 10:45:00  1087.9  1091.4  1083.5  1085.0   41720  1111.16\n2026-03-24 11:00:00  1084.8  1090.0  1084.8  1087.1   22566  1111.13\n2026-03-24 11:15:00  1087.2  1102.3  1087.2  1101.0  131828  1111.01\n2026-03-24 11:30:00  1102.2  1109.5  1100.4  1104.5  111372  1110.97\n2026-03-24 11:45:00  1104.5  1115.0  1104.5  1114.9  130950  1110.97\n2026-03-24 12:00:00  1114.9  1116.3  1108.0  1109.0  120101  1110.97\n2026-03-24 12:15:00  1109.3  1115.9  1106.1  1109.7  104652  1110.97\n2026-03-24 12:30:00  1109.6  1120.8  1109.3  1120.8  339889  1111.09\n2026-03-24 12:45:00  1121.4  1124.9  1118.4  1124.0  113272  1111.17\n2026-03-24 13:00:00  1124.0  1124.4  1119.0  1122.4  171136  1111.28\n2026-03-24 13:15:00  1122.3  1125.3  1120.0  1122.3  169171  1111.39\n2026-03-24 13:30:00  1121.5  1123.2  1119.9  1122.7  127909  1111.47\n2026-03-24 13:45:00  1123.5  1125.0  1122.0  1123.6   89660  1111.53\n2026-03-24 14:00:00  1123.9  1124.1  1120.1  1122.3   94108  1111.59\n2026-03-24 14:15:00  1121.9  1124.4  1119.3  1121.2  112981  1111.65'}
+
+{'company': 'COFORGE LIMITED', 'sector': 'Technology', 'industry': 'Information Technology Services', 'market_cap_cr': 37662.0, 'pe_ratio': 33.51868, 'pb_ratio': 5.4515305, 'ev_ebitda': 17.42, 'beta': 0.061, 'beta_signal': 'low_volatility_defensive', '52w_high': 1994.0, '52w_low': 1008.1, '200d_avg': 1680.623, '50d_avg': 1411.688, 'float_shares': 333038029, 'shares_outstanding': 335800217, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 1.45, 'earnings_date': '1769076000', 'recommendation': 'buy', 'analyst_count': 31, 'target_price': 1871.5807}
+
+[{'id': '3dba7611-87f3-3db7-b542-2273f0d200bf', 'content': {'id': '3dba7611-87f3-3db7-b542-2273f0d200bf', 'contentType': 'STORY', 'title': 'Coforge Ltd (BOM:532541) Q3 2026 Earnings Call Highlights: Strong Revenue Growth and Strategic ...', 'description': '', 'summary': 'Coforge Ltd (BOM:532541) reports robust year-to-date dollar revenue growth of 32.8% and outlines strategic plans for continued expansion through the acquisition of Encora.', 'pubDate': '2026-01-23T09:00:47Z', 'displayTime': '2026-01-23T09:00:47Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'GuruFocus.com', 'url': 'http://www.gurufocus.com/'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/coforge-ltd-bom-532541-q3-090047890.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/coforge-ltd-bom-532541-q3-090047890.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': 'e858956b-73b7-3588-879f-68ed352cf2a7', 'content': {'id': 'e858956b-73b7-3588-879f-68ed352cf2a7', 'contentType': 'STORY', 'title': "India's Coforge to acquire Encora in $2.35 billion deal to boost AI offerings (Dec 26)", 'description': '', 'summary': "(Corrects paragraph 6 in Dec 26 story to say preference shares will be issued a premium of 8.5%, not 14.5%, to Friday's close) By Nandan Mandayam and Sai Ishwarbharath B Dec 26 (Reuters) - Indian IT", 'pubDate': '2025-12-29T04:15:35Z', 'displayTime': '2025-12-29T04:15:35Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-coforge-acquire-encora-2-041535096.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-coforge-acquire-encora-2-041535096.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}, {'id': '23c1d55a-e8de-3d1a-bb96-8593b9fcfc54', 'content': {'id': '23c1d55a-e8de-3d1a-bb96-8593b9fcfc54', 'contentType': 'STORY', 'title': "India's Coforge beats second-quarter profit view on improved client spending", 'description': '', 'summary': '(Reuters) -Indian IT services firm Coforge reported a better-than-expected 86% surge in second-quarter profit as client spending picked up across the sector.', 'pubDate': '2025-10-24T16:36:47Z', 'displayTime': '2025-10-24T16:36:47Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': None, 'provider': {'displayName': 'Reuters', 'url': 'https://www.reuters.com/'}, 'canonicalUrl': {'url': 'https://sg.finance.yahoo.com/news/indias-coforge-beats-second-quarter-163647410.html', 'site': 'finance', 'region': 'SG', 'lang': 'en-SG'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/indias-coforge-beats-second-quarter-163647410.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Technology', 'peers': {'TCS.NS': {'1d_change_pct': 0.82, '5d_change_pct': 0.49, 'latest_close': 2403.4}, 'INFY.NS': {'1d_change_pct': nan, '5d_change_pct': nan, 'latest_close': nan}, 'WIPRO.NS': {'1d_change_pct': 0.93, '5d_change_pct': -1.07, 'latest_close': 189.28}, 'HCLTECH.NS': {'1d_change_pct': 1.27, '5d_change_pct': 4.14, 'latest_close': 1375.8}, 'TECHM.NS': {'1d_change_pct': 2.98, '5d_change_pct': 6.22, 'latest_close': 1425.3}}, 'sector_avg_1d_pct': nan, 'stock_vs_sector': nan, 'relative_strength': 'underperforming'}
+
+{'symbol': 'COFORGE.NS', 'checks_run': 3, 'flags_found': 0, 'flags': [], 'status': 'ALL_CLEAR', 'warnings': {}}
+
+
+
+{'symbol': 'COFORGE.NS', 'direction': 'Bearish', 'factors': {'technical_aligned': False, 'nifty_aligned': False, 'obv_confirming': False, 'news_clear': True, 'non_expiry_day': True}, 'score': 1, 'confidence': 'Low', 'macro_override': False, 'macro_override_reason': None, 'contradiction': True, 'contradiction_reason': 'CONTRADICTION: Negative R:R (-8.03) — target and stop are on the same side of entry.', 'tradeable': False, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — COFORGE.NS  
+Date: 2026-03-12 | As of: 11:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bearish  
+  Expected Move   : +-1.27% (30min scaled)  
+  Price Targets   : Entry=1109.1, Target=1048.33, Stop=1112.12, R:R=-8.03  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 37.38 -> neutral  
+  MACD            : macd_trend=bullish | macd_crossover=none  
+  EMA Trend       : strongly_bearish  
+  ATR(14)         : 49.63 pts -> +-0.22% scaled to 30min  
+  ADX(14)         : 62.56 -> strong_trend  
+  OBV Trend       : rising  
+  VWAP            : Price 1109.1 is above VWAP 1111.65  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22952.1 [1.95% change] | 5d trend: down  
+  BANKNIFTY       : 52737.2 [2.53% change]  
+  India VIX       : 24.87 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: No  
+  - OBV confirming: No  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 1/5 -> Low  
+
+FINAL REASONING: The bearish outlook is supported by a strong ADX indicating a strong trend, but the negative risk-reward ratio and lack of alignment with technical indicators suggest caution. The price is currently above the VWAP, which may indicate some buying pressure, but overall market sentiment and technical signals lean towards a bearish move in the next 30 minutes.
+
+Now call: log_forecast(symbol="COFORGE.NS", date="2026-03-12", direction="Bearish", entry_price=1109.1, target_price=1048.33, stop_price=1112.12, rr_ratio=-8.03, confidence="Low", score=1, tradeable=False)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'COFORGE.NS', 'date': '2026-03-12', 'direction': 'Bearish', 'entry_price': 1109.1, 'target_price': 1048.33, 'stop_price': 1112.12, 'rr_ratio': -8.03, 'confidence': 'Low', 'score': 1, 'tradeable': False, 'factors': {}, 'logged_at': '2026-03-24T08:56:32.072459', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+

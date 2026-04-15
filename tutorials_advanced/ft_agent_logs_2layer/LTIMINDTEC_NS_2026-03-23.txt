@@ -1,0 +1,66 @@
+TWO-LAYER ANALYSIS — LTIMINDTEC.NS — 2026-03-23T07:01:26.418101+00:00
+============================================================
+
+LAYER 1A — FINBERT SENTIMENT
+{
+  "source": "FinBERT (ProsusAI/finbert)",
+  "model": "ProsusAI/finbert",
+  "headlines_scored": 0,
+  "net_score": 0.0,
+  "avg_positive": 0.0,
+  "avg_negative": 0.0,
+  "avg_neutral": 1.0,
+  "bullish_count": 0,
+  "bearish_count": 0,
+  "neutral_count": 0,
+  "sentiment_label": "Neutral",
+  "per_headline": [],
+  "error": "no headlines provided"
+}
+
+LAYER 1B — FINML CLASSIFIER
+{
+  "ml_confidence": 0.28,
+  "ml_label": "Low",
+  "model_type": "RuleBased (only 0 samples, need 10)",
+  "training_samples": 0,
+  "feature_cols": [
+    "rr_ratio",
+    "atr_pct",
+    "score",
+    "exp_move_pct"
+  ],
+  "feature_importance": {},
+  "top_feature": "score",
+  "train_accuracy": null,
+  "error": "insufficient data (0 samples)"
+}
+
+LAYER 1 COMBINED
+{
+  "agreement": "WEAK_SIGNAL",
+  "note": "Both FinBERT neutral and FinML low confidence \u2192 proceed with caution",
+  "finbert_label": "Neutral",
+  "finbert_score": 0.0,
+  "finml_label": "Low",
+  "finml_prob": 0.28,
+  "overall_strength": 0.368
+}
+
+LAYER 2 — GPT-4 REASONING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NSE 60-MIN TWO-LAYER FORECAST — LTIMINDTEC.NS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUANTITATIVE SYNTHESIS:
+  FinBERT Interpretation : The neutral sentiment indicates a lack of strong news flow that could influence market direction, suggesting no clear support or opposition to the technical signals.
+  FinML Interpretation   : The low probability from the technical classifier indicates that the current setup is historically unreliable, suggesting caution in trading decisions.
+  Signal Conflict        : Yes — the neutral sentiment does not align with the low confidence from the technical analysis, creating uncertainty.
+
+FINAL DECISION:
+  Direction    : Sideways
+  Confidence   : Low
+  Key Reason   : Both sentiment and technical signals indicate a lack of clarity and reliability in the current market conditions.
+  Risk Note    : The main risk is the potential for unexpected market movements due to insufficient data and neutral sentiment.
+
+TERMINATE

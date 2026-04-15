@@ -1,0 +1,58 @@
+TWO-LAYER BACKTEST — WIPRO.NS — 2026-03-12 11:30
+{
+  "finbert": {
+    "source": "FinBERT (ProsusAI/finbert)",
+    "model": "ProsusAI/finbert",
+    "headlines_scored": 0,
+    "net_score": 0.0,
+    "avg_positive": 0.0,
+    "avg_negative": 0.0,
+    "avg_neutral": 1.0,
+    "bullish_count": 0,
+    "bearish_count": 0,
+    "neutral_count": 0,
+    "sentiment_label": "Neutral",
+    "per_headline": [],
+    "error": "no HuggingFace token \u2014 add HF_TOKEN to config_api_keys.json"
+  },
+  "finml": {
+    "ml_confidence": 0.3339,
+    "ml_label": "Low",
+    "model_type": "RandomForest (scikit-learn)",
+    "training_samples": 30,
+    "feature_cols": [
+      "rr_ratio",
+      "atr_pct",
+      "score",
+      "exp_move_pct",
+      "hour_ist",
+      "is_morning"
+    ],
+    "feature_importance": {
+      "rr_ratio": 0.246,
+      "atr_pct": 0.2043,
+      "score": 0.0,
+      "exp_move_pct": 0.2284,
+      "hour_ist": 0.3213,
+      "is_morning": 0.0
+    },
+    "top_feature": "hour_ist",
+    "train_accuracy": 0.4667,
+    "error": null
+  },
+  "combined": {
+    "agreement": "WEAK_SIGNAL",
+    "note": "Both FinBERT neutral and FinML low confidence \u2192 proceed with caution",
+    "finbert_label": "Neutral",
+    "finbert_score": 0.0,
+    "finml_label": "Low",
+    "finml_prob": 0.3339,
+    "overall_strength": 0.4003
+  }
+}
+
+{
+  "direction": null,
+  "confidence": "Low",
+  "error": "run_layer2_reasoning() got an unexpected keyword argument 'date_str'"
+}

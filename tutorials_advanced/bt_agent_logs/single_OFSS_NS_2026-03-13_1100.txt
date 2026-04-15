@@ -1,0 +1,153 @@
+You are an NSE intraday analyst. Date: 2026-03-13. Time: 11:00 IST.
+Target stock: OFSS.NS. THIS IS A BACKTEST as of 2026-03-13 11:00 IST.
+Historical entry price at this time: 6607.5
+
+YOUR TASK: Predict direction for the NEXT 30 MINUTES from 11:00 IST on 2026-03-13.
+ENTRY PRICE = latest_close from get_intraday_data() = 6607.5
+EXPECTED MOVE = expected_intraday_range_pct x sqrt(30/375) = expected_intraday_range_pct x 0.2828
+
+STEP 1: get_nse_market_context() then get_fno_data(symbol="OFSS.NS")
+STEP 2: get_stock_data(symbol="OFSS.NS", start_date="2026-02-11", end_date="2026-03-13")
+        get_technical_indicators(symbol="OFSS.NS")
+        get_support_resistance(symbol="OFSS.NS")
+        get_intraday_data(symbol="OFSS.NS", interval="15m", period="5d")
+        get_extended_company_info(symbol="OFSS.NS")
+        get_company_news(symbol="OFSS.NS")
+        get_sector_peers(symbol="OFSS.NS")
+        get_data_sanity_check(symbol="OFSS.NS")
+STEP 3: compute_confidence() — copy output verbatim.
+STEP 4: Output this exact format:
+
+NSE 30-MIN FORECAST — OFSS.NS
+Date: 2026-03-13 | As of: 11:00 | Horizon: next 30 minutes
+
+PREDICTION SUMMARY:
+  Direction       : [Bullish / Bearish / Sideways]
+  Expected Move   : [+-X.XX% (30min scaled)]
+  Price Targets   : Entry=6607.5, Target=____, Stop=____, R:R=____
+  Confidence      : [High/Medium/Low]
+  Max Pain Level  : [value OR 'N/A (data unavailable)']
+
+TECHNICAL SIGNALS:
+  RSI(14)         : ____ -> [rsi_signal VERBATIM]
+  MACD            : macd_trend=____ | macd_crossover=____
+  EMA Trend       : ____
+  ATR(14)         : ____ pts -> +-____% scaled to 30min
+  ADX(14)         : ____ -> [strong_trend/weak_trend]
+  OBV Trend       : ____
+  VWAP            : Price ____ is [above/below] VWAP ____
+
+MARKET CONTEXT:
+  NIFTY50         : ____ [____% change] | 5d trend: ____
+  BANKNIFTY       : ____ [____% change]
+  India VIX       : ____ -> [level]
+
+CONFIDENCE JUSTIFICATION:
+  - Technical aligned: [Yes/No]
+  - NIFTY trend aligned: [Yes/No]
+  - OBV confirming: [Yes/No]
+  - News clear: [Yes/No]
+  - Non-expiry day: [Yes/No]
+  -> Score: [X/5] -> [High/Medium/Low]
+
+FINAL REASONING: [3-4 sentences about next 30 minutes]
+
+Now call: log_forecast(symbol="OFSS.NS", date="2026-03-13", direction=<Direction>,
+  entry_price=6607.5, target_price=<Target>, stop_price=<Stop>,
+  rr_ratio=<R:R>, confidence=<Confidence>, score=<Score>, tradeable=<True/False>)
+Then reply ONLY: TERMINATE
+
+
+
+
+{'nifty50': {'latest_close': 22912.4, 'prev_close': 22512.65, 'change_pct': 1.78, '5d_trend': 'down', '3d_momentum': 'down', 'session_high': 23057.3, 'session_low': 22624.2}, 'banknifty': {'latest_close': 52605.65, 'change_pct': 2.27, 'trend': 'down'}, 'india_vix': {'latest': 24.74, 'level': 'high_fear', 'trend': 'rising', 'implication': 'expect_wide_swings'}, 'usdinr': {'latest': 93.818, 'change_pct': -0.0823, 'rupee_signal': 'rupee_strengthening_fii_inflow_favorable'}, 'brent_crude_proxy': {'latest_usd': 91.78, 'change_pct': 4.14, 'data_anomaly': False, 'data_note': 'data_ok', 'signal': 'bearish_for_india_importers'}}
+
+{'today': '2026-03-24', 'is_expiry_day': False, 'days_to_next_expiry': 2, 'is_monthly_expiry_week': True, 'expiry_implication': 'expiry_week_elevated_volatility'}
+
+              Open    High     Low   Close  Volume  Dividends  Stock Splits
+Date                                                                       
+2026-02-11  7350.0  7379.5  7200.0  7217.5   74734        0.0           0.0
+2026-02-12  7165.0  7184.5  6731.5  6764.0  370703        0.0           0.0
+2026-02-13  6648.0  6711.0  6400.0  6639.0  437097        0.0           0.0
+2026-02-16  6639.0  6758.5  6609.0  6699.0  155949        0.0           0.0
+2026-02-17  6698.0  6912.0  6672.5  6845.0  215007        0.0           0.0
+2026-02-18  6877.5  6877.5  6674.0  6714.5  151155        0.0           0.0
+2026-02-19  6750.0  6799.5  6625.0  6652.0  140373        0.0           0.0
+2026-02-20  6650.0  6694.0  6593.0  6642.5   91354        0.0           0.0
+2026-02-23  6645.0  6699.0  6566.5  6669.5  123441        0.0           0.0
+2026-02-24  6605.0  6646.5  6399.5  6454.0  212873        0.0           0.0
+2026-02-25  6519.0  6670.0  6519.0  6612.0  148595        0.0           0.0
+2026-02-26  6651.0  6880.0  6631.0  6856.5  254463        0.0           0.0
+2026-02-27  6904.0  6985.0  6835.0  6932.0  257521        0.0           0.0
+2026-03-02  6755.0  6980.5  6755.0  6848.0  106501        0.0           0.0
+2026-03-04  6799.5  6890.5  6771.5  6832.0  122604        0.0           0.0
+2026-03-05  6860.5  6886.0  6739.0  6789.5  102857        0.0           0.0
+2026-03-06  6761.0  6914.0  6690.0  6718.0   91716        0.0           0.0
+2026-03-09  6650.0  6732.0  6569.5  6712.5   94042        0.0           0.0
+2026-03-10  6770.5  6840.5  6724.0  6824.0  103676        0.0           0.0
+2026-03-11  6924.0  6995.5  6745.0  6792.0  183088        0.0           0.0
+2026-03-12  6796.0  6796.0  6667.0  6694.5   82424        0.0           0.0
+
+{'latest_close': 6445.0, '52w_high': 8514.5, '52w_low': 6234.5, 'pct_from_52w_high': -24.31, 'rsi_14': 37.67, 'rsi_signal': 'neutral', 'stoch_k': 27.66, 'stoch_d': 30.22, 'stoch_signal': 'neutral', 'macd': -176.25, 'macd_signal_line': -184.19, 'macd_histogram': 7.9401, 'macd_prev_histogram': 7.9318, 'macd_crossover': 'none', 'macd_trend': 'bullish', 'macd_signal': 'bullish', 'ema_trend': 'strongly_bearish', 'ema_9': 6529.75, 'ema_21': 6675.2, 'ema_50': 7021.0, 'ema_200': 7747.93, 'adx_14': 10.8, 'adx_signal': 'weak_trend', 'atr_14': 205.93, 'expected_intraday_range_pct': 3.2, 'bb_upper': 7014.29, 'bb_lower': 6282.16, 'bb_width_pct': 11.01, 'bb_position': 'middle', 'bb_squeeze': False, 'obv_trend': 'rising', 'avg_vol_20d': 151082, 'latest_vol': 118364, 'volume_vs_avg': 'normal'}
+
+{'prev_session': {'high': 6535.0, 'low': 6401.0, 'close': 6445.0, 'open': 6490.0}, 'today_open': 6610.0, 'latest_close': 6605.5, 'classic_pivots': {'PP': 6460.33, 'R1': 6519.67, 'R2': 6594.33, 'R3': 6653.67, 'S1': 6385.67, 'S2': 6326.33, 'S3': 6251.67}, 'camarilla_pivots': {'H4': 6518.7, 'H3': 6481.85, 'L3': 6408.15, 'L4': 6371.3}, 'nearest_support': 6385.67, 'nearest_resistance': 6653.67, 'bearish_setup': {'entry': 6605.5, 'target': 6326.33, 'stop': 6481.85, 'reward_pts': 279.17, 'risk_pts': -123.65, 'rr_ratio': -2.26, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'bullish_setup': {'entry': 6605.5, 'target': 6594.33, 'stop': 6408.15, 'reward_pts': -11.17, 'risk_pts': 197.35, 'rr_ratio': -0.06, 'tradeable': False, 'note': 'untradeable — R:R below 0.5:1'}, 'gap_up_down': 2.56}
+
+{'interval': '15m', 'period': '5d', 'latest_close': 6575.0, 'latest_vwap': 6556.03, 'price_vs_vwap': 'above', 'session_high': 6675.0, 'session_low': 6323.0, 'avg_volume_per_candle': 6969, 'last_20_candles': '                       Open    High     Low   Close  Volume     VWAP\nDatetime                                                            \n2026-03-24 10:30:00  6522.0  6524.5  6471.0  6473.0    3887  6547.33\n2026-03-24 10:45:00  6476.0  6499.0  6468.0  6474.5    3551  6547.01\n2026-03-24 11:00:00  6475.5  6491.5  6472.5  6486.0    2033  6546.84\n2026-03-24 11:15:00  6488.0  6535.0  6488.0  6525.5    3992  6546.68\n2026-03-24 11:30:00  6520.5  6578.0  6515.5  6551.5    8243  6546.70\n2026-03-24 11:45:00  6551.5  6576.5  6541.5  6576.5    2905  6546.77\n2026-03-24 12:00:00  6581.5  6606.0  6577.0  6591.0    5669  6547.09\n2026-03-24 12:15:00  6594.0  6624.5  6584.0  6592.0    6018  6547.51\n2026-03-24 12:30:00  6595.0  6630.0  6595.0  6627.5    9267  6548.33\n2026-03-24 12:45:00  6627.5  6635.0  6605.0  6614.5    3831  6548.67\n2026-03-24 13:00:00  6616.5  6633.5  6606.5  6626.0    2380  6548.89\n2026-03-24 13:15:00  6627.0  6669.5  6619.0  6664.0   10394  6550.21\n2026-03-24 13:30:00  6662.0  6675.0  6650.5  6659.5    6444  6551.10\n2026-03-24 13:45:00  6661.5  6666.0  6626.0  6631.5    7893  6551.97\n2026-03-24 14:00:00  6628.0  6641.5  6617.5  6634.0    4565  6552.40\n2026-03-24 14:15:00  6634.0  6660.0  6631.5  6640.0    4651  6552.92\n2026-03-24 14:30:00  6636.5  6648.5  6616.0  6623.5   10114  6553.84\n2026-03-24 14:45:00  6626.0  6639.0  6613.0  6630.5   10200  6554.73\n2026-03-24 15:00:00  6625.5  6633.5  6604.5  6609.5   12087  6555.59\n2026-03-24 15:15:00  6607.5  6611.5  6575.0  6575.0   12268  6556.03'}
+
+{'company': 'ORACLE FIN SERV SOFT LTD.', 'sector': 'Technology', 'industry': 'Software - Infrastructure', 'market_cap_cr': 57494.0, 'pe_ratio': 23.615532, 'pb_ratio': 8.319081, 'ev_ebitda': 16.257, 'beta': 0.062, 'beta_signal': 'low_volatility_defensive', '52w_high': 9950.0, '52w_low': 6234.5, '200d_avg': 8187.6025, '50d_avg': 7146.63, 'float_shares': 23775628, 'shares_outstanding': 87035133, 'institutional_own_pct': 0, 'promoter_holding_pct': None, 'dividend_yield_pct': 2.02, 'earnings_date': '1768989600', 'recommendation': 'none', 'analyst_count': 1, 'target_price': 9800.0}
+
+[{'id': '28e6fcf5-cc3a-335a-adcf-3cc0984349da', 'content': {'id': '28e6fcf5-cc3a-335a-adcf-3cc0984349da', 'contentType': 'STORY', 'title': 'Bloom Energy (BE) Slumps Amid AI Bubble Fears', 'description': '', 'summary': 'The share price of Bloom Energy Corporation (NYSE:BE) fell by 24.01% between December 10 and December 17, 2025, putting it among the Energy Stocks that Lost the Most This Week. Bloom Energy Corporation (NYSE:BE) designs, manufactures, sells, and installs solid-oxide fuel cell systems for on-site power generation in the United States and internationally. Bloom’s Energy […]', 'pubDate': '2025-12-20T11:46:52Z', 'displayTime': '2025-12-20T11:46:52Z', 'isHosted': True, 'bypassModal': False, 'previewUrl': None, 'thumbnail': {'originalUrl': 'https://media.zenfs.com/en/insidermonkey.com/b6ddf6ed38266fd7e2ceb879b3f063f7', 'originalWidth': 1200, 'originalHeight': 799, 'caption': 'Bloom Energy (BE) Slumps Amid AI Bubble Fears', 'resolutions': [{'url': 'https://s.yimg.com/uu/api/res/1.2/HQoTF7oWfXlLAqvPC3Z5jg--~B/aD03OTk7dz0xMjAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/insidermonkey.com/b6ddf6ed38266fd7e2ceb879b3f063f7', 'width': 1200, 'height': 799, 'tag': 'original'}, {'url': 'https://s.yimg.com/uu/api/res/1.2/Z96DsxShwHs8lP6UZgIwJg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/insidermonkey.com/b6ddf6ed38266fd7e2ceb879b3f063f7', 'width': 170, 'height': 128, 'tag': '170x128'}]}, 'provider': {'displayName': 'Insider Monkey', 'url': 'http://www.insidermonkey.com'}, 'canonicalUrl': {'url': 'https://finance.yahoo.com/news/bloom-energy-slumps-amid-ai-114652090.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'clickThroughUrl': {'url': 'https://finance.yahoo.com/news/bloom-energy-slumps-amid-ai-114652090.html', 'site': 'finance', 'region': 'US', 'lang': 'en-US'}, 'metadata': {'editorsPick': False}, 'finance': {'premiumFinance': {'isPremiumNews': False, 'isPremiumFreeNews': False}}, 'storyline': None}}]
+
+{'sector': 'Technology', 'peers': {'TCS.NS': {'1d_change_pct': 0.63, '5d_change_pct': 0.3, 'latest_close': 2398.8}, 'INFY.NS': {'1d_change_pct': 1.71, '5d_change_pct': 3.68, 'latest_close': 1278.3}, 'WIPRO.NS': {'1d_change_pct': 0.64, '5d_change_pct': -1.35, 'latest_close': 188.74}, 'HCLTECH.NS': {'1d_change_pct': 1.08, '5d_change_pct': 3.95, 'latest_close': 1373.3}, 'TECHM.NS': {'1d_change_pct': 3.52, '5d_change_pct': 6.77, 'latest_close': 1432.7}}, 'sector_avg_1d_pct': 1.52, 'stock_vs_sector': -1.52, 'relative_strength': 'underperforming'}
+
+{'symbol': 'OFSS.NS', 'checks_run': 3, 'flags_found': 1, 'flags': ['52w_high mismatch: technical_indicators=8514.5 vs extended_company_info=9950.0 (14.4% difference). Use technical_indicators value (rolling 252-day) for intraday analysis.'], 'status': 'REVIEW_REQUIRED', 'warnings': {'52w_high': '52w_high mismatch: technical_indicators=8514.5 vs extended_company_info=9950.0 (14.4% difference). Use technical_indicators value (rolling 252-day) for intraday analysis.'}}
+
+
+
+{'symbol': 'OFSS.NS', 'direction': 'Bearish', 'factors': {'technical_aligned': False, 'nifty_aligned': False, 'obv_confirming': False, 'news_clear': True, 'non_expiry_day': True}, 'score': 2, 'confidence': 'Low', 'macro_override': True, 'macro_override_reason': 'MACRO OVERRIDE: NIFTY +1.78% with VIX 0.0 — strong bullish macro opposes Bearish call. Capped at Low.', 'contradiction': False, 'contradiction_reason': None, 'tradeable': True, 'note': 'Copy score and confidence VERBATIM into report. Do not recompute.'}
+
+NSE 30-MIN FORECAST — OFSS.NS  
+Date: 2026-03-13 | As of: 11:00 | Horizon: next 30 minutes  
+
+PREDICTION SUMMARY:  
+  Direction       : Bearish  
+  Expected Move   : +-0.91% (30min scaled)  
+  Price Targets   : Entry=6607.5, Target=6326.33, Stop=6481.85, R:R=-2.26  
+  Confidence      : Low  
+  Max Pain Level  : N/A (data unavailable)  
+
+TECHNICAL SIGNALS:  
+  RSI(14)         : 37.67 -> neutral  
+  MACD            : macd_trend=bullish | macd_crossover=none  
+  EMA Trend       : strongly_bearish  
+  ATR(14)         : 205.93 pts -> +-0.91% scaled to 30min  
+  ADX(14)         : 10.8 -> weak_trend  
+  OBV Trend       : rising  
+  VWAP            : Price 6607.5 is above VWAP 6556.03  
+
+MARKET CONTEXT:  
+  NIFTY50         : 22912.4 [1.78% change] | 5d trend: down  
+  BANKNIFTY       : 52605.65 [2.27% change]  
+  India VIX       : 24.74 -> high_fear  
+
+CONFIDENCE JUSTIFICATION:  
+  - Technical aligned: No  
+  - NIFTY trend aligned: No  
+  - OBV confirming: No  
+  - News clear: Yes  
+  - Non-expiry day: Yes  
+  -> Score: 2/5 -> Low  
+
+FINAL REASONING: The bearish setup indicates a potential downward movement in the next 30 minutes, but the overall market context, including a rising NIFTY and high VIX, suggests that the bearish call may be limited. The low confidence score reflects the conflicting signals from technical indicators and market trends.  
+
+Now call: log_forecast(symbol="OFSS.NS", date="2026-03-13", direction="Bearish", entry_price=6607.5, target_price=6326.33, stop_price=6481.85, rr_ratio=-2.26, confidence="Low", score=2, tradeable=True)  
+Then reply ONLY: TERMINATE
+
+
+
+
+
+{'status': 'logged', 'file': 'C:\\Users\\KIIT0001\\Finrobot_old\\tutorials_advanced\\forecasts.jsonl', 'record': {'symbol': 'OFSS.NS', 'date': '2026-03-13', 'direction': 'Bearish', 'entry_price': 6607.5, 'target_price': 6326.33, 'stop_price': 6481.85, 'rr_ratio': -2.26, 'confidence': 'Low', 'score': 2, 'tradeable': True, 'factors': {}, 'logged_at': '2026-03-24T13:25:39.012750', 'outcome': None, 'actual_high': None, 'actual_low': None, 'actual_close': None, 'hit_target': None, 'hit_stop': None, 'actual_move_pct': None}}
+
+TERMINATE
+
